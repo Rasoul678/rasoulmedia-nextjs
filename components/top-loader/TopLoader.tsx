@@ -12,7 +12,7 @@ export const TopLoader: React.FC<IProps> = (props) => {
     height = 3,
     initialPosition = 0.08,
     shadow = "0 0 10px #2299DD,0 0 5px #2299DD",
-    showSpinner = true,
+    showSpinner = false,
     speed = 200,
   } = props;
 

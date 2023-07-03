@@ -1,11 +1,16 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import Link from "next/link";
-import { i18n } from "../../i18n-config";
+import { i18n } from "@i18n-config";
+import { useRouter } from "next/navigation";
+import { useLocale } from "@hooks/useLocale";
+import { Dictionaries } from "@utils/enums";
 
 export const LocaleSwitcher = () => {
   const pathName = usePathname();
+  const router = useRouter();
+  const lang = useLocale();
+
   const redirectedPathName = (locale: string) => {
     if (!pathName) return "/";
     const segments = pathName.split("/");
@@ -13,17 +18,27 @@ export const LocaleSwitcher = () => {
     return segments.join("/");
   };
 
+  const handleSelectChange = (e: SelectEvent) => {
+    const path = redirectedPathName(e.target.value);
+    router.push(path);
+  };
+
   return (
     <div>
-      <ul className="flex gap-2">
+      <select onChange={handleSelectChange} className="lang-select">
         {i18n.locales.map((locale) => {
           return (
-            <li key={locale}>
-              <Link href={redirectedPathName(locale)}>{locale}</Link>
-            </li>
+            <option
+              selected={locale === lang}
+              className="lang-select-option"
+              key={locale}
+              value={locale}
+            >
+              {Dictionaries[locale]}
+            </option>
           );
         })}
-      </ul>
+      </select>
     </div>
   );
 };
