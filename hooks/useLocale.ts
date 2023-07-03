@@ -1,5 +1,5 @@
-import { Locale } from "@i18n-config";
 import { usePathname } from "next/navigation";
+import { Locale } from "@i18n-config";
 
 export const useLocale = (): Locale => {
   const pathName = usePathname();

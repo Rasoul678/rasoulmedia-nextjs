@@ -1,17 +1,15 @@
-import { getDictionary } from "./dictionaries";
-import type { Locale } from "@i18n-config";
+"use client";
 
-interface IProps {
-  params: { lang: Locale };
-}
+import { useContext } from "react";
+import { IntlContext } from "@components/intl-provider/ServerIntlProvider";
 
-const Home: React.FC<IProps> = async ({ params: { lang } }) => {
-  const dict = await getDictionary(lang);
+const Home = async () => {
+  const dict = useContext(IntlContext);
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="text-4xl">Rasoul Media with Next.js</div>
-      <div>{dict.me}</div>
+      <div>{dict?.me}</div>
     </main>
   );
 };

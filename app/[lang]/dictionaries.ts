@@ -16,4 +16,6 @@ const dictionaries = {
     import("@assets/dictionaries/hi/hi.json").then((module) => module.default),
 };
 
+export type Dictionaries = Awaited<ReturnType<(typeof dictionaries)["en"]>>;
+
 export const getDictionary = async (locale: Locale) => dictionaries[locale]();

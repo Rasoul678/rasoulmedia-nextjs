@@ -1,4 +1,4 @@
-export enum Dictionaries {
+export enum LocaleToLangMapper {
   en = "English",
   nl = "Dutch",
   es = "Spanish",

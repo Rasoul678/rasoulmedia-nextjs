@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import { i18n } from "@i18n-config";
 import { useRouter } from "next/navigation";
 import { useLocale } from "@hooks/useLocale";
-import { Dictionaries } from "@utils/enums";
+import { LocaleToLangMapper } from "@utils/enums";
 
 export const LocaleSwitcher = () => {
   const pathName = usePathname();
@@ -25,16 +25,15 @@ export const LocaleSwitcher = () => {
 
   return (
     <div>
-      <select onChange={handleSelectChange} className="lang-select">
+      <select
+        defaultValue={lang}
+        onChange={handleSelectChange}
+        className="lang-select"
+      >
         {i18n.locales.map((locale) => {
           return (
-            <option
-              selected={locale === lang}
-              className="lang-select-option"
-              key={locale}
-              value={locale}
-            >
-              {Dictionaries[locale]}
+            <option className="lang-select-option" key={locale} value={locale}>
+              {LocaleToLangMapper[locale]}
             </option>
           );
         })}
