@@ -1,6 +1,7 @@
 import "@styles/globals.css";
 import Navbar from "@components/navbar";
 import Footer from "@components/footer";
+import TopLoader from "@components/top-loader";
 
 export const metadata = {
   title: "Rasoul Media | Next.js",
@@ -15,6 +16,7 @@ const RootLayout: React.FC<IProps> = ({ children }) => {
   return (
     <html lang="en">
       <body>
+        <TopLoader />
         <Navbar />
         <section>{children}</section>
         <Footer />
