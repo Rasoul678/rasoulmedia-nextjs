@@ -11,8 +11,6 @@ interface IProps {
   dict: Dictionaries;
 }
 
-const ServerIntlProvider = ({ children, dict }: IProps) => {
+export const ServerIntlProvider: React.FC<IProps> = ({ children, dict }) => {
   return <IntlContext.Provider value={dict}>{children}</IntlContext.Provider>;
 };
-
-export default ServerIntlProvider;

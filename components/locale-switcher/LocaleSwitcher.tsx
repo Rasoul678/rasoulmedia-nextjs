@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import { i18n } from "@i18n-config";
 import { useRouter } from "next/navigation";
 import { useLocale } from "@hooks/useLocale";
-import { LocaleToLangMapper } from "@utils/enums";
+import { LocaleToLangMapper } from "@utils";
 
 export const LocaleSwitcher = () => {
   const pathName = usePathname();

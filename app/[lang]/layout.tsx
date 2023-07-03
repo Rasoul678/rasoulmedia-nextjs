@@ -3,8 +3,9 @@ import Navbar from "@components/navbar";
 import Footer from "@components/footer";
 import TopLoader from "@components/top-loader";
 import type { Locale } from "@i18n-config";
-import ServerIntlProvider from "@components/intl-provider/ServerIntlProvider";
-import { Dictionaries, getDictionary } from "./dictionaries";
+import ServerIntlProvider from "@components/intl-provider";
+import { getDictionary } from "./dictionaries";
+import { iranSans } from "@utils";
 
 export const metadata = {
   title: "Rasoul Media | Next.js",
@@ -25,7 +26,7 @@ const RootLayout: React.FC<IProps> = async (props) => {
   const dict = await getDictionary(lang);
 
   return (
-    <html lang={lang}>
+    <html lang={lang} className={`${iranSans.variable} font-iransans`}>
       <body>
         <ServerIntlProvider dict={dict}>
           <TopLoader />

@@ -1,7 +1,7 @@
 "use client";
 
-import { useContext } from "react";
-import { IntlContext } from "@components/intl-provider/ServerIntlProvider";
+import React, { useContext } from "react";
+import { IntlContext } from "@components/intl-provider";
 
 const Home = async () => {
   const dict = useContext(IntlContext);

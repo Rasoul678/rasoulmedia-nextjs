@@ -13,6 +13,9 @@ module.exports = {
       backgroundOpacity: {
         7: "0.07",
       },
+      fontFamily: {
+        iransans: ['var(--font-iransans)']
+      }
     },
   },
   plugins: [],
