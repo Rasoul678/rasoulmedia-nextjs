@@ -1,4 +1,4 @@
-import "./globals.css";
+import "@styles/globals.css";
 import Navbar from "@components/navbar";
 import Footer from "@components/footer";
 
@@ -16,7 +16,7 @@ const RootLayout: React.FC<IProps> = ({ children }) => {
     <html lang="en">
       <body>
         <Navbar />
-        {children}
+        <section>{children}</section>
         <Footer />
       </body>
     </html>
