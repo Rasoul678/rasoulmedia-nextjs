@@ -12,9 +12,7 @@ export const Navbar = () => {
     <div className="navbar">
       <div className="nav-links">
         <Link href={`/${intl?.lang}/`}>{intl?.dict.nav.home}</Link>
-        <Link href={`/${intl?.lang}/projects`}>
-          {intl?.dict.nav.applications}
-        </Link>
+        <Link href={`/${intl?.lang}/projects`}>{intl?.dict.nav.projects}</Link>
         <Link href={`/${intl?.lang}/codes`}>{intl?.dict.nav.code}</Link>
         <Link href={`/${intl?.lang}/contact`}>{intl?.dict.nav.contact}</Link>
       </div>

@@ -52,15 +52,21 @@ body {
 }
 
 .navbar {
-  @apply px-10 py-4 flex justify-between align-middle gap-5 sticky top-0 backdrop-blur-sm text-lg uppercase bg-white bg-opacity-7;
+  @apply px-10 py-4 flex justify-between align-middle gap-5 sticky top-0 backdrop-blur-sm uppercase bg-white bg-opacity-7;
 }
 
 .nav-links {
   @apply flex gap-5;
 }
 
+.nav-links a {
+  line-height: 2rem;
+}
+
 .lang-select {
-  @apply bg-transparent border-none w-24 text-lg;
+  @apply bg-transparent border-none w-24;
+  font-size: 1rem;
+  line-height: 1.25rem;
 }
 
 .lang-select-option {
