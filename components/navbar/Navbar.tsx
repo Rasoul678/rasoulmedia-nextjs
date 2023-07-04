@@ -1,24 +1,22 @@
-import React from "react";
-import Link from "next/link";
+"use client";
+
+import { IntlContext } from "@components/intl-provider";
 import { LocaleSwitcher } from "@components/locale-switcher/LocaleSwitcher";
-import type { Locale } from "@i18n-config";
-import { getDictionary } from "@app/[lang]/dictionaries";
+import Link from "next/link";
+import { useContext } from "react";
 
-interface IProps {
-  lang: Locale;
-}
-
-export const Navbar: React.FC<IProps> = async ({ lang }) => {
-  const dict = await getDictionary(lang);
-  const { applications, code, contact, home } = dict.nav;
+export const Navbar = () => {
+  const intl = useContext(IntlContext);
 
   return (
     <div className="navbar">
       <div className="nav-links">
-        <Link href={`/${lang}/`}>{home}</Link>
-        <Link href={`/${lang}/projects`}>{applications}</Link>
-        <Link href={`/${lang}/codes`}>{code}</Link>
-        <Link href={`/${lang}/contact`}>{contact}</Link>
+        <Link href={`/${intl?.lang}/`}>{intl?.dict.nav.home}</Link>
+        <Link href={`/${intl?.lang}/projects`}>
+          {intl?.dict.nav.applications}
+        </Link>
+        <Link href={`/${intl?.lang}/codes`}>{intl?.dict.nav.code}</Link>
+        <Link href={`/${intl?.lang}/contact`}>{intl?.dict.nav.contact}</Link>
       </div>
       <LocaleSwitcher />
     </div>

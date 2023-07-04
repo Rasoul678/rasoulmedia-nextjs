@@ -25,12 +25,15 @@ const RootLayout: React.FC<IProps> = async (props) => {
 
   const dict = await getDictionary(lang);
 
+  const htmlClasses = `${iranSans.variable} font-iransans`;
+  const htmlDir = lang === "fa" ? "rtl" : "ltr";
+
   return (
-    <html lang={lang} className={`${iranSans.variable} font-iransans`}>
+    <html lang={lang} className={htmlClasses} dir={htmlDir}>
       <body>
-        <ServerIntlProvider dict={dict}>
+        <ServerIntlProvider dict={dict} lang={lang}>
           <TopLoader />
-          <Navbar lang={lang} />
+          <Navbar />
           <section>{children}</section>
           <Footer />
         </ServerIntlProvider>
