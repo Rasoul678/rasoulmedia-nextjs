@@ -1,12 +1,9 @@
-import { sql, db } from "@vercel/postgres";
-import { NextApiRequest, NextApiResponse } from "next";
+import { db } from "@vercel/postgres";
+import { NextRequest, NextResponse } from "next/server";
 
-export const GET = async (
-  request: NextApiRequest,
-  response: NextApiResponse
-) => {
+export const GET = async (request: NextRequest, response: NextResponse) => {
   const client = await db.connect();
-  
+
   try {
     await client.sql`CREATE TABLE IF NOT EXISTS Pets ( Name varchar(255), Owner varchar(255) );`;
     const names = ["me", "you"];
