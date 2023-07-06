@@ -6,6 +6,8 @@ import type { Locale } from "@i18n-config";
 import ServerIntlProvider from "@components/intl-provider";
 import { getDictionary } from "./dictionaries";
 import { iranSans } from "@utils";
+import SessionProvider from "@components/provider/Provider";
+import { Session } from "next-auth";
 
 export const metadata = {
   title: "Rasoul Media | Next.js",
@@ -15,12 +17,14 @@ export const metadata = {
 interface IProps {
   children: React.ReactNode;
   params: { lang: Locale };
+  session: Session | null;
 }
 
 const RootLayout: React.FC<IProps> = async (props) => {
   const {
     children,
     params: { lang },
+    session,
   } = props;
 
   const dict = await getDictionary(lang);
@@ -31,12 +35,14 @@ const RootLayout: React.FC<IProps> = async (props) => {
   return (
     <html lang={lang} className={htmlClasses} dir={htmlDir}>
       <body>
-        <ServerIntlProvider dict={dict} lang={lang}>
-          <TopLoader />
-          <Navbar />
-          <section>{children}</section>
-          <Footer />
-        </ServerIntlProvider>
+        <SessionProvider session={session}>
+          <ServerIntlProvider dict={dict} lang={lang}>
+            <TopLoader />
+            <Navbar />
+            <section>{children}</section>
+            <Footer />
+          </ServerIntlProvider>
+        </SessionProvider>
       </body>
     </html>
   );
