@@ -2,6 +2,7 @@ import GitHubProvider from "next-auth/providers/github";
 import { NextAuthOptions } from "next-auth";
 import vercelPostgresAdapter from "./vercelPostgresAdapter";
 import { AdapterUser } from "next-auth/adapters";
+import { postgresAdapter } from "@services/postgresAdapterService";
 
 export const authOptions: NextAuthOptions = {
   debug: true,
@@ -18,22 +19,21 @@ export const authOptions: NextAuthOptions = {
     },
     signIn: async ({ user, account, credentials, profile }) => {
       try {
-        const userAlreadyExists = await vercelPostgresAdapter().getUser(
-          user.id
+        const userExists = await postgresAdapter.getUserByEmail(
+          String(user.email)
         );
 
-        if (!userAlreadyExists) {
-          const newUser = await vercelPostgresAdapter().createUser(
-            user as AdapterUser
-          );
+        if (!userExists) {
+          const newUser = await postgresAdapter.createUser(user as AdapterUser);
 
           if (account) {
-            await vercelPostgresAdapter().linkAccount({
+            await postgresAdapter.linkAccount({
               ...account,
               userId: newUser.id,
             });
           }
         }
+
         return true;
       } catch (error) {
         console.log(error);

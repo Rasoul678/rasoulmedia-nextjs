@@ -69,7 +69,7 @@ export default function vercelPostgresAdapter(): Adapter {
       const { rows } = await sql`
       SELECT u.* 
       FROM users u join accounts a on u.id = a.user_id 
-      WHERE a.provider_id = ${provider} 
+      WHERE a.provider = ${provider} 
       AND a.provider_account_id = ${providerAccountId}`;
       const user = rows[0]
         ? {
