@@ -39,7 +39,14 @@
       "5": "Using of MaterialUI library."
     }
   },
-  "lang": { "en": "English", "fa": "Persian", "hi": "Hindi" },
+  "lang": {
+    "en": "english",
+    "fa": "persian",
+    "hi": "hindi",
+    "nl": "dutch",
+    "fr": "french",
+    "es": "spanish"
+  },
   "light": "Light",
   "live-description": "And my hometown is Rostamkola.",
   "master-description": "I got my master's degree from Shahid Beheshti University in aerospace engineering.",
@@ -101,5 +108,6 @@
   "typewriter": { "1": "I like to design.", "3": "I like meeting new people." },
   "university": { "mut": "Malek Ashtar", "sbu": "Shahid Beheshti" },
   "work-experience": "Work & Experience",
-  "yellow": "Yellow"
+  "yellow": "Yellow",
+  "account": { "signin": "sign in", "signout": "sign out" }
 }

@@ -67,6 +67,7 @@ body {
   @apply bg-transparent border-none w-24;
   font-size: 1rem;
   line-height: 1.25rem;
+  direction: ltr;
 }
 
 .lang-select-option {

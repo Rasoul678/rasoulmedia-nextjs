@@ -42,7 +42,7 @@ export const Navbar = () => {
         <Link href={`/${intl?.lang}/codes`}>{intl?.dict.nav.code}</Link>
         <Link href={`/${intl?.lang}/contact`}>{intl?.dict.nav.contact}</Link>
       </div>
-      <div className="flex gap-3">
+      <div className="flex gap-5">
         <LocaleSwitcher />
 
         {session?.user ? (
@@ -53,7 +53,7 @@ export const Navbar = () => {
                 signOut();
               }}
             >
-              Sign Out
+              {intl?.dict.account.signout}
             </button>
             <Image
               src={session.user.image || ""}
@@ -73,7 +73,7 @@ export const Navbar = () => {
                     type="button"
                     onClick={() => signIn(provider.id)}
                   >
-                    Sign In
+                    {intl?.dict.account.signin}
                   </button>
                 );
               })}

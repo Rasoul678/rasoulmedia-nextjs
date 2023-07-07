@@ -14,10 +14,12 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
-    session: ({ session }) => {
+    session: ({ session, newSession, token, trigger, user }) => {
+      // console.log({ session, newSession, token, trigger, user });
       return session;
     },
-    signIn: async ({ user, account, credentials, profile }) => {
+    signIn: async ({ user, account, credentials, profile, email }) => {
+      // console.log({ profile, account });
       try {
         const userExists = await postgresAdapter.getUserByEmail(
           String(user.email)
@@ -29,6 +31,13 @@ export const authOptions: NextAuthOptions = {
           if (account) {
             await postgresAdapter.linkAccount({
               ...account,
+              userId: newUser.id,
+            });
+          }
+
+          if (profile) {
+            await postgresAdapter.linkProfile({
+              ...profile as GitHubProfileType,
               userId: newUser.id,
             });
           }

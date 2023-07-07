@@ -39,7 +39,14 @@
       "5": "Gebruik van de MaterialUI-bibliotheek."
     }
   },
-  "lang": { "en": "Engels", "fa": "Perzisch", "hi": "Hindi" },
+  "lang": {
+    "en": "engels",
+    "fa": "perzisch",
+    "hi": "hindi",
+    "nl": "nederlands",
+    "fr": "frans",
+    "es": "spaans"
+  },
   "light": "Licht",
   "live-description": "En mijn geboorteplaats is Rostamkola.",
   "master-description": "Ik heb mijn masterdiploma in lucht- en ruimtevaarttechniek behaald aan de Shahid Beheshti University.",
@@ -104,5 +111,6 @@
   },
   "university": { "mut": "Malek Ashtar", "sbu": "Shahid Beheshti" },
   "work-experience": "Werkervaring",
-  "yellow": "Geel"
+  "yellow": "Geel",
+  "account": { "signin": "inloggen", "signout": "uitloggen" }
 }

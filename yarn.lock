@@ -290,6 +290,13 @@
   resolved "https://registry.yarnpkg.com/@types/scheduler/-/scheduler-0.16.3.tgz#cef09e3ec9af1d63d2a6cc5b383a737e24e6dcf5"
   integrity sha512-5cJ8CB4yAx7BH1oMvdU0Jh9lrEXyPkar6F9G/ERswkCuvP4KQZfZkSjcMbAICCpQTN4OuZn8tz0HiKv9TGZgrQ==
 
+"@types/swagger-ui-react@^4.18.0":
+  version "4.18.0"
+  resolved "https://registry.yarnpkg.com/@types/swagger-ui-react/-/swagger-ui-react-4.18.0.tgz#6668a7f44c825f9dbd46e3ecb8a9a40f745ce861"
+  integrity sha512-XtvFXmj46Zibe89tFQwSQknrq1NxEtOep2rZuxth7K88tyPEP00FnoA6H7ATYhocAEA4XUWaNHNFWFRl1KX8aQ==
+  dependencies:
+    "@types/react" "*"
+
 "@typescript-eslint/parser@^5.42.0":
   version "5.60.1"
   resolved "https://registry.yarnpkg.com/@typescript-eslint/parser/-/parser-5.60.1.tgz#0f2f58209c0862a73e3d5a56099abfdfa21d0fd3"

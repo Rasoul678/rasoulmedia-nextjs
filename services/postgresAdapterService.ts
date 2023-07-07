@@ -170,6 +170,41 @@ class PostgresAdapterService {
     return;
   };
 
+  public linkProfile = async (
+    profile: GitHubProfileType & { userId: string }
+  ): Promise<GitHubProfileType | null | undefined> => {
+    await sql`
+    INSERT INTO profiles (
+        user_id, 
+        name, 
+        user_name, 
+        blog, 
+        avatar_url,
+        profile_url,
+        repos_url,
+        public_repos,
+        followers,
+        following,
+        created_at,
+        updated_at
+    ) 
+    VALUES (
+        ${profile.userId}, 
+        ${profile.name},
+        ${profile.login}, 
+        ${profile.blog}, 
+        ${profile.avatar_url}, 
+        ${profile.html_url},
+        ${profile.repos_url},
+        ${profile.public_repos},
+        ${profile.followers},
+        ${profile.following},
+        ${profile.created_at},
+        ${profile.updated_at}
+    )`;
+    return profile;
+  };
+
   public linkAccount = async (
     account: AdapterAccount
   ): Promise<AdapterAccount | null | undefined> => {

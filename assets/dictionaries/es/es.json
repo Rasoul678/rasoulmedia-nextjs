@@ -39,7 +39,14 @@
       "5": "Uso de la biblioteca MaterialUI."
     }
   },
-  "lang": { "en": "inglés", "fa": "persa", "hi": "hindi" },
+  "lang": {
+    "en": "inglés",
+    "fa": "persa",
+    "hi": "hindi",
+    "nl": "holandesa",
+    "fr": "francesa",
+    "es": "española"
+  },
   "light": "Luz",
   "live-description": "Y mi ciudad natal es Rostamkola.",
   "master-description": "Obtuve mi maestría en ingeniería aeroespacial de la Universidad Shahid Beheshti.",
@@ -104,5 +111,6 @@
   },
   "university": { "mut": "Malek Ashtar", "sbu": "Shahid Beheshti" },
   "work-experience": "Experiencia laboral",
-  "yellow": "Amarillo"
+  "yellow": "Amarillo",
+  "account": { "signin": "iniciar sesión", "signout": "desconectar" }
 }

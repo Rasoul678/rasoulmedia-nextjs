@@ -19,6 +19,22 @@ CREATE TABLE accounts (
   scope TEXT,
 );
 
+CREATE TABLE profiles (
+  id SERIAL PRIMARY KEY,
+  user_id INTEGER NOT NULL REFERENCES users(id),
+  name VARCHAR(255) NOT NULL,
+  user_name VARCHAR(255) NOT NULL,
+  blog VARCHAR(255),
+  avatar_url TEXT,
+  profile_url TEXT,
+  repos_url TEXT,
+  public_repos INTEGER,
+  followers INTEGER,
+  following INTEGER,
+  created_at TIMESTAMP,
+  updated_at TIMESTAMP
+);
+
 CREATE TABLE verification_tokens (
   identifier VARCHAR(255) PRIMARY KEY,
   token TEXT NOT NULL,
