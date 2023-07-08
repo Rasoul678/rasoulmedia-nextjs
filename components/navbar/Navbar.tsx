@@ -55,13 +55,15 @@ export const Navbar = () => {
             >
               {intl?.dict.account.signout}
             </button>
-            <Image
-              src={session.user.image || ""}
-              alt="profile"
-              className="rounded-full"
-              width={35}
-              height={35}
-            />
+            <Link href={`/profile`}>
+              <Image
+                src={session.user.image || ""}
+                alt="profile"
+                className="rounded-full"
+                width={35}
+                height={35}
+              />
+            </Link>
           </>
         ) : (
           <>
