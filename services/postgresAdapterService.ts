@@ -175,19 +175,17 @@ class PostgresAdapterService {
     profile: GitHubProfileType & { userId: string }
   ): Promise<GitHubProfileType | null | undefined> => {
     await sql`
-    INSERT INTO profiles (
-        user_id, 
+    INSERT INTO "Profile" (
+        "userId", 
         name, 
-        user_name, 
+        "userName", 
         blog, 
-        avatar_url,
-        profile_url,
-        repos_url,
-        public_repos,
+        "avatarUrl",
+        "profileUrl",
+        "reposUrl",
+        "publicRepos",
         followers,
-        following,
-        created_at,
-        updated_at
+        following
     ) 
     VALUES (
         ${profile.userId}, 
@@ -199,9 +197,7 @@ class PostgresAdapterService {
         ${profile.repos_url},
         ${profile.public_repos},
         ${profile.followers},
-        ${profile.following},
-        ${profile.created_at},
-        ${profile.updated_at}
+        ${profile.following}
     )`;
     return profile;
   };
@@ -283,4 +279,4 @@ class PostgresAdapterService {
   };
 }
 
-export const postgresAdapter = new PostgresAdapterService();
+export const postgresService = new PostgresAdapterService();

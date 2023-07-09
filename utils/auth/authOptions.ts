@@ -16,4 +16,16 @@ export const authOptions: NextAuthOptions = {
       clientSecret: String(process.env.GITHUB_CLIENT_SECRET),
     }),
   ],
+  events: {
+    createUser: async ({ user }) => {
+      await prisma.profile.create({
+        data: {
+          userId: user.id,
+          avatarUrl: user.image,
+          userName: user.name,
+          // TODO: add email field
+        },
+      });
+    },
+  },
 };
