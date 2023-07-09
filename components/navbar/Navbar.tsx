@@ -4,25 +4,14 @@ import { IntlContext } from "@components/intl-provider";
 import { LocaleSwitcher } from "@components/locale-switcher/LocaleSwitcher";
 import Link from "next/link";
 import { useContext, useEffect, useState } from "react";
-import {
-  signIn,
-  signOut,
-  useSession,
-  getProviders,
-  LiteralUnion,
-  ClientSafeProvider,
-} from "next-auth/react";
-import type { BuiltInProviderType } from "next-auth/providers";
+import { signIn, signOut, useSession, getProviders } from "next-auth/react";
 import Image from "next/image";
-
-type ProvidersType = Record<
-  LiteralUnion<BuiltInProviderType, string>,
-  ClientSafeProvider
-> | null;
+import { Spinner } from "@components/spinner/Spinner";
+import { ProvidersType } from "@types";
 
 export const Navbar = () => {
   const intl = useContext(IntlContext);
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const [providers, setProviders] = useState<ProvidersType>(null);
 
   useEffect(() => {
@@ -44,41 +33,46 @@ export const Navbar = () => {
       </div>
       <div className="flex gap-5">
         <LocaleSwitcher />
-
-        {session?.user ? (
-          <>
-            <button
-              type="button"
-              onClick={() => {
-                signOut();
-              }}
-            >
-              {intl?.dict.account.signout}
-            </button>
-            <Link href={`/profile`}>
-              <Image
-                src={session.user.image || ""}
-                alt="profile"
-                className="rounded-full"
-                width={35}
-                height={35}
-              />
-            </Link>
-          </>
+        {status === "loading" ? (
+          <Spinner />
         ) : (
           <>
-            {providers &&
-              Object.values(providers).map((provider) => {
-                return (
-                  <button
-                    key={provider.name}
-                    type="button"
-                    onClick={() => signIn(provider.id)}
-                  >
-                    {intl?.dict.account.signin}
-                  </button>
-                );
-              })}
+            {session?.user ? (
+              <>
+                <button
+                  type="button"
+                  onClick={() => {
+                    signOut();
+                  }}
+                >
+                  {intl?.dict.account.signout}
+                </button>
+                <Link href={`/profile`}>
+                  <Image
+                    src={session.user.image || ""}
+                    alt="profile"
+                    className="rounded-full"
+                    width={35}
+                    height={35}
+                  />
+                </Link>
+              </>
+            ) : (
+              <>
+                {providers &&
+                  Object.values(providers).map((provider) => {
+                    return (
+                      <button
+                        key={provider.name}
+                        type="button"
+                        onClick={() => signIn(provider.id)}
+                      >
+                        {intl?.dict.account.signin}
+                      </button>
+                    );
+                  })}
+              </>
+            )}
           </>
         )}
       </div>

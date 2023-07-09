@@ -1,3 +1,4 @@
+import { GitHubProfileType } from "@types";
 import { sql } from "@vercel/postgres";
 import { Account } from "next-auth";
 import {

@@ -1,6 +1,14 @@
-type SelectEvent = React.ChangeEvent<HTMLSelectElement>;
+import type { BuiltInProviderType } from "next-auth/providers";
+import type { LiteralUnion, ClientSafeProvider } from "next-auth/react";
 
-type GitHubProfileType = {
+export type SelectEvent = React.ChangeEvent<HTMLSelectElement>;
+
+export type ProvidersType = Record<
+  LiteralUnion<BuiltInProviderType, string>,
+  ClientSafeProvider
+> | null;
+
+export type GitHubProfileType = {
   login: string;
   id: number;
   node_id: string;
