@@ -1,12 +1,8 @@
 import { authOptions } from "@utils/auth/authOptions";
 import { sql } from "@vercel/postgres";
-import { Session, getServerSession } from "next-auth";
-import { NextRequest } from "next/server";
+import { getServerSession } from "next-auth";
 
-export const GET = async (
-  req: NextRequest,
-  { params }: { params: { id: string } }
-) => {
+export const GET = async () => {
   const session = await getServerSession(authOptions);
 
   if (!session?.user) {
@@ -24,9 +20,8 @@ export const GET = async (
   }
 
   try {
-    // TODO: query by session user email
     const profile =
-      await sql`SELECT * FROM "Profile" WHERE "userId" = ${params.id};`;
+      await sql`SELECT * FROM "Profile" WHERE "userId" = ${session.user.id};`;
     return new Response(JSON.stringify({ profile }), { status: 200 });
   } catch (error) {
     return new Response(JSON.stringify({ error }), { status: 500 });

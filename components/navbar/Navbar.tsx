@@ -47,7 +47,7 @@ export const Navbar = () => {
                 >
                   {intl?.dict.account.signout}
                 </button>
-                <Link href={`/profile`}>
+                <Link href={"/profile"}>
                   <Image
                     src={session.user.image || ""}
                     alt="profile"
