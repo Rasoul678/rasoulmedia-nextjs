@@ -1,3 +1,6 @@
+-- CreateEnum
+CREATE TYPE "UserRole" AS ENUM ('ADMIN', 'USER');
+
 -- CreateTable
 CREATE TABLE "Account" (
     "id" TEXT NOT NULL,
@@ -30,15 +33,16 @@ CREATE TABLE "Session" (
 CREATE TABLE "Profile" (
     "id" TEXT NOT NULL,
     "userId" TEXT NOT NULL,
-    "name" TEXT,
-    "userName" TEXT,
-    "blog" TEXT,
+    "firstName" TEXT,
+    "lastName" TEXT,
+    "email" TEXT,
+    "occupation" TEXT,
+    "company" TEXT,
+    "webUrl" TEXT,
     "avatarUrl" TEXT,
-    "profileUrl" TEXT,
-    "reposUrl" TEXT,
-    "publicRepos" INTEGER DEFAULT 0,
     "followers" INTEGER DEFAULT 0,
     "following" INTEGER DEFAULT 0,
+    "lastJoin" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -52,6 +56,7 @@ CREATE TABLE "User" (
     "email" TEXT,
     "emailVerified" TIMESTAMP(3),
     "image" TEXT,
+    "role" "UserRole" NOT NULL DEFAULT 'USER',
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );

@@ -1,6 +1,6 @@
 import GitHubProvider from "next-auth/providers/github";
 import { NextAuthOptions } from "next-auth";
-import { Adapter } from "next-auth/adapters";
+import { Adapter, AdapterUser } from "next-auth/adapters";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import prisma from "./db/client";
 
@@ -19,6 +19,7 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     session({ session, user }) {
       session.user.id = user.id;
+      session.user.role = user.role;
       return session;
     },
   },
@@ -28,8 +29,8 @@ export const authOptions: NextAuthOptions = {
         data: {
           userId: user.id,
           avatarUrl: user.image,
-          userName: user.name,
-          // TODO: add email field
+          firstName: user.name,
+          email: user.email,
         },
       });
     },
