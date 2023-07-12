@@ -4,7 +4,13 @@ import { IntlContext } from "@components/intl-provider";
 import { LocaleSwitcher } from "@components/locale-switcher/LocaleSwitcher";
 import Link from "next/link";
 import { useContext, useEffect, useState } from "react";
-import { signIn, signOut, useSession, getProviders } from "next-auth/react";
+import {
+  signIn,
+  signOut,
+  useSession,
+  getProviders,
+  getSession,
+} from "next-auth/react";
 import Image from "next/image";
 import { Spinner } from "@components/spinner/Spinner";
 import { ProvidersType } from "@types";
@@ -31,7 +37,7 @@ export const Navbar = () => {
         <Link href={`/${intl?.lang}/codes`}>{intl?.dict.nav.code}</Link>
         <Link href={`/${intl?.lang}/contact`}>{intl?.dict.nav.contact}</Link>
       </div>
-      <div className="flex gap-5">
+      <div className="flex gap-5 justify-center align-middle">
         <LocaleSwitcher />
         {status === "loading" ? (
           <Spinner />
@@ -59,7 +65,7 @@ export const Navbar = () => {
               </>
             ) : (
               <>
-                {providers &&
+                {/* {providers &&
                   Object.values(providers).map((provider) => {
                     return (
                       <button
@@ -70,7 +76,9 @@ export const Navbar = () => {
                         {intl?.dict.account.signin}
                       </button>
                     );
-                  })}
+                  })} */}
+                <Link href="/api/auth/signin">Signin</Link>
+                <Link href="/auth/signup">Signup</Link>
               </>
             )}
           </>
