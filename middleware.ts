@@ -2,6 +2,7 @@ import { match as matchLocale } from "@formatjs/intl-localematcher";
 import Negotiator from "negotiator";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { getToken } from "next-auth/jwt";
 
 import { i18n } from "./i18n-config";
 
@@ -23,8 +24,18 @@ function getLocale(request: NextRequest): string | undefined {
   return locale;
 }
 
-export function middleware(request: NextRequest) {
+export const middleware = async (request: NextRequest) => {
   const pathname = request.nextUrl.pathname;
+  const token = await getToken({ req: request });
+  const isAuthenticated = !!token;
+
+  if (
+    (request.nextUrl.pathname.endsWith("/signin") ||
+      request.nextUrl.pathname.endsWith("/signup")) &&
+    isAuthenticated
+  ) {
+    return NextResponse.redirect(new URL("/", request.url));
+  }
 
   //! / `/_next/` and `/api/` are ignored by the watcher, but we need to ignore files in `public` manually.
   //! If you have one
@@ -50,7 +61,7 @@ export function middleware(request: NextRequest) {
       )
     );
   }
-}
+};
 
 export const config = {
   // Matcher ignoring `/_next/` and `/api/`
