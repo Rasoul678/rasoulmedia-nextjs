@@ -2,8 +2,7 @@
 
 import React from "react";
 import { signIn } from "next-auth/react";
-import GithubIcon from "@components/icons/Github";
-import { useSearchParams } from "next/navigation";
+import { GithubIcon } from "@components/icons";
 
 interface IProps {
   callbackUrl: string;

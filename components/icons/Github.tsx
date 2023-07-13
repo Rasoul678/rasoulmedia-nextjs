@@ -2,7 +2,7 @@ import React from "react";
 
 interface IProps {}
 
-const GithubIcon: React.FC<IProps> = (props) => {
+export const GithubIcon: React.FC<IProps> = (props) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -16,5 +16,3 @@ const GithubIcon: React.FC<IProps> = (props) => {
     </svg>
   );
 };
-
-export default GithubIcon;

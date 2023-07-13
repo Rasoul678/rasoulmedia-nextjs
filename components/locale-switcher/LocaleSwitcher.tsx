@@ -4,16 +4,15 @@ import { usePathname } from "next/navigation";
 import { i18n } from "@i18n-config";
 import { useRouter } from "next/navigation";
 import { useLocale } from "@hooks/useLocale";
-import { LocaleToLangMapper } from "@utils";
 import { useContext } from "react";
 import { IntlContext } from "@components/intl-provider";
+import { SelectEvent } from "@types";
 
 export const LocaleSwitcher = () => {
   const pathName = usePathname();
   const router = useRouter();
   const lang = useLocale();
   const intl = useContext(IntlContext);
-
 
   const redirectedPathName = (locale: string) => {
     if (!pathName) return "/";

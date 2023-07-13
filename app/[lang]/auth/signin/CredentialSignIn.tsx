@@ -2,9 +2,8 @@
 
 import React, { ChangeEvent, useState } from "react";
 import { signIn } from "next-auth/react";
-import { Spinner } from "@components/spinner/Spinner";
 import { useRouter } from "next/navigation";
-import Form from "@components/form/Form";
+import Form from "@components/form";
 
 interface IProps {
   callbackUrl: string;

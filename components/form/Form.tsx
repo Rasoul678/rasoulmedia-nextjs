@@ -13,7 +13,7 @@ interface IProps {
   type: "signin" | "signup";
 }
 
-const Form: React.FC<IProps> = ({
+export const Form: React.FC<IProps> = ({
   onSubmit,
   error,
   formValues,
@@ -64,5 +64,3 @@ const Form: React.FC<IProps> = ({
     </form>
   );
 };
-
-export default Form;
