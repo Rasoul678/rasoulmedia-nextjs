@@ -73,3 +73,58 @@ body {
 .lang-select-option {
   @apply bg-black text-center m-3;
 }
+
+.card {
+  @apply w-1/3 p-7 rounded-lg;
+  background-color: #0d1117;
+}
+
+.signin hr {
+  border: 0;
+  border-top: 1px solid #444;
+  display: block;
+  margin: 2rem auto;
+  overflow: visible;
+}
+
+.signin hr:before {
+  background: #0d1117;
+  color: #888;
+  content: "or";
+  padding: 0 0.4rem;
+  position: relative;
+  top: -0.7rem;
+  left: calc(50% - 0.4rem);
+}
+
+.github-button {
+  @apply my-5 py-2 px-4 flex justify-center align-middle items-center bg-black hover:bg-gray-900 focus:ring-gray-500 focus:ring-offset-gray-200 text-white w-full transition ease-in duration-200 text-center shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-md;
+}
+
+.form-container {
+  @apply flex flex-wrap items-center justify-center mt-9;
+}
+
+.form-header {
+  @apply flex align-middle justify-center mb-5 text-2xl;
+}
+
+.form-input {
+  @apply block min-h-[auto] w-full rounded border border-cyan-100 bg-transparent px-3 py-[0.32rem] leading-[2.15] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 motion-reduce:transition-none;
+}
+
+.form-error-msg {
+  @apply text-center bg-red-500 py-2 mb-6 rounded;
+}
+
+.form-submit-btn {
+  @apply w-full flex justify-center align-middle gap-2 rounded bg-blue-600 px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal text-white;
+}
+
+.form-question {
+  @apply mb-6 flex items-center justify-between text-gray-400;
+}
+
+.form-question a {
+  @apply text-gray-400 hover:text-gray-100;
+}

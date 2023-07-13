@@ -3,11 +3,15 @@
 import React, { ChangeEvent, useState } from "react";
 import { signIn } from "next-auth/react";
 import { Spinner } from "@components/spinner/Spinner";
+import { useRouter } from "next/navigation";
 import Form from "@components/form/Form";
 
-interface IProps {}
+interface IProps {
+  callbackUrl: string;
+}
 
-const SignUpPage: React.FC<IProps> = (props) => {
+const CredentialSignIn: React.FC<IProps> = ({ callbackUrl }) => {
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [formValues, setFormValues] = useState({
     email: "",
@@ -27,45 +31,36 @@ const SignUpPage: React.FC<IProps> = (props) => {
     setFormValues({ email: "", password: "" });
 
     try {
-      const response = await fetch("/api/auth/register", {
-        method: "POST",
-        body: JSON.stringify(formValues),
-        headers: {
-          "Content-Type": "application/json",
-        },
+      const response = await signIn("credentials", {
+        redirect: false,
+        email: formValues.email,
+        password: formValues.password,
+        callbackUrl,
       });
 
       setLoading(false);
 
-      if (!response.ok) {
-        setError((await response.json()).message);
+      if (!response?.error) {
+        router.push(callbackUrl);
         return;
+      } else {
+        setError("invalid email or password");
       }
-
-      signIn(undefined, { callbackUrl: "/" });
     } catch (error: any) {
       setLoading(false);
       setError(error);
     }
   };
-
   return (
-    <section className="h-screen">
-      <div className="form-container">
-        <div className="card">
-          <div className="form-header">Sign up</div>
-          <Form
-            error={error}
-            formValues={formValues}
-            loading={loading}
-            handleChange={handleChange}
-            onSubmit={onSubmit}
-            type="signup"
-          />
-        </div>
-      </div>
-    </section>
+    <Form
+      error={error}
+      formValues={formValues}
+      loading={loading}
+      handleChange={handleChange}
+      onSubmit={onSubmit}
+      type="signin"
+    />
   );
 };
 
-export default SignUpPage;
+export default CredentialSignIn;

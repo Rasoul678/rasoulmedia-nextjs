@@ -9,34 +9,62 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
       password: string;
     };
 
-    const userExists = await prisma.user.findUnique({
-      where: { email },
-    });
-
-    if (userExists) {
+    if (!email || !password) {
       return new Response(
-        JSON.stringify({ status: "error", message: "User already exists!" }),
+        JSON.stringify({
+          status: "error",
+          message: "email and password are required!",
+        }),
         { status: 500 }
       );
     }
 
-    const salt = bcrypt.genSaltSync(10);
-    const hashePassword = bcrypt.hashSync(String(password), salt);
-
-    const newUser = await prisma.user.create({
-      data: {
-        email: email.toLowerCase(),
-        password: hashePassword,
-        role: "USER",
-      },
+    const userExists = await prisma.user.findUnique({
+      where: { email },
     });
 
-    return new Response(
-      JSON.stringify({ user: { email: newUser.email, name: newUser.name } }),
-      {
-        status: 200,
+    const salt = bcrypt.genSaltSync(10);
+    const hashedPassword = bcrypt.hashSync(String(password), salt);
+
+    if (userExists) {
+      if (userExists.password) {
+        return new Response(
+          JSON.stringify({ status: "error", message: "user already exists!" }),
+          { status: 500 }
+        );
+      } else {
+        await prisma.user.update({
+          where: { email },
+          data: {
+            password: hashedPassword,
+          },
+        });
+
+        return new Response(
+          JSON.stringify({
+            user: { email: userExists.email, name: userExists.name },
+          }),
+          {
+            status: 200,
+          }
+        );
       }
-    );
+    } else {
+      const newUser = await prisma.user.create({
+        data: {
+          email: email.toLowerCase(),
+          password: hashedPassword,
+          role: "USER",
+        },
+      });
+
+      return new Response(
+        JSON.stringify({ user: { email: newUser.email, name: newUser.name } }),
+        {
+          status: 200,
+        }
+      );
+    }
   } catch (error: any) {
     return new Response(
       JSON.stringify({

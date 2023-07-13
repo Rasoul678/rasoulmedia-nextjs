@@ -1,33 +1,17 @@
 "use client";
 
+import { useContext, useEffect, useState } from "react";
+import { signOut, useSession } from "next-auth/react";
+import Image from "next/image";
+import Link from "next/link";
 import { IntlContext } from "@components/intl-provider";
 import { LocaleSwitcher } from "@components/locale-switcher/LocaleSwitcher";
-import Link from "next/link";
-import { useContext, useEffect, useState } from "react";
-import {
-  signIn,
-  signOut,
-  useSession,
-  getProviders,
-  getSession,
-} from "next-auth/react";
-import Image from "next/image";
 import { Spinner } from "@components/spinner/Spinner";
-import { ProvidersType } from "@types";
+import defaultAvatar from "@assets/svg/avatar-default.svg";
 
 export const Navbar = () => {
   const intl = useContext(IntlContext);
   const { data: session, status } = useSession();
-  const [providers, setProviders] = useState<ProvidersType>(null);
-
-  useEffect(() => {
-    const fetchProviders = async () => {
-      const response = await getProviders();
-      setProviders(response);
-    };
-
-    fetchProviders();
-  }, []);
 
   return (
     <div className="navbar">
@@ -55,7 +39,7 @@ export const Navbar = () => {
                 </button>
                 <Link href={"/profile"}>
                   <Image
-                    src={session.user.image || ""}
+                    src={session.user.image || defaultAvatar}
                     alt="profile"
                     className="rounded-full"
                     width={35}
@@ -65,20 +49,12 @@ export const Navbar = () => {
               </>
             ) : (
               <>
-                {/* {providers &&
-                  Object.values(providers).map((provider) => {
-                    return (
-                      <button
-                        key={provider.name}
-                        type="button"
-                        onClick={() => signIn(provider.id)}
-                      >
-                        {intl?.dict.account.signin}
-                      </button>
-                    );
-                  })} */}
-                <Link href="/api/auth/signin">Signin</Link>
-                <Link href="/auth/signup">Signup</Link>
+                <Link className="leading-8" href="/auth/signin">
+                  Signin
+                </Link>
+                <Link className="leading-8" href="/auth/signup">
+                  Signup
+                </Link>
               </>
             )}
           </>

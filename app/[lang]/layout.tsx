@@ -7,7 +7,7 @@ import ServerIntlProvider from "@components/intl-provider";
 import { getDictionary } from "./dictionaries";
 import { iranSans } from "@utils";
 import SessionProvider from "@components/provider/Provider";
-import { Session } from "next-auth";
+import type { Session } from "next-auth";
 
 export const metadata = {
   title: "Rasoul Media | Next.js",

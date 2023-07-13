@@ -1,11 +1,10 @@
 import GitHubProvider from "next-auth/providers/github";
 import CredentialProvider from "next-auth/providers/credentials";
-import { NextAuthOptions } from "next-auth";
+import type { NextAuthOptions } from "next-auth";
 import { Adapter } from "next-auth/adapters";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import prisma from "./db/client";
 import * as bcrypt from "bcrypt";
-import { GitHubProfileType } from "@types";
 
 const prismaAdapter = PrismaAdapter(prisma) as Adapter;
 
@@ -25,7 +24,7 @@ export const authOptions: NextAuthOptions = {
       allowDangerousEmailAccountLinking: true,
     }),
     CredentialProvider({
-      id: "email",
+      id: "credentials",
       name: "Email",
       credentials: {
         email: {
@@ -42,12 +41,6 @@ export const authOptions: NextAuthOptions = {
         const userExists = await prisma.user.findUnique({
           where: { email: credentials?.email },
         });
-
-        const salt = bcrypt.genSaltSync(10);
-        const hashePassword = bcrypt.hashSync(
-          String(credentials?.password),
-          salt
-        );
 
         //! See if user with this email already exists
         if (userExists) {
@@ -70,18 +63,6 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
-    signIn: async ({ account, user, profile }) => {
-      if (account?.provider === "github") {
-        await prisma.user.update({
-          where: { id: user.id },
-          data: {
-            image: (profile as GitHubProfileType).avatar_url,
-          },
-        });
-      }
-
-      return true;
-    },
     session: async ({ session, user, token }) => {
       if (user) {
         session.user.id = user.id;
@@ -96,7 +77,7 @@ export const authOptions: NextAuthOptions = {
 
       return session;
     },
-    jwt({ token, user, trigger, account, profile, session }) {
+    jwt({ token, user, account }) {
       if (user) {
         token.id = user.id;
         token.role = user.role;
@@ -116,9 +97,22 @@ export const authOptions: NextAuthOptions = {
         },
       });
     },
+    signIn: async ({ account, user, profile, isNewUser }) => {
+      if (isNewUser && account?.provider === "github") {
+        await prisma.user.update({
+          where: { id: user.id },
+          data: {
+            image: profile?.image,
+          },
+        });
+      }
+    },
     // signOut(message) {
     //   console.log({ message });
     // },
   },
-  pages: { newUser: "/auth/signup" },
+  pages: {
+    newUser: "/auth/signup",
+    signIn: "/auth/signin",
+  },
 };
