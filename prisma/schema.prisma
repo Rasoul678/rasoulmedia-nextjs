@@ -73,6 +73,8 @@ model User {
   accounts      Account[]
   sessions      Session[]
   profiles      Profile[]
+  followedBy    User[] @relation("UserFollows")
+  following     User[] @relation("UserFollows")
 }
 
 model VerificationToken {

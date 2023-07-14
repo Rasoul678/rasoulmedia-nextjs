@@ -1,52 +1,44 @@
 "use client";
 
-import { useContext, useEffect, useState } from "react";
-import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
-import { IntlContext } from "@components/intl-provider";
-import { LocaleSwitcher } from "@components/locale-switcher/LocaleSwitcher";
-import { Spinner } from "@components/spinner/Spinner";
+import React from "react";
+import { useSession } from "next-auth/react";
 import defaultAvatar from "@assets/svg/avatar-default.svg";
+import { IntlContext } from "@components/intl-provider";
+// import { LocaleSwitcher } from "@components/locale-switcher/LocaleSwitcher";
+import Menu from "@components/menu";
+import { Spinner } from "@components/spinner/Spinner";
+import { useClickOutside } from "@hooks/useClickOutside";
 
 export const Navbar = () => {
-  const intl = useContext(IntlContext);
+  const intl = React.useContext(IntlContext);
   const { data: session, status } = useSession();
+  const [showMenu, setShowMenu] = React.useState(false);
+  const clickRef = React.useRef(null);
+
+  useClickOutside({ ref: clickRef, callback: () => setShowMenu(false) });
 
   return (
     <div className="navbar">
-      <div className="nav-links">
-        <Link href={`/${intl?.lang}/`}>{intl?.dict.nav.home}</Link>
-        <Link href={`/${intl?.lang}/projects`}>{intl?.dict.nav.projects}</Link>
-        <Link href={`/${intl?.lang}/codes`}>{intl?.dict.nav.code}</Link>
-        <Link href={`/${intl?.lang}/contact`}>{intl?.dict.nav.contact}</Link>
-      </div>
-      <div className="flex gap-5 justify-center align-middle">
-        <LocaleSwitcher />
+      <div className="flex flex-row-reverse gap-3 justify-center align-middle">
+        {/* <LocaleSwitcher /> */}
         {status === "loading" ? (
           <Spinner />
         ) : (
           <>
             {session?.user ? (
-              <>
-                <button
-                  type="button"
-                  onClick={() => {
-                    signOut();
-                  }}
-                >
-                  {intl?.dict.account.signout}
-                </button>
-                <Link href={"/profile"}>
-                  <Image
-                    src={session.user.image || defaultAvatar}
-                    alt="profile"
-                    className="rounded-full"
-                    width={35}
-                    height={35}
-                  />
-                </Link>
-              </>
+              <div ref={clickRef}>
+                <Image
+                  src={session?.user.image || defaultAvatar}
+                  alt="profile"
+                  className="rounded-full"
+                  width={40}
+                  height={40}
+                  onClick={() => setShowMenu((v) => !v)}
+                />
+                {showMenu && <Menu />}
+              </div>
             ) : (
               <>
                 <Link className="leading-8" href="/auth/signin">
@@ -59,6 +51,12 @@ export const Navbar = () => {
             )}
           </>
         )}
+      </div>
+      <div className="nav-links">
+        <Link href={`/${intl?.lang}/`}>{intl?.dict.nav.home}</Link>
+        <Link href={`/${intl?.lang}/projects`}>{intl?.dict.nav.projects}</Link>
+        <Link href={`/${intl?.lang}/codes`}>{intl?.dict.nav.code}</Link>
+        <Link href={`/${intl?.lang}/contact`}>{intl?.dict.nav.contact}</Link>
       </div>
     </div>
   );

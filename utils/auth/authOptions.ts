@@ -38,25 +38,29 @@ export const authOptions: NextAuthOptions = {
         },
       },
       authorize: async (credentials) => {
-        const userExists = await prisma.user.findUnique({
-          where: { email: credentials?.email },
-        });
+        try {
+          const userExists = await prisma.user.findUnique({
+            where: { email: credentials?.email },
+          });
 
-        //! See if user with this email already exists
-        if (userExists) {
-          //! Check password
-          const match = bcrypt.compareSync(
-            String(credentials?.password),
-            String(userExists.password)
-          );
+          //! See if user with this email already exists
+          if (userExists) {
+            //! Check password
+            const match = bcrypt.compareSync(
+              String(credentials?.password),
+              String(userExists.password)
+            );
 
-          if (match) {
-            return userExists;
+            if (match) {
+              return userExists;
+            } else {
+              return null;
+            }
           } else {
+            //! User not found
             return null;
           }
-        } else {
-          //! User not found
+        } catch (error) {
           return null;
         }
       },
@@ -106,6 +110,7 @@ export const authOptions: NextAuthOptions = {
           },
         });
       }
+      console.log({ user });
     },
     // signOut(message) {
     //   console.log({ message });
