@@ -3,25 +3,30 @@
 import Image from "next/image";
 import React, { useEffect } from "react";
 import defaultAvatar from "@assets/svg/avatar-default.svg";
+import { ProfileType, UserType } from "@types";
+
+type DataType = {
+  profile: ProfileType & { user: UserType };
+};
 
 interface IProps {}
 
 const ProfilePage: React.FC<IProps> = (props) => {
   const [showMore, setShowMore] = React.useState(false);
-  const [profile, setProfile] = React.useState<any>();
+  const [profile, setProfile] = React.useState<DataType["profile"]>();
 
   useEffect(() => {
     const fetchProfile = async () => {
       const res = await fetch("/api/profile");
-      const data = await res.json();
+      const data = (await res.json()) as DataType;
       console.log(data);
-      setProfile(data);
+      setProfile(data.profile);
     };
     fetchProfile();
   }, []);
   return (
     <div>
-      <main className="profile-page p-8 mt-[4rem]">
+      <main className="p-8 mt-[4rem]">
         <section>
           <div className="px-6 bg-gray-900 rounded-xl">
             <div className="flex flex-wrap justify-center items-start">
@@ -31,38 +36,38 @@ const ProfilePage: React.FC<IProps> = (props) => {
                     width={150}
                     height={150}
                     alt="profile-image"
-                    src={profile?.profile.user.image}
+                    src={String(profile?.user.image)}
                     className="shadow-xl bg-gray-900 rounded-full align-middle border-none relative -top-[5.5rem] max-w-150-px"
                   />
                 </div>
               </div>
-              <div className="w-full lg:w-4/12 px-4 lg:order-3 lg:text-right">
-                <div className="py-6 px-3 mt-32 sm:mt-0">
+              <div className="w-full lg:w-4/12 px-4 lg:order-3 lg:text-right flex justify-center lg:justify-end h-10">
+                <div className="py-6 px-3 sm:mt-0">
                   <button
                     className="bg-blue-500 active:bg-blue-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150"
                     type="button"
                   >
                     Follow
                   </button>
-                  <button
+                  {/* <button
                     className="text-green-500 font-bold text-sm px-4 py-[0.35rem] rounded outline-none border-[1px] border-green-400 focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150"
                     type="button"
                   >
                     Following
-                  </button>
+                  </button> */}
                 </div>
               </div>
               <div className="w-full lg:w-4/12 px-4 lg:order-1">
                 <div className="flex justify-center py-4 lg:pt-4 pt-8">
                   <div className="mr-4 p-3 text-center">
                     <span className="text-xl font-bold block uppercase tracking-wide text-blueGray-600">
-                      {profile?.profile.user.followedBy.length}
+                      {profile?.user.followedBy?.length}
                     </span>
                     <span className="text-sm text-blueGray-400">Followers</span>
                   </div>
                   <div className="mr-4 p-3 text-center">
                     <span className="text-xl font-bold block uppercase tracking-wide text-blueGray-600">
-                      {profile?.profile.user.following.length}
+                      {profile?.user.following?.length}
                     </span>
                     <span className="text-sm text-blueGray-400">Following</span>
                   </div>
@@ -77,20 +82,20 @@ const ProfilePage: React.FC<IProps> = (props) => {
             </div>
             <div className="text-center mt-8">
               <h3 className="text-4xl font-semibold leading-normal mb-2 text-blueGray-700">
-                Jenna Stones
+                {profile?.user.name}
               </h3>
-              <div className="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold uppercase">
-                <i className="fas fa-map-marker-alt mr-2 text-lg text-blueGray-400"></i>
-                Los Angeles, California
-              </div>
-              <div className="mb-2 text-blueGray-600 mt-10">
-                <i className="fas fa-briefcase mr-2 text-lg text-blueGray-400"></i>
-                Web Developer - Front-end
-              </div>
-              <div className="mb-2 text-blueGray-600">
-                <i className="fas fa-university mr-2 text-lg text-blueGray-400"></i>
-                University of Computer Science
-              </div>
+              {profile?.occupation && (
+                <div className="mb-2 text-blueGray-600 mt-10">
+                  <i className="fas fa-briefcase mr-2 text-lg text-blueGray-400"></i>
+                  {profile?.occupation}
+                </div>
+              )}
+              {profile?.education && (
+                <div className="mb-2 text-blueGray-600">
+                  <i className="fas fa-university mr-2 text-lg text-blueGray-400"></i>
+                  {profile?.education}
+                </div>
+              )}
             </div>
             <div className="mt-10 py-5 border-t border-blueGray-200 text-center">
               <div>
@@ -105,20 +110,20 @@ const ProfilePage: React.FC<IProps> = (props) => {
                   </div>
                   {showMore && (
                     <div className="container mx-auto my-5 p-5 bg-black rounded-xl">
-                      <div className="md:flex no-wrap md:-mx-2 ">
+                      <div className="sm:flex no-wrap md:-mx-2 ">
                         <div className="w-full md:w-3/12 md:mx-2">
                           <div className="bg-gray-900 rounded-md p-3">
-                            <div className="image overflow-hidden">
+                            <div className="overflow-hidden">
                               <Image
-                                className="h-auto w-full mx-auto rounded"
-                                src={profile?.profile.user.image}
+                                className="h-auto w-full mx-auto rounded-md"
+                                src={String(profile?.user.image)}
                                 alt=""
-                                width={100}
-                                height={100}
+                                width={500}
+                                height={500}
                               />
                             </div>
                             <h1 className="text-white font-bold text-xl leading-8 my-1">
-                              {profile.profile.user.name}
+                              {profile?.user.name}
                             </h1>
                             <h3 className="text-gray-400 font-lg text-semibold leading-6">
                               Owner at Her Company Inc.
@@ -144,7 +149,7 @@ const ProfilePage: React.FC<IProps> = (props) => {
                             </ul>
                           </div>
                         </div>
-                        <div className="w-full md:w-9/12 mx-2 h-64">
+                        <div className="w-full md:w-9/12 sm:mx-3 mt-4 sm:mt-0">
                           <div className="bg-gray-900 p-3 shadow-sm rounded-md">
                             <div className="flex items-center space-x-2 font-semibold leading-8">
                               <span className="text-gray-300">
@@ -168,65 +173,38 @@ const ProfilePage: React.FC<IProps> = (props) => {
                             <div className="text-gray-300">
                               <div className="grid md:grid-cols-2 text-sm">
                                 <div className="grid grid-cols-2">
-                                  <div className="px-4 py-2 font-semibold">
-                                    First Name
+                                  <div className="px-4 py-2 font-semibold text-left">
+                                    First Name:
                                   </div>
                                   <div className="px-4 py-2">
-                                    {profile.profile.firstName}
+                                    {profile?.firstName}
                                   </div>
                                 </div>
                                 <div className="grid grid-cols-2">
-                                  <div className="px-4 py-2 font-semibold">
-                                    Last Name
+                                  <div className="px-4 py-2 font-semibold text-left">
+                                    Last Name:
                                   </div>
                                   <div className="px-4 py-2">
-                                    {profile.profile.lastName}
+                                    {profile?.lastName}
                                   </div>
                                 </div>
+
                                 <div className="grid grid-cols-2">
-                                  <div className="px-4 py-2 font-semibold">
-                                    Gender
-                                  </div>
-                                  <div className="px-4 py-2">Female</div>
-                                </div>
-                                <div className="grid grid-cols-2">
-                                  <div className="px-4 py-2 font-semibold">
-                                    Contact No.
-                                  </div>
-                                  <div className="px-4 py-2">+11 998001001</div>
-                                </div>
-                                <div className="grid grid-cols-2">
-                                  <div className="px-4 py-2 font-semibold">
-                                    Current Address
-                                  </div>
-                                  <div className="px-4 py-2">
-                                    Beech Creek, PA, Pennsylvania
-                                  </div>
-                                </div>
-                                <div className="grid grid-cols-2">
-                                  <div className="px-4 py-2 font-semibold">
-                                    Permanant Address
-                                  </div>
-                                  <div className="px-4 py-2">
-                                    Arlington Heights, IL, Illinois
-                                  </div>
-                                </div>
-                                <div className="grid grid-cols-2">
-                                  <div className="px-4 py-2 font-semibold">
-                                    Email.
+                                  <div className="px-4 py-2 font-semibold text-left">
+                                    Email:
                                   </div>
                                   <div className="px-4 py-2">
                                     <a
                                       className="text-blue-800"
-                                      href={`mailto:${profile.profile.email}`}
+                                      href={`mailto:${profile?.email}`}
                                     >
-                                      {profile.profile.email}
+                                      {profile?.email}
                                     </a>
                                   </div>
                                 </div>
                                 <div className="grid grid-cols-2">
-                                  <div className="px-4 py-2 font-semibold">
-                                    Birthday
+                                  <div className="px-4 py-2 font-semibold text-left">
+                                    Birthday:
                                   </div>
                                   <div className="px-4 py-2">Feb 06, 1998</div>
                                 </div>

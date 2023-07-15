@@ -46,6 +46,7 @@ model Profile {
   lastName   String?
   email      String?
   occupation String?
+  education  String?
   company    String?
   webUrl     String?
   avatarUrl  String?

@@ -1,7 +1,9 @@
+import { UserRole } from "@prisma/client";
 import type { BuiltInProviderType } from "next-auth/providers";
 import type { LiteralUnion, ClientSafeProvider } from "next-auth/react";
 
 export type SelectEvent = React.ChangeEvent<HTMLSelectElement>;
+type StringOrNull = string | null;
 
 export type ProvidersType = Record<
   LiteralUnion<BuiltInProviderType, string>,
@@ -53,4 +55,35 @@ export type GitHubProfileType = {
     collaborators: number;
     private_repos: number;
   };
+};
+
+export type UserType = {
+  id?: string;
+  email?: StringOrNull;
+  emailVerified?: StringOrNull;
+  followedBy?: UserType[];
+  following?: UserType[];
+  image?: StringOrNull;
+  name?: StringOrNull;
+  password?: StringOrNull;
+  role?: UserRole;
+  accounts?: any;
+  sessions?: any;
+  profiles?: ProfileType[];
+};
+
+export type ProfileType = {
+  id?: string;
+  userId?: string;
+  avatarUrl?: StringOrNull;
+  company?: StringOrNull;
+  email?: StringOrNull;
+  firstName?: StringOrNull;
+  lastJoin?: StringOrNull;
+  lastName?: StringOrNull;
+  webUrl?: StringOrNull;
+  occupation?: StringOrNull;
+  education?: StringOrNull;
+  createdAt?: string;
+  updatedAt?: string;
 };
