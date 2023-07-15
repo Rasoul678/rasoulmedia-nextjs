@@ -25,7 +25,7 @@ export const Menu: React.FC<IProps> = () => {
   };
 
   return (
-    <div className="rounded-lg bg-gray-900 shadow-xl px-4 absolute left-6 mt-7">
+    <div className="menu-wrapper">
       <svg
         className="absolute bottom-full left-5"
         width="30"
@@ -33,7 +33,7 @@ export const Menu: React.FC<IProps> = () => {
         viewBox="0 0 30 20"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <polygon points="15, 0 30, 20 0, 20" className=" fill-gray-900" />
+        <polygon points="15, 0 30, 20 0, 20" className="fill-gray-900" />
       </svg>
       <MenuItem name="Profile" noBorder href="/profile" />
       <MenuItem

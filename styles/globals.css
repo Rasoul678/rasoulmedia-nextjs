@@ -60,7 +60,7 @@ body {
 }
 
 .nav-links a {
-  line-height: 2rem;
+  @apply leading-8 flex justify-center items-end;
 }
 
 .lang-select {
@@ -127,4 +127,20 @@ body {
 
 .form-question a {
   @apply text-gray-400 hover:text-gray-100;
+}
+
+.menu-wrapper {
+  @apply rounded-lg bg-gray-900 shadow-xl px-4 absolute left-6 mt-7;
+}
+
+.menu-link {
+  @apply text-gray-400 flex-1 text-base hover:text-gray-100;
+}
+
+.menu-regular {
+  @apply text-gray-400 text-base hover:text-gray-100 cursor-pointer;
+}
+
+.sub-menu-wrapper {
+  @apply py-2 bg-gray-900 rounded-lg shadow-xl px-4 absolute left-[9.5rem] -top-0;
 }
