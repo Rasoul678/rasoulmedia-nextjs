@@ -5,9 +5,11 @@ import { IntlContext } from "@components/intl-provider";
 import { Locale, i18n } from "@i18n-config";
 import { usePathname, useRouter } from "next/navigation";
 
-interface IProps {}
+interface IProps {
+  user: any
+}
 
-export const Menu: React.FC<IProps> = () => {
+export const Menu: React.FC<IProps> = ({user}) => {
   const intl = React.useContext(IntlContext);
   const pathName = usePathname();
   const router = useRouter();
@@ -35,7 +37,8 @@ export const Menu: React.FC<IProps> = () => {
       >
         <polygon points="15, 0 30, 20 0, 20" className="fill-gray-900" />
       </svg>
-      <MenuItem name="Profile" noBorder href="/profile" />
+      <MenuItem name={user.email} noBorder />
+      <MenuItem name="Profile" href="/profile" />
       <MenuItem
         name="Language"
         left={40}

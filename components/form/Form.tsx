@@ -9,6 +9,8 @@ interface IProps {
   formValues: {
     email: string;
     password: string;
+    firstName?: string;
+    lastName?: string;
   };
   type: "signin" | "signup";
 }
@@ -26,6 +28,30 @@ export const Form: React.FC<IProps> = ({
   return (
     <form onSubmit={onSubmit}>
       {error && <p className="form-error-msg">{error}</p>}
+      {type === "signup" && (
+        <>
+          <div className="relative mb-6">
+            <input
+              value={formValues.firstName}
+              name="firstName"
+              type="text"
+              className="form-input"
+              placeholder="First name"
+              onChange={handleChange}
+            />
+          </div>
+          <div className="relative mb-6">
+            <input
+              value={formValues.lastName}
+              name="lastName"
+              type="text"
+              className="form-input"
+              placeholder="Last name"
+              onChange={handleChange}
+            />
+          </div>
+        </>
+      )}
       <div className="relative mb-6">
         <input
           required
@@ -37,7 +63,6 @@ export const Form: React.FC<IProps> = ({
           onChange={handleChange}
         />
       </div>
-
       <div className="relative mb-6">
         <input
           required

@@ -75,7 +75,7 @@ body {
 }
 
 .card {
-  @apply w-1/3 p-7 rounded-lg;
+  @apply lg:w-1/3 md:w-7/12 sm:w-3/5 p-7 rounded-lg;
   background-color: #0d1117;
 }
 
@@ -110,7 +110,7 @@ body {
 }
 
 .form-input {
-  @apply block min-h-[auto] w-full rounded border border-cyan-100 bg-transparent px-3 py-[0.32rem] leading-[2.15] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 motion-reduce:transition-none;
+  @apply block min-h-[auto] w-full rounded border border-cyan-100 bg-transparent px-3 py-[0.2rem] leading-[2.15] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 motion-reduce:transition-none;
 }
 
 .form-error-msg {
@@ -130,7 +130,7 @@ body {
 }
 
 .menu-wrapper {
-  @apply rounded-lg bg-gray-900 shadow-xl px-4 absolute left-6 mt-7;
+  @apply rounded-lg bg-gray-900 shadow-xl px-4 absolute left-6 mt-7 w-[13rem] break-all;
 }
 
 .menu-link {
@@ -142,5 +142,5 @@ body {
 }
 
 .sub-menu-wrapper {
-  @apply py-2 bg-gray-900 rounded-lg shadow-xl px-4 absolute left-[9.5rem] -top-0;
+  @apply py-2 bg-gray-900 rounded-lg shadow-xl px-4 absolute left-[12.5rem] -top-0 break-normal;
 }

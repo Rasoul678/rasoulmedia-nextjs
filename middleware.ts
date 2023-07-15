@@ -37,6 +37,10 @@ export const middleware = async (request: NextRequest) => {
     return NextResponse.redirect(new URL("/", request.url));
   }
 
+  if (request.nextUrl.pathname.endsWith("/profile") && !isAuthenticated) {
+    return NextResponse.redirect(new URL("/", request.url));
+  }
+
   //! / `/_next/` and `/api/` are ignored by the watcher, but we need to ignore files in `public` manually.
   //! If you have one
   if (["/favicon.ico", "/fonts/"].includes(pathname)) {

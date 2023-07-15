@@ -55,6 +55,18 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
           email: email.toLowerCase(),
           password: hashedPassword,
           role: "USER",
+          profiles: {
+            create: {
+              email,
+            },
+          },
+          accounts: {
+            create: {
+              provider: "credentials",
+              type: "credentials",
+              providerAccountId: email,
+            },
+          },
         },
       });
 

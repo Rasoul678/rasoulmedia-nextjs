@@ -6,7 +6,6 @@ import React from "react";
 import { useSession } from "next-auth/react";
 import defaultAvatar from "@assets/svg/avatar-default.svg";
 import { IntlContext } from "@components/intl-provider";
-// import { LocaleSwitcher } from "@components/locale-switcher/LocaleSwitcher";
 import Menu from "@components/menu";
 import { Spinner } from "@components/spinner/Spinner";
 import { useClickOutside } from "@hooks/useClickOutside";
@@ -20,9 +19,8 @@ export const Navbar = () => {
   useClickOutside({ ref: clickRef, callback: () => setShowMenu(false) });
 
   return (
-    <div className="navbar">
+    <div className="navbar z-[1000]">
       <div className="flex flex-row-reverse gap-3 justify-center align-middle">
-        {/* <LocaleSwitcher /> */}
         {status === "loading" ? (
           <Spinner />
         ) : (
@@ -37,7 +35,7 @@ export const Navbar = () => {
                   height={40}
                   onClick={() => setShowMenu((v) => !v)}
                 />
-                {showMenu && <Menu />}
+                {showMenu && <Menu user={session.user} />}
               </div>
             ) : (
               <>

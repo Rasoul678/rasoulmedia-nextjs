@@ -41,7 +41,7 @@ model Session {
 
 model Profile {
   id         String   @id @default(cuid())
-  userId     String
+  userId     String   @unique
   firstName  String?
   lastName   String?
   email      String?
@@ -49,8 +49,6 @@ model Profile {
   company    String?
   webUrl     String?
   avatarUrl  String?
-  followers  Int?     @default(0)
-  following  Int?     @default(0)
   lastJoin   DateTime @default(now())
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
@@ -73,8 +71,8 @@ model User {
   accounts      Account[]
   sessions      Session[]
   profiles      Profile[]
-  followedBy    User[] @relation("UserFollows")
-  following     User[] @relation("UserFollows")
+  followedBy    User[]    @relation("UserFollows")
+  following     User[]    @relation("UserFollows")
 }
 
 model VerificationToken {
