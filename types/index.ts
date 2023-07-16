@@ -70,6 +70,9 @@ export type UserType = {
   accounts?: any;
   sessions?: any;
   profiles?: ProfileType[];
+  lastJoin?: StringOrNull;
+  createdAt?: string;
+  updatedAt?: string;
 };
 
 export type ProfileType = {
@@ -79,7 +82,7 @@ export type ProfileType = {
   company?: StringOrNull;
   email?: StringOrNull;
   firstName?: StringOrNull;
-  lastJoin?: StringOrNull;
+
   lastName?: StringOrNull;
   webUrl?: StringOrNull;
   occupation?: StringOrNull;

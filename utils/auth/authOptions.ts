@@ -110,6 +110,11 @@ export const authOptions: NextAuthOptions = {
           },
         });
       }
+
+      await prisma.user.update({
+        where: { email: String(user?.email) },
+        data: { lastJoin: new Date().toISOString() },
+      });
     },
     // signOut(message) {
     //   console.log({ message });
