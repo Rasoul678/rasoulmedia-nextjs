@@ -90,3 +90,5 @@ export type ProfileType = {
   createdAt?: string;
   updatedAt?: string;
 };
+
+export type ProfileWithUserType = ProfileType & { user: UserType };
