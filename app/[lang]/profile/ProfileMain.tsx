@@ -1,5 +1,3 @@
-"use client";
-
 import { ProfileWithUserType } from "@types";
 import Image from "next/image";
 import React from "react";
@@ -13,6 +11,9 @@ interface IProps {
 const ProfileMain: React.FC<IProps> = ({ profile }) => {
   const { data: session } = useSession();
   const isAuthUser = session?.user.id === profile?.user.id;
+  const isFollowing = profile.user.followedBy?.some(
+    (u) => u.id === session?.user.id
+  );
 
   const followUser = async () => {
     try {
@@ -52,29 +53,36 @@ const ProfileMain: React.FC<IProps> = ({ profile }) => {
         </div>
         <div className="w-full lg:w-4/12 px-4 lg:order-3 lg:text-right flex justify-center lg:justify-end h-10">
           <div className="py-6 px-3 sm:mt-0">
-            {isAuthUser ? (
-              <button
-                className="bg-teal-500 active:bg-teal-600 uppercase text-black font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150"
-                type="button"
-              >
-                Edit profile
-              </button>
-            ) : (
+            {session && (
               <>
-                <button
-                  className="bg-teal-500 active:bg-teal-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150"
-                  type="button"
-                  onClick={followUser}
-                >
-                  Follow
-                </button>
-                <button
-                  className="bg-red-500 active:bg-red-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150"
-                  type="button"
-                  onClick={unFollowUser}
-                >
-                  UnFollow
-                </button>
+                {isAuthUser ? (
+                  <button
+                    className="bg-teal-500 active:bg-teal-600 uppercase text-black font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150"
+                    type="button"
+                  >
+                    Edit profile
+                  </button>
+                ) : (
+                  <>
+                    {!isFollowing ? (
+                      <button
+                        className="bg-teal-500 active:bg-teal-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150"
+                        type="button"
+                        onClick={followUser}
+                      >
+                        Follow
+                      </button>
+                    ) : (
+                      <button
+                        className="bg-red-500 active:bg-red-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150"
+                        type="button"
+                        onClick={unFollowUser}
+                      >
+                        UnFollow
+                      </button>
+                    )}
+                  </>
+                )}
               </>
             )}
           </div>

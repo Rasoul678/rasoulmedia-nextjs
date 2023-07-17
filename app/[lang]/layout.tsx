@@ -7,6 +7,7 @@ import ServerIntlProvider from "@components/intl-provider";
 import { getDictionary } from "./dictionaries";
 import { iranSans } from "@utils";
 import SessionProvider from "@components/provider/Provider";
+import RQProvider from "@utils/react-query/provider";
 import type { Session } from "next-auth";
 
 export const metadata = {
@@ -35,14 +36,16 @@ const RootLayout: React.FC<IProps> = async (props) => {
   return (
     <html lang={lang} className={htmlClasses} dir={htmlDir}>
       <body>
-        <SessionProvider session={session}>
-          <ServerIntlProvider dict={dict} lang={lang}>
-            <TopLoader />
-            <Navbar />
-            <section>{children}</section>
-            <Footer />
-          </ServerIntlProvider>
-        </SessionProvider>
+        <RQProvider>
+          <SessionProvider session={session}>
+            <ServerIntlProvider dict={dict} lang={lang}>
+              <TopLoader />
+              <Navbar />
+              <section>{children}</section>
+              <Footer />
+            </ServerIntlProvider>
+          </SessionProvider>
+        </RQProvider>
       </body>
     </html>
   );

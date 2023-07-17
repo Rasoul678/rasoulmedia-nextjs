@@ -1,44 +1,51 @@
-"use client";
-
-import React, { useEffect } from "react";
-import { ProfileType, UserType } from "@types";
+import React from "react";
+import { getServerSession } from "next-auth";
 import { parseDate } from "@utils/parseDate";
-import ProfileMain from "./ProfileMain";
-import { Skeleton } from "@components/skeleton/Skeleton";
-import ProfileDetails from "./ProfileDetails";
+import getQueryClient from "@utils/react-query/getQueryClient";
+import { dehydrate } from "@tanstack/react-query";
+import Hydrate from "@utils/react-query/hydrate.client";
+import MyProfile from "./MyProfile";
+import prisma from "@utils/auth/db/client";
+import { authOptions } from "@utils/auth/authOptions";
 
-type DataType = {
-  profile: ProfileType & { user: UserType };
+const getUserProfile = async () => {
+  const serverSession = await getServerSession(authOptions);
+
+  const profile = await prisma.profile.findUnique({
+    where: { userId: serverSession?.user.id },
+    include: {
+      user: {
+        include: {
+          followedBy: true,
+          following: true,
+        },
+      },
+    },
+  });
+
+  if (profile) {
+    profile.user.createdAt = parseDate(String(profile?.user.createdAt))
+      .relativeTime as unknown as Date;
+
+    profile.user.lastJoin = parseDate(String(profile.user.lastJoin))
+      .relativeTime as unknown as Date;
+  }
+
+  return profile;
 };
 
-interface IProps {}
-
-const ProfilePage: React.FC<IProps> = (props) => {
-  const [profile, setProfile] = React.useState<DataType["profile"]>();
-
-  useEffect(() => {
-    const fetchProfile = async () => {
-      const res = await fetch("/api/profile");
-      const data = (await res.json()) as DataType;
-
-      data.profile.user.createdAt = parseDate(
-        String(data.profile.user.createdAt)
-      ).relativeTime;
-      data.profile.user.lastJoin = parseDate(
-        String(data.profile.user.lastJoin)
-      ).relativeTime;
-
-      setProfile(data.profile);
-    };
-    fetchProfile();
-  }, []);
+const ProfilePage = async () => {
+  const queryClient = getQueryClient();
+  await queryClient.prefetchQuery(["hydrate-user-profile"], getUserProfile);
+  const dehydratedState = dehydrate(queryClient);
 
   return (
     <div>
       <main className="p-14 mt-[3rem]">
         <section className="px-6 bg-gray-900 rounded-xl">
-          {profile ? <ProfileMain profile={profile} /> : <Skeleton />}
-          {profile && <ProfileDetails profile={profile} />}
+          <Hydrate state={dehydratedState}>
+            <MyProfile />
+          </Hydrate>
         </section>
       </main>
     </div>
