@@ -1,8 +1,13 @@
-import { ProfileWithUserType } from "@types";
-import Image from "next/image";
+"use client";
+
 import React from "react";
-import defaultAvatar from "@assets/svg/avatar-default.svg";
+import Image from "next/image";
 import { useSession } from "next-auth/react";
+import defaultAvatar from "@assets/svg/avatar-default.svg";
+import { ProfileWithUserType } from "@types";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { clientService } from "@utils/api-service";
+import { Spinner } from "@components/spinner/Spinner";
 
 interface IProps {
   profile: ProfileWithUserType;
@@ -10,30 +15,45 @@ interface IProps {
 
 const ProfileMain: React.FC<IProps> = ({ profile }) => {
   const { data: session } = useSession();
+  const queryClient = useQueryClient();
+
   const isAuthUser = session?.user.id === profile?.user.id;
   const isFollowing = profile.user.followedBy?.some(
     (u) => u.id === session?.user.id
   );
 
-  const followUser = async () => {
-    try {
-      await fetch(`/api/follow/${profile?.user.id}`, {
-        method: "POST",
-        body: JSON.stringify({ userId: session?.user.id }),
-        headers: {
-          "Content-Type": "application/json",
-        },
+  //! Mutation (follow or unFollow)
+  const { mutate: followOrUnfollow, isLoading } = useMutation({
+    mutationFn: async (args: {
+      userId: string;
+      followerId: string;
+      type: "follow" | "unfollow";
+    }) =>
+      await clientService.followOrUnfollowUser(
+        args.userId,
+        args.followerId,
+        args.type
+      ),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["hydrate-user-profile"],
       });
-    } catch (error) {}
+    },
+  });
+
+  const followUser = async () => {
+    followOrUnfollow({
+      userId: String(profile?.user.id),
+      followerId: String(session?.user.id),
+      type: "follow",
+    });
   };
 
   const unFollowUser = async () => {
-    await fetch(`/api/follow/${profile?.user.id}`, {
-      method: "PUT",
-      body: JSON.stringify({ userId: session?.user.id }),
-      headers: {
-        "Content-Type": "application/json",
-      },
+    followOrUnfollow({
+      userId: String(profile?.user.id),
+      followerId: String(session?.user.id),
+      type: "unfollow",
     });
   };
 
@@ -66,18 +86,22 @@ const ProfileMain: React.FC<IProps> = ({ profile }) => {
                   <>
                     {!isFollowing ? (
                       <button
-                        className="bg-teal-500 active:bg-teal-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150"
+                        className="flex items-center gap-2 bg-teal-500 active:bg-teal-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150"
                         type="button"
                         onClick={followUser}
+                        disabled={isLoading}
                       >
+                        {isLoading && <Spinner />}
                         Follow
                       </button>
                     ) : (
                       <button
-                        className="bg-red-500 active:bg-red-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150"
+                        className="flex items-center gap-2 bg-red-500 active:bg-red-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150"
                         type="button"
                         onClick={unFollowUser}
+                        disabled={isLoading}
                       >
+                        {isLoading && <Spinner />}
                         UnFollow
                       </button>
                     )}

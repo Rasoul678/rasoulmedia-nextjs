@@ -34,6 +34,24 @@ class APIClientSide {
 
     return response;
   };
+
+  public followOrUnfollowUser = async (
+    userId: string,
+    followerId: string,
+    type: "follow" | "unfollow"
+  ) => {
+    let method = type === "follow" ? "POST" : "PUT";
+
+    const response = await fetch(`/api/follow/${userId}`, {
+      method,
+      body: JSON.stringify({ userId: followerId }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    return response;
+  };
 }
 
 export const clientService = new APIClientSide();
