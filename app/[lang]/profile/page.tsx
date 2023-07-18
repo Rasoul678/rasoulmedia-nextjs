@@ -1,35 +1,17 @@
-import React from "react";
-import { getServerSession } from "next-auth";
-import { parseDate } from "@utils/parseDate";
-import getQueryClient from "@utils/react-query/getQueryClient";
 import { dehydrate } from "@tanstack/react-query";
-import Hydrate from "@utils/react-query/hydrate.client";
-import MyProfile from "./MyProfile";
-import prisma from "@utils/auth/db/client";
+import { serverService } from "@utils/api-service";
 import { authOptions } from "@utils/auth/authOptions";
+import getQueryClient from "@utils/react-query/getQueryClient";
+import Hydrate from "@utils/react-query/hydrate.client";
+import { getServerSession } from "next-auth";
+import MyProfile from "./MyProfile";
 
 const getUserProfile = async () => {
   const serverSession = await getServerSession(authOptions);
 
-  const profile = await prisma.profile.findUnique({
-    where: { userId: serverSession?.user.id },
-    include: {
-      user: {
-        include: {
-          followedBy: true,
-          following: true,
-        },
-      },
-    },
-  });
-
-  if (profile) {
-    profile.user.createdAt = parseDate(String(profile?.user.createdAt))
-      .relativeTime as unknown as Date;
-
-    profile.user.lastJoin = parseDate(String(profile.user.lastJoin))
-      .relativeTime as unknown as Date;
-  }
+  const profile = await serverService.getProfile(
+    String(serverSession?.user.id)
+  );
 
   return profile;
 };

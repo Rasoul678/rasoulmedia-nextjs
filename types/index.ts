@@ -92,3 +92,15 @@ export type ProfileType = {
 };
 
 export type ProfileWithUserType = ProfileType & { user: UserType };
+
+export type LoginRequestType = {
+  email: string;
+  password: string;
+};
+
+export type RegisterRequestType = {
+  email: string;
+  password: string;
+  firstName?: string;
+  lastName?: string;
+};

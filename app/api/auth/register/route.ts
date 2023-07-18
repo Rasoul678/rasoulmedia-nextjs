@@ -4,9 +4,11 @@ import prisma from "@utils/auth/db/client";
 
 export const POST = async (req: NextRequest, res: NextResponse) => {
   try {
-    const { email, password } = (await req.json()) as {
+    const { email, password, firstName, lastName } = (await req.json()) as {
       email: string;
       password: string;
+      firstName?: string;
+      lastName?: string;
     };
 
     if (!email || !password) {
@@ -58,6 +60,8 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
           profiles: {
             create: {
               email,
+              firstName,
+              lastName,
             },
           },
           accounts: {
