@@ -1,5 +1,5 @@
 import { ProfileWithUserType, RegisterRequestType } from "@types";
-import { parseDate } from "@utils/parseDate";
+import { parseDate } from "@utils";
 
 class APIClientSide {
   public getProfile = async (userId?: string) => {

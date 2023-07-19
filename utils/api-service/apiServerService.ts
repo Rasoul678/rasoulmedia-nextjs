@@ -1,5 +1,5 @@
 import prisma from "@utils/auth/db/client";
-import { parseDate } from "@utils/parseDate";
+import { parseDate } from "@utils";
 
 class APIServerSide {
   public getProfile = async (userId: string) => {

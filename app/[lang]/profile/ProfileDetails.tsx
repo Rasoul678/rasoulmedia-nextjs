@@ -24,10 +24,10 @@ const ProfileDetails: React.FC<IProps> = ({ profile }) => {
           <div className="w-full px-4 lg:w-9/12">
             <button
               ref={ref}
-              className="font-normal text-pink-500 outline-none"
+              className="w-full font-normal text-sky-500 outline-none text-lg"
               onClick={() => setShowMore((v) => !v)}
             >
-              Show {showMore ? "less" : "more"}
+              show {showMore ? "less" : "more"}
             </button>
           </div>
           {showMore && (
@@ -121,7 +121,7 @@ const ProfileDetails: React.FC<IProps> = ({ profile }) => {
                           </div>
                           <div className="px-4 py-2">
                             <a
-                              className="text-blue-800"
+                              className="text-sky-500"
                               href={`mailto:${profile?.email}`}
                             >
                               {profile?.email}
