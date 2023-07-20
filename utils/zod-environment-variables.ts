@@ -22,6 +22,8 @@ const envVariables = z.object({
   DB_NAME: z.string(),
   DB_PORT: z.string(),
   DATABASE_URL: z.string(),
+
+  OPENAI_API_KEY: z.string(),
 });
 
 envVariables.parse(process.env);

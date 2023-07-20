@@ -104,3 +104,8 @@ export type RegisterRequestType = {
   firstName?: string;
   lastName?: string;
 };
+
+export enum Creator {
+  ME = 0,
+  BOT = 1,
+}
