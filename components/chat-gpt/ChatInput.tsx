@@ -23,7 +23,7 @@ const ChatInput: React.FC<IProps> = ({ disabled, onSend }) => {
   };
 
   return (
-    <div className="bg-white w-full border-2 p-2 rounded-lg flex justify-center">
+    <div className="bg-white w-full p-2 rounded-lg flex justify-center">
       <input
         value={input}
         onChange={(e) => setInput(e.target.value)}

@@ -74,7 +74,7 @@ const ChatWithBot: React.FC<IProps> = (props) => {
           />
         ))}
         {messages.length === 0 && (
-          <p className="text-center text-xl text-gray-400">I am at your service</p>
+          <p className="text-center text-2xl text-gray-400">I am at your service</p>
         )}
       </div>
     </div>

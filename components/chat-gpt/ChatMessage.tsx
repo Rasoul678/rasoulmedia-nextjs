@@ -6,6 +6,7 @@ import React from "react";
 import GPTLogo from "@assets/svg/ChatGPT_logo.svg";
 import defaultAvatar from "@assets/svg/avatar-default.svg";
 import { useSession } from "next-auth/react";
+import CustomTypewriter from "@components/CustomTypewriter/CustomTypewriter";
 
 interface IProps {
   text: string;
@@ -25,7 +26,9 @@ const ChatMessage: React.FC<IProps> = ({ text, from }) => {
             height={50}
             className="rounded-full"
           />
-          <p className="text-gray-700">{text}</p>
+          <p className="text-gray-700 mt-3">
+            <CustomTypewriter delay={1} text={text} loop={false} cursor=" " />
+          </p>
         </div>
       )}
       {from === Creator.BOT && (
@@ -37,7 +40,9 @@ const ChatMessage: React.FC<IProps> = ({ text, from }) => {
             height={40}
             className="rounded-full"
           />
-          <p className="text-gray-700">{text}</p>
+          <p className="text-gray-700 mt-3">
+            <CustomTypewriter delay={0} text={text} loop={false} cursor=" " />
+          </p>
         </div>
       )}
     </>
