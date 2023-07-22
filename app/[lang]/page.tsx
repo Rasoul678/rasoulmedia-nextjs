@@ -3,6 +3,7 @@
 import React, { useContext } from "react";
 import { IntlContext } from "@components/intl-provider";
 import PromptList from "@components/PromptList/PromptList";
+import ChatWithGPT from "@components/chat-gpt/ChatWithGPT";
 
 const prompts = [
   {
@@ -26,6 +27,7 @@ const Home = () => {
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="text-4xl">Rasoul Media with Next.js</div>
       <div>{intl?.dict?.me}</div>
+      <ChatWithGPT />
       <PromptList prompts={prompts} />
     </main>
   );

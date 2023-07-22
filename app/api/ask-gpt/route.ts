@@ -1,11 +1,5 @@
 import { NextRequest } from "next/server";
-import { Configuration, OpenAIApi } from "openai";
-
-const configuration = new Configuration({
-  apiKey: process.env.OPENAI_API_KEY,
-});
-
-const openai = new OpenAIApi(configuration);
+import { openAI } from "@utils";
 
 export const POST = async (req: NextRequest) => {
   const { prompt } = (await req.json()) as {
@@ -17,7 +11,7 @@ export const POST = async (req: NextRequest) => {
   }
 
   try {
-    const chatCompletion = await openai.createCompletion({
+    const chatCompletion = await openAI.createCompletion({
       model: "text-davinci-003",
       prompt: `${prompt}`,
       temperature: 0.9, // Higher values means that the model will take more risks.
