@@ -23,7 +23,7 @@ const ChatInput: React.FC<IProps> = ({ disabled, onSend }) => {
   };
 
   return (
-    <div className="bg-gray-300 w-full p-2 rounded-lg flex justify-center">
+    <div className="w-full flex justify-center p-3 glassmorphism">
       <input
         value={input}
         onChange={(e) => setInput(e.target.value)}
@@ -48,7 +48,11 @@ const ChatInput: React.FC<IProps> = ({ disabled, onSend }) => {
           />
         </button>
       )}
-      {disabled && <Spinner />}
+      {disabled && (
+        <div className="px-4 flex justify-center items-center">
+          <Spinner />
+        </div>
+      )}
     </div>
   );
 };

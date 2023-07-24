@@ -28,7 +28,7 @@ export const ChatWithGPT: React.FC<IProps> = (props) => {
   };
 
   return (
-    <div className="relative max-w-2xl mx-auto w-full">
+    <div className="relative max-w-3xl mx-auto w-full">
       <div className="sticky top-4 w-full pt-10 px-4">
         <ChatInput onSend={callGPT} disabled={isLoading} />
       </div>
@@ -42,7 +42,7 @@ export const ChatWithGPT: React.FC<IProps> = (props) => {
         ))}
         {messages.length === 0 && (
           <p className="text-center text-2xl text-gray-200">
-            I am at your service
+            I am at your service!
           </p>
         )}
       </div>

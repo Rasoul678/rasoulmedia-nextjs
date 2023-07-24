@@ -41,7 +41,10 @@ const RootLayout: React.FC<IProps> = async (props) => {
             <ServerIntlProvider dict={dict} lang={lang}>
               <TopLoader />
               <Navbar />
-              <section>{children}</section>
+              <div className="main">
+                <div className="gradient" />
+              </div>
+              <main>{children}</main>
               <Footer />
             </ServerIntlProvider>
           </SessionProvider>
