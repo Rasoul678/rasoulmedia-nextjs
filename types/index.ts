@@ -109,3 +109,9 @@ export enum Creator {
   ME = 0,
   BOT = 1,
 }
+
+export type GPTMessageType = {
+  text: string;
+  from: Creator;
+  key: number;
+};

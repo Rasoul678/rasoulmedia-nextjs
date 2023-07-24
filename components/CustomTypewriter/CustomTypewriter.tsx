@@ -12,7 +12,7 @@ interface TypewriterProps {
   cursorClassName?: string;
 }
 
-const CustomTypewriter: React.FC<TypewriterProps> = (props) => {
+export const CustomTypewriter: React.FC<TypewriterProps> = (props) => {
   const {
     strings,
     autoStart = true,
@@ -43,5 +43,3 @@ const CustomTypewriter: React.FC<TypewriterProps> = (props) => {
     />
   );
 };
-
-export default CustomTypewriter;

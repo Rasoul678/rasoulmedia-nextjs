@@ -52,6 +52,18 @@ class APIClientSide {
 
     return response;
   };
+
+  public callGPT = async (prompt: string) => {
+    const response = await fetch("/api/ask-gpt", {
+      method: "POST",
+      body: JSON.stringify({ prompt }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    return response;
+  };
 }
 
 export const clientService = new APIClientSide();

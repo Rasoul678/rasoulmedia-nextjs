@@ -1,6 +1,6 @@
 import React from "react";
-import sendMessage from "@assets/svg/send-message.svg";
 import Image from "next/image";
+import sendMessage from "@assets/svg/send-message.svg";
 import { Spinner } from "@components/spinner/Spinner";
 
 interface IProps {
@@ -23,7 +23,7 @@ const ChatInput: React.FC<IProps> = ({ disabled, onSend }) => {
   };
 
   return (
-    <div className="bg-white w-full p-2 rounded-lg flex justify-center">
+    <div className="bg-gray-300 w-full p-2 rounded-lg flex justify-center">
       <input
         value={input}
         onChange={(e) => setInput(e.target.value)}

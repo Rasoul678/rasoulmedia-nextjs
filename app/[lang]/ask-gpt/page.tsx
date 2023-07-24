@@ -1,10 +1,10 @@
 import React from "react";
-import ChatWithGPT from "@components/chat-gpt/ChatWithGPT";
+import ChatWithGPT from "@components/chat-gpt";
 
 interface IProps {}
 
-const page: React.FC<IProps> = (props) => {
+const AskGPT: React.FC<IProps> = (props) => {
   return <ChatWithGPT />;
 };
 
-export default page;
+export default AskGPT;
