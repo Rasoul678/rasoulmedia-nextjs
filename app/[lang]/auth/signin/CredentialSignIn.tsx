@@ -4,7 +4,7 @@ import React, { ChangeEvent } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import Form from "@components/form";
+import { AuthForm } from "@components/form";
 
 interface IProps {
   callbackUrl: string;
@@ -52,7 +52,7 @@ const CredentialSignIn: React.FC<IProps> = ({ callbackUrl }) => {
   };
 
   return (
-    <Form
+    <AuthForm
       error={error}
       formValues={formValues}
       loading={isLoading}

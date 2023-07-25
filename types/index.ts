@@ -82,7 +82,6 @@ export type ProfileType = {
   company?: StringOrNull;
   email?: StringOrNull;
   firstName?: StringOrNull;
-
   lastName?: StringOrNull;
   webUrl?: StringOrNull;
   occupation?: StringOrNull;
@@ -91,7 +90,17 @@ export type ProfileType = {
   updatedAt?: string;
 };
 
+export type PromptType = {
+  id?: string;
+  userId?: string;
+  text?: string;
+  tag?: string;
+  createdAt?: string;
+  updatedAt?: string;
+};
+
 export type ProfileWithUserType = ProfileType & { user: UserType };
+export type PromptWithUserType = PromptType & { user: UserType };
 
 export type LoginRequestType = {
   email: string;
@@ -114,4 +123,12 @@ export type GPTMessageType = {
   text: string;
   from: Creator;
   key: number;
+};
+
+export type InfiniteResponseDataType<T> = {
+  data: T;
+  metaData: {
+    lastCursor: string;
+    hasNextPage: boolean;
+  };
 };

@@ -15,7 +15,7 @@ interface IProps {
   type: "signin" | "signup";
 }
 
-export const Form: React.FC<IProps> = ({
+export const AuthForm: React.FC<IProps> = ({
   onSubmit,
   error,
   formValues,

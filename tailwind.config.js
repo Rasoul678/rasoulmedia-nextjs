@@ -14,8 +14,12 @@ module.exports = {
         7: "0.07",
       },
       fontFamily: {
-        iransans: ['var(--font-iransans)']
-      }
+        iransans: ["var(--font-iransans)"],
+        satoshi: ["Satoshi", "sans-serif"],
+      },
+      colors: {
+        "primary-orange": "#FF5722",
+      },
     },
   },
   plugins: [],

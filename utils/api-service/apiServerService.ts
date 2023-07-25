@@ -25,6 +25,17 @@ class APIServerSide {
 
     return profile;
   };
+
+  public getAllPrompts = async () => {
+    const prompts = await prisma.prompt.findMany({
+      include: {
+        user: true,
+      },
+      orderBy: { createdAt: "desc" },
+    });
+
+    return prompts;
+  };
 }
 
 export const serverService = new APIServerSide();

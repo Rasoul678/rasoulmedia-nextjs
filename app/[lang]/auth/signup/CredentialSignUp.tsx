@@ -2,7 +2,7 @@
 
 import React, { ChangeEvent } from "react";
 import { signIn } from "next-auth/react";
-import Form from "@components/form";
+import { AuthForm } from "@components/form";
 import { clientService } from "@utils/api-service";
 import { useMutation } from "@tanstack/react-query";
 
@@ -51,7 +51,7 @@ const CredentialSignUp: React.FC<IProps> = (props) => {
   };
 
   return (
-    <Form
+    <AuthForm
       error={error}
       formValues={formValues}
       loading={isLoading}

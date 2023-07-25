@@ -1,1 +1,2 @@
-export { Form as default } from "./Form";
+export { AuthForm } from "./auth";
+export { PromptForm } from "./prompt";

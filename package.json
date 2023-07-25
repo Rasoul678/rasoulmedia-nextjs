@@ -19,6 +19,9 @@
     "clean:docker": "docker system prune -af",
     "clean:volumes": "docker volume prune -f"
   },
+  "prisma": {
+    "seed": "tsx ./prisma/seed.ts"
+  },
   "dependencies": {
     "@auth/prisma-adapter": "^1.0.0",
     "@formatjs/intl-localematcher": "^0.4.0",
@@ -41,15 +44,18 @@
     "postcss": "8.4.24",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-intersection-observer": "^9.5.2",
     "tailwindcss": "3.3.2",
     "typescript": "5.1.6",
     "typewriter-effect": "^2.20.1",
     "zod": "^3.21.4"
   },
   "devDependencies": {
+    "@faker-js/faker": "^8.0.2",
     "@types/bcrypt": "^5.0.0",
     "@types/negotiator": "^0.6.1",
     "dotenv-cli": "^7.2.1",
-    "prisma": "^4.16.2"
+    "prisma": "^4.16.2",
+    "tsx": "^3.12.7"
   }
 }
