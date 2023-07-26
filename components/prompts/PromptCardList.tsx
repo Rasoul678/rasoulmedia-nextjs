@@ -9,6 +9,8 @@ interface ICardListProps {
   handleTagClick: (tag: string) => void;
   hasNextPage: boolean;
   fetchNextPage: (options?: FetchNextPageOptions | undefined) => void;
+  handleEdit?: (promptId: string) => void;
+  handleDelete?: (promptId: string) => void;
 }
 
 const PromptCardList: React.FC<ICardListProps> = ({
@@ -16,6 +18,8 @@ const PromptCardList: React.FC<ICardListProps> = ({
   handleTagClick,
   hasNextPage,
   fetchNextPage,
+  handleEdit,
+  handleDelete,
 }) => {
   //! to know when the last element is in view
   const { ref, inView } = useInView();
@@ -39,6 +43,8 @@ const PromptCardList: React.FC<ICardListProps> = ({
                   key={prompt.id}
                   prompt={prompt}
                   handleTagClick={handleTagClick}
+                  handleEdit={() => handleEdit?.(String(prompt.id))}
+                  handleDelete={() => handleDelete?.(String(prompt.id))}
                 />
               </div>
             );
@@ -48,6 +54,8 @@ const PromptCardList: React.FC<ICardListProps> = ({
                 key={prompt.id}
                 prompt={prompt}
                 handleTagClick={handleTagClick}
+                handleEdit={() => handleEdit?.(String(prompt.id))}
+                handleDelete={() => handleDelete?.(String(prompt.id))}
               />
             );
           }

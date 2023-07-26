@@ -2,8 +2,13 @@
 
 import React from "react";
 import PromptCardList from "./PromptCardList";
-import { useInfiniteQuery } from "@tanstack/react-query";
+import {
+  useInfiniteQuery,
+  useMutation,
+  useQueryClient,
+} from "@tanstack/react-query";
 import { PromptWithUserType } from "@types";
+import { useRouter } from "next/navigation";
 
 interface IProps {}
 
@@ -21,24 +26,15 @@ const allPrompts = async ({ take, lastCursor }: PromptQueryParams) => {
 };
 
 export const Feed: React.FC<IProps> = (props) => {
+  const router = useRouter();
+  const queryClient = useQueryClient();
+
   const [searchText, setSearchText] = React.useState("");
   const [searchTimeout, setSearchTimeout] =
     React.useState<ReturnType<typeof setTimeout>>();
   const [searchResults, setSearchResults] = React.useState<
     PromptWithUserType[]
   >([]);
-
-  //! Fetch the posts on the client
-  //   const {
-  //     data: allPosts,
-  //     isLoading,
-  //     isFetching,
-  //     error,
-  //   } = useQuery({
-  //     queryKey: ["hydrate-posts"],
-  //     queryFn: () => {},
-  //     keepPreviousData: true,
-  //   });
 
   const {
     data,
@@ -51,11 +47,23 @@ export const Feed: React.FC<IProps> = (props) => {
   } = useInfiniteQuery({
     queryFn: ({ pageParam = "" }) =>
       allPrompts({ take: 10, lastCursor: pageParam }),
-    queryKey: ["prompts"],
+    queryKey: ["hydrate-prompts"],
     // getNextPageParam is used to get the cursor of the last element in the current page
     // which is then used as the pageParam in the queryFn
     getNextPageParam: (lastPage) => {
       return lastPage?.metaData.lastCursor;
+    },
+  });
+
+  //! Mutation (delete prompt)
+  const { mutate } = useMutation({
+    mutationFn: async (promptId: string) => {
+      return await fetch(`/api/prompt/${promptId}`, {
+        method: "DELETE",
+      });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["hydrate-prompts"] });
     },
   });
 
@@ -91,9 +99,23 @@ export const Feed: React.FC<IProps> = (props) => {
     setSearchResults(searchResults);
   };
 
+  const handleEdit = (promptId: string) => {
+    router.push(`/prompts/update?id=${promptId}`);
+  };
+
+  const handleDelete = async (promptId: string) => {
+    const hasConfirmed = confirm(
+      "Are you sure you want to delete this prompt?"
+    );
+
+    if (hasConfirmed) {
+      mutate(promptId);
+    }
+  };
+
   return (
     <section className="feed">
-      <form className="sticky top-14 z-50 w-full flex-center max-w-xl">
+      <form className="sticky top-2 z-[1000] w-full flex-center max-w-xl">
         <input
           type="text"
           placeholder="Search for a tag or a username"
@@ -113,6 +135,8 @@ export const Feed: React.FC<IProps> = (props) => {
           handleTagClick={handleTagClick}
           hasNextPage={Boolean(hasNextPage)}
           fetchNextPage={fetchNextPage}
+          handleDelete={handleDelete}
+          handleEdit={handleEdit}
         />
       ) : null}
     </section>

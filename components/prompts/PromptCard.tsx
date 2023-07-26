@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import tick from "@assets/svg/tick.svg";
 import copy from "@assets/svg/copy.svg";
 import defaultAvatar from "@assets/svg/avatar-default.svg";
+import Link from "next/link";
 
 interface IProps {
   prompt: PromptWithUserType;
@@ -22,6 +23,8 @@ const PromptCard: React.FC<IProps> = (props) => {
   const { data: session } = useSession();
   const router = useRouter();
 
+  const isAuthUser = session?.user.id === prompt.user.id;
+
   const handleCopy = () => {
     const promptText = String(prompt.text);
     setCopied(promptText);
@@ -30,8 +33,6 @@ const PromptCard: React.FC<IProps> = (props) => {
   };
 
   const handleGoToProfile = () => {
-    const isAuthUser = session?.user.id === prompt.user.id;
-
     if (isAuthUser) {
       router.push(`/profile`);
     } else {
@@ -78,16 +79,18 @@ const PromptCard: React.FC<IProps> = (props) => {
       >
         #{prompt.tag}
       </p>
-      {session?.user.id === prompt.user.id && (
+      {isAuthUser && (
         <div className="mt-5 flex-end gap-4 border-t border-gray-100 pt-3">
+          <Link href={`/prompts/update/${prompt.id}`}>
+            <p
+              className="text-sm green_gradient cursor-pointer"
+              // onClick={handleEdit}
+            >
+              Edit
+            </p>
+          </Link>
           <p
-            className="text-md green_gradient cursor-pointer"
-            onClick={handleEdit}
-          >
-            Edit
-          </p>
-          <p
-            className=" font-inter text-md red_gradient cursor-pointer"
+            className=" font-inter text-sm red_gradient cursor-pointer"
             onClick={handleDelete}
           >
             Delete

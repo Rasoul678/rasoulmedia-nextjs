@@ -132,3 +132,5 @@ export type InfiniteResponseDataType<T> = {
     hasNextPage: boolean;
   };
 };
+
+export type FormPromptType = Partial<PromptType> | null | undefined;

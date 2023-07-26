@@ -4,13 +4,13 @@ import { useState } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { PromptForm } from "@components/form";
-import { PromptType } from "@types";
+import { FormPromptType } from "@types";
 
 interface IProps {}
 
 const CreatePrompt: React.FC<IProps> = (props) => {
   const [submitting, setSubmitting] = useState(false);
-  const [prompt, setPrompt] = useState<PromptType>({ text: "", tag: "" });
+  const [prompt, setPrompt] = useState<FormPromptType>({ text: "", tag: "" });
   const { data: session } = useSession();
   const router = useRouter();
 

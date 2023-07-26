@@ -1,4 +1,4 @@
-import { ProfileWithUserType, RegisterRequestType } from "@types";
+import { ProfileWithUserType, PromptWithUserType, RegisterRequestType } from "@types";
 import { parseDate } from "@utils";
 
 class APIClientSide {
@@ -63,6 +63,12 @@ class APIClientSide {
     });
 
     return response;
+  };
+
+  public getUserPrompt = async (promptId: string) => {
+    const response = await fetch(`/api/prompt/${promptId}`);
+    const prompt = (await response.json()) as PromptWithUserType;
+    return prompt;
   };
 }
 

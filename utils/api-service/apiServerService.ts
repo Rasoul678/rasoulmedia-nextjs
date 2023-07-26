@@ -36,6 +36,19 @@ class APIServerSide {
 
     return prompts;
   };
+
+  public getPromptById = async (promptId: string) => {
+    const prompt = await prisma.prompt.findUnique({
+      where: {
+        id: promptId,
+      },
+      include: {
+        user: true,
+      },
+    });
+
+    return prompt;
+  };
 }
 
 export const serverService = new APIServerSide();
