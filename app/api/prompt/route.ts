@@ -8,6 +8,7 @@ export const GET = async (req: NextRequest) => {
 
     const take = searchParams.get("take");
     const lastCursor = searchParams.get("lastCursor");
+    const search = searchParams.get("search");
 
     const result = await prisma.prompt.findMany({
       take: take ? parseInt(take as string) : 10,
@@ -23,6 +24,38 @@ export const GET = async (req: NextRequest) => {
       orderBy: {
         createdAt: "desc",
       },
+      ...(search && {
+        where: {
+          OR: [
+            {
+              text: {
+                contains: search,
+              },
+            },
+            {
+              tag: {
+                contains: search,
+              },
+            },
+            {
+              user: {
+                OR: [
+                  {
+                    name: {
+                      contains: search,
+                    },
+                  },
+                  {
+                    email: {
+                      contains: search
+                    }
+                  }
+                ],
+              },
+            },
+          ],
+        },
+      }),
     });
 
     if (result.length == 0) {

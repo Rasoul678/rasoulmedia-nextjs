@@ -16,16 +16,16 @@ export const PromptForm: React.FC<IProps> = (props) => {
   const { handleSubmit, prompt, setPrompt, submitting, type } = props;
 
   return (
-    <section className="w-full max-w-full flex-center flex-col mt-3">
-      <h1 className="head_text text-left">
+    <section className="form-prompt-wrapper">
+      <h1 className="head_text text-left mt-4">
         <span className="blue_gradient text-3xl">{type} Prompt</span>
       </h1>
       <form
-        className="mt-4 w-full max-w-xl p-5 flex flex-col gap-7 glassmorphism"
+        className="form-prompt"
         onSubmit={handleSubmit}
       >
         <label>
-          <span className="font-satoshi font-semibold text-base text-gray-200">
+          <span className="form-prompt-text-label">
             Your AI Prompt
           </span>
           <textarea
@@ -37,10 +37,10 @@ export const PromptForm: React.FC<IProps> = (props) => {
           />
         </label>
         <label>
-          <span className="font-satoshi font-semibold text-base text-gray-200">
+          <span className="form-prompt-tag-label">
             Tag{" "}
             <span className="font-normal">
-              (#product, #webdevelopment, #idea)
+              (#product, #web-development, #idea)
             </span>
           </span>
           <input
@@ -58,9 +58,9 @@ export const PromptForm: React.FC<IProps> = (props) => {
           <button
             type="submit"
             disabled={submitting}
-            className=" px-5 py-1.5 text-sm bg-sky-600 rounded-full text-white"
+            className="form-prompt-submit-btn"
           >
-            {submitting ? `${type}...` : type}
+            {submitting ? `${type.slice(0,-1)}ing...` : type}
           </button>
         </div>
       </form>

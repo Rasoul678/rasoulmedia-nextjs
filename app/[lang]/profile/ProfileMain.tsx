@@ -91,7 +91,7 @@ const ProfileMain: React.FC<IProps> = ({ profile }) => {
                         onClick={followUser}
                         disabled={isLoading}
                       >
-                        {isLoading && <Spinner />}
+                        {isLoading && <Spinner size={20} />}
                         Follow
                       </button>
                     ) : (
@@ -101,7 +101,7 @@ const ProfileMain: React.FC<IProps> = ({ profile }) => {
                         onClick={unFollowUser}
                         disabled={isLoading}
                       >
-                        {isLoading && <Spinner />}
+                        {isLoading && <Spinner size={20} />}
                         UnFollow
                       </button>
                     )}

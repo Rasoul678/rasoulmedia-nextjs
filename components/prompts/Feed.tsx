@@ -7,19 +7,21 @@ import {
   useMutation,
   useQueryClient,
 } from "@tanstack/react-query";
-import { PromptWithUserType } from "@types";
 import { useRouter } from "next/navigation";
+import { Spinner } from "@components/spinner/Spinner";
 
 interface IProps {}
 
 type PromptQueryParams = {
   take?: number;
   lastCursor?: string;
+  searchText?: string;
 };
 
-const allPrompts = async ({ take, lastCursor }: PromptQueryParams) => {
+const allPrompts = async (args: PromptQueryParams) => {
+  const { take, lastCursor, searchText } = args;
   const response = await fetch(
-    `/api/prompt?take=${take}&lastCursor=${lastCursor}`
+    `/api/prompt?take=${take}&lastCursor=${lastCursor}&search=${searchText}`
   );
   const data = await response.json();
   return data;
@@ -32,9 +34,6 @@ export const Feed: React.FC<IProps> = (props) => {
   const [searchText, setSearchText] = React.useState("");
   const [searchTimeout, setSearchTimeout] =
     React.useState<ReturnType<typeof setTimeout>>();
-  const [searchResults, setSearchResults] = React.useState<
-    PromptWithUserType[]
-  >([]);
 
   const {
     data,
@@ -44,15 +43,17 @@ export const Feed: React.FC<IProps> = (props) => {
     fetchNextPage,
     isSuccess,
     isFetchingNextPage,
+    refetch,
   } = useInfiniteQuery({
     queryFn: ({ pageParam = "" }) =>
-      allPrompts({ take: 10, lastCursor: pageParam }),
+      allPrompts({ take: 10, lastCursor: pageParam, searchText }),
     queryKey: ["hydrate-prompts"],
     // getNextPageParam is used to get the cursor of the last element in the current page
     // which is then used as the pageParam in the queryFn
     getNextPageParam: (lastPage) => {
       return lastPage?.metaData.lastCursor;
     },
+    keepPreviousData: true,
   });
 
   //! Mutation (delete prompt)
@@ -67,36 +68,25 @@ export const Feed: React.FC<IProps> = (props) => {
     },
   });
 
-  const filterPosts = (searchText: string) => {
-    const regex = new RegExp(searchText, "i");
-
-    return (
-      data?.pages?.filter(
-        (page: any) =>
-          regex.test(page.text) ||
-          regex.test(page.tag) ||
-          regex.test(page.user.name)
-      ) || []
-    );
-  };
-
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const searchText = e.target.value;
-    clearTimeout(searchTimeout);
     setSearchText(searchText);
-
-    setSearchTimeout(
-      setTimeout(() => {
-        const searchResults = filterPosts(searchText);
-        setSearchResults(searchResults);
-      }, 500)
-    );
+    refetchPrompts();
   };
 
   const handleTagClick = (tagName: string) => {
     setSearchText(tagName);
-    const searchResults = filterPosts(tagName);
-    setSearchResults(searchResults);
+    refetchPrompts();
+  };
+
+  const refetchPrompts = () => {
+    clearTimeout(searchTimeout);
+
+    setSearchTimeout(
+      setTimeout(() => {
+        refetch();
+      }, 500)
+    );
   };
 
   const handleEdit = (promptId: string) => {
@@ -118,7 +108,7 @@ export const Feed: React.FC<IProps> = (props) => {
       <form className="sticky top-2 z-[1000] w-full flex-center max-w-xl">
         <input
           type="text"
-          placeholder="Search for a tag or a username"
+          placeholder="Search for text, tag, email or a name"
           value={searchText}
           onChange={handleSearchChange}
           required
@@ -131,7 +121,7 @@ export const Feed: React.FC<IProps> = (props) => {
         <p>Loading...</p>
       ) : data?.pages ? (
         <PromptCardList
-          pages={searchText ? searchResults : data.pages}
+          pages={data.pages}
           handleTagClick={handleTagClick}
           hasNextPage={Boolean(hasNextPage)}
           fetchNextPage={fetchNextPage}
@@ -139,6 +129,7 @@ export const Feed: React.FC<IProps> = (props) => {
           handleEdit={handleEdit}
         />
       ) : null}
+      {hasNextPage && isFetchingNextPage && <Spinner size={50} />}
     </section>
   );
 };

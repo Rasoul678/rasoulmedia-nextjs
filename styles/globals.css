@@ -237,7 +237,7 @@ main {
 }
 
 .search_input {
-  @apply block w-full rounded-md border border-gray-200 bg-white py-2.5 font-satoshi pl-5 pr-12 text-sm shadow-lg font-medium focus:border-black focus:outline-none focus:ring-0;
+  @apply block w-full rounded-md text-gray-900 bg-gray-200 py-2.5 font-satoshi pl-5 pr-12 text-sm shadow-lg font-medium focus:border-black focus:outline-none focus:ring-0;
 }
 
 .prompt_layout {
@@ -251,16 +251,16 @@ main {
 
 /* Form Component */
 .form_textarea {
-  @apply w-full flex rounded-lg h-[200px] mt-2 p-3 text-sm text-gray-500 outline-0;
+  @apply w-full flex rounded-lg h-[200px] mt-2 p-3 text-sm bg-gray-100 text-gray-800 outline-0;
 }
 
 .form_input {
-  @apply w-full flex rounded-lg mt-2 p-3 text-sm text-gray-500 outline-0;
+  @apply w-full flex rounded-lg mt-2 p-3 text-sm bg-gray-100 text-gray-800 outline-0;
 }
 
 /* PromptCard Component */
 .prompt_card {
-  @apply break-inside-avoid rounded-lg  bg-white/20 bg-clip-padding p-6 pb-4 backdrop-blur-lg backdrop-filter;
+  @apply break-inside-avoid rounded-lg  bg-gray-700/20 bg-clip-padding p-6 pb-4 backdrop-blur-lg backdrop-filter;
 }
 
 .flex-center {
@@ -277,4 +277,24 @@ main {
 
 .flex-between {
   @apply flex justify-between items-center;
+}
+
+.form-prompt-wrapper {
+  @apply w-full max-w-full flex-center flex-col;
+}
+
+.form-prompt {
+  @apply mt-4 w-full max-w-xl p-5 flex flex-col gap-7 bg-gray-700/30 rounded-lg;
+}
+
+.form-prompt-text-label {
+  @apply font-satoshi font-semibold text-base text-gray-200 red_gradient;
+}
+
+.form-prompt-tag-label {
+  @apply font-satoshi font-semibold text-base text-gray-200 red_gradient;
+}
+
+.form-prompt-submit-btn {
+  @apply px-5 py-1.5 text-sm bg-sky-600 rounded-full text-white;
 }

@@ -6,10 +6,10 @@ import { Locale, i18n } from "@i18n-config";
 import { usePathname, useRouter } from "next/navigation";
 
 interface IProps {
-  user: any
+  user: any;
 }
 
-export const Menu: React.FC<IProps> = ({user}) => {
+export const Menu: React.FC<IProps> = ({ user }) => {
   const intl = React.useContext(IntlContext);
   const pathName = usePathname();
   const router = useRouter();

@@ -2,16 +2,18 @@ import Image from "next/image";
 import React from "react";
 import loader from "@assets/svg/loader.svg";
 
-interface IProps {}
+interface IProps {
+  size?: number
+}
 
-export const Spinner: React.FC<IProps> = () => {
+export const Spinner: React.FC<IProps> = ({size}) => {
   return (
     <div
       aria-label="Loading..."
       role="status"
       className="flex flex-col align-middle justify-center"
     >
-      <Image src={loader} alt="Loader" width={40} height={40} />
+      <Image src={loader} alt="Loader" width={size || 40} />
     </div>
   );
 };
