@@ -56,7 +56,7 @@ const PromptCard: React.FC<IProps> = (props) => {
           />
           <div className="flex flex-col">
             <h3 className="font-satoshi font-semibold text-gray-200">
-              {prompt.user.name}
+              {prompt.user.name || "No Name"}
             </h3>
             <p className="font-satoshi text-sm text-gray-400">
               {prompt.user.email}
@@ -72,7 +72,9 @@ const PromptCard: React.FC<IProps> = (props) => {
           />
         </div>
       </div>
-      <p className="my-4 font-satoshi text-sm text-gray-200">{prompt.text}</p>
+      <p className="flex-1 my-4 font-satoshi text-md text-gray-200 line-clamp-2">
+        {prompt.text}
+      </p>
       <p
         className="text-sm text-sky-400 cursor-pointer"
         onClick={() => handleTagClick?.(String(prompt.tag))}

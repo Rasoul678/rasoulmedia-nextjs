@@ -134,3 +134,9 @@ export type InfiniteResponseDataType<T> = {
 };
 
 export type FormPromptType = Partial<PromptType> | null | undefined;
+
+export type PromptQueryParams = {
+  take?: number | string | null;
+  lastCursor?: string | null;
+  searchText?: string | null;
+};

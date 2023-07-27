@@ -9,23 +9,9 @@ import {
 } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { Spinner } from "@components/spinner/Spinner";
+import { clientService } from "@utils/api-service";
 
 interface IProps {}
-
-type PromptQueryParams = {
-  take?: number;
-  lastCursor?: string;
-  searchText?: string;
-};
-
-const allPrompts = async (args: PromptQueryParams) => {
-  const { take, lastCursor, searchText } = args;
-  const response = await fetch(
-    `/api/prompt?take=${take}&lastCursor=${lastCursor}&search=${searchText}`
-  );
-  const data = await response.json();
-  return data;
-};
 
 export const Feed: React.FC<IProps> = (props) => {
   const router = useRouter();
@@ -45,9 +31,13 @@ export const Feed: React.FC<IProps> = (props) => {
     isFetchingNextPage,
     refetch,
   } = useInfiniteQuery({
-    queryFn: ({ pageParam = "" }) =>
-      allPrompts({ take: 10, lastCursor: pageParam, searchText }),
-    queryKey: ["hydrate-prompts"],
+    queryFn: async ({ pageParam = "" }) =>
+      await clientService.allUserPrompts({
+        take: 10,
+        lastCursor: pageParam,
+        searchText,
+      }),
+    queryKey: ["hydrate-user-prompts"],
     // getNextPageParam is used to get the cursor of the last element in the current page
     // which is then used as the pageParam in the queryFn
     getNextPageParam: (lastPage) => {
@@ -55,6 +45,7 @@ export const Feed: React.FC<IProps> = (props) => {
     },
     keepPreviousData: true,
   });
+
 
   //! Mutation (delete prompt)
   const { mutate } = useMutation({
@@ -64,7 +55,7 @@ export const Feed: React.FC<IProps> = (props) => {
       });
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["hydrate-prompts"] });
+      queryClient.invalidateQueries({ queryKey: ["hydrate-user-prompts"] });
     },
   });
 

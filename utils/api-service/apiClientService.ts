@@ -1,4 +1,4 @@
-import { ProfileWithUserType, PromptWithUserType, RegisterRequestType } from "@types";
+import { InfiniteResponseDataType, ProfileWithUserType, PromptQueryParams, PromptWithUserType, RegisterRequestType } from "@types";
 import { parseDate } from "@utils";
 
 class APIClientSide {
@@ -69,6 +69,15 @@ class APIClientSide {
     const response = await fetch(`/api/prompt/${promptId}`);
     const prompt = (await response.json()) as PromptWithUserType;
     return prompt;
+  };
+
+  public allUserPrompts = async (args: PromptQueryParams) => {
+    const { take, lastCursor, searchText } = args;
+    const response = await fetch(
+      `/api/prompt?take=${take}&lastCursor=${lastCursor}&search=${searchText}`
+    );
+    const data = (await response.json()) as InfiniteResponseDataType<PromptWithUserType[]>;
+    return data;
   };
 }
 

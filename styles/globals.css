@@ -162,6 +162,7 @@ main {
   position: relative;
   top: -0.7rem;
   left: calc(50% - 0.4rem);
+  border-radius: 50%;
 }
 
 .github-button {
@@ -260,7 +261,7 @@ main {
 
 /* PromptCard Component */
 .prompt_card {
-  @apply break-inside-avoid rounded-lg  bg-gray-700/20 bg-clip-padding p-6 pb-4 backdrop-blur-lg backdrop-filter;
+  @apply flex flex-col break-inside-avoid rounded-lg  bg-gray-700/20 bg-clip-padding p-6 pb-4 backdrop-blur-lg backdrop-filter min-h-[13rem] max-h-[15.5rem];
 }
 
 .flex-center {

@@ -1,5 +1,5 @@
 import type { NextRequest } from "next/server";
-import prisma from "@utils/auth/db/client";
+import { serverService } from "@utils/api-service";
 
 export const GET = async (req: NextRequest) => {
   try {
@@ -10,52 +10,10 @@ export const GET = async (req: NextRequest) => {
     const lastCursor = searchParams.get("lastCursor");
     const search = searchParams.get("search");
 
-    const result = await prisma.prompt.findMany({
-      take: take ? parseInt(take as string) : 10,
-      ...(lastCursor && {
-        skip: 1, // Do not include the cursor itself in the query result.
-        cursor: {
-          id: lastCursor as string,
-        },
-      }),
-      include: {
-        user: true,
-      },
-      orderBy: {
-        createdAt: "desc",
-      },
-      ...(search && {
-        where: {
-          OR: [
-            {
-              text: {
-                contains: search,
-              },
-            },
-            {
-              tag: {
-                contains: search,
-              },
-            },
-            {
-              user: {
-                OR: [
-                  {
-                    name: {
-                      contains: search,
-                    },
-                  },
-                  {
-                    email: {
-                      contains: search
-                    }
-                  }
-                ],
-              },
-            },
-          ],
-        },
-      }),
+    const result = await serverService.getPrompts({
+      take,
+      searchText: search,
+      lastCursor,
     });
 
     if (result.length == 0) {
@@ -74,13 +32,9 @@ export const GET = async (req: NextRequest) => {
     const lastPromptInResults = result[result.length - 1];
     const cursor = lastPromptInResults.id;
 
-    const nextPage = await prisma.prompt.findMany({
-      // Same as before, limit the number of events returned by this query.
-      take: take ? parseInt(take as string) : 7,
-      skip: 1, // Do not include the cursor itself in the query result.
-      cursor: {
-        id: cursor,
-      },
+    const nextPage = await serverService.getNextPrompts({
+      take,
+      lastCursor: cursor,
     });
 
     const data = {
