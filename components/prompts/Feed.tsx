@@ -46,7 +46,6 @@ export const Feed: React.FC<IProps> = (props) => {
     keepPreviousData: true,
   });
 
-
   //! Mutation (delete prompt)
   const { mutate } = useMutation({
     mutationFn: async (promptId: string) => {
@@ -118,6 +117,7 @@ export const Feed: React.FC<IProps> = (props) => {
           fetchNextPage={fetchNextPage}
           handleDelete={handleDelete}
           handleEdit={handleEdit}
+          isFetchingNextPage={isFetchingNextPage}
         />
       ) : null}
       {hasNextPage && isFetchingNextPage && <Spinner size={50} />}

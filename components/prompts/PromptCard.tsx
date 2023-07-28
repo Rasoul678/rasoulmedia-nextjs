@@ -4,7 +4,7 @@ import { PromptWithUserType } from "@types";
 import React, { useState } from "react";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import tick from "@assets/svg/tick.svg";
 import copy from "@assets/svg/copy.svg";
 import defaultAvatar from "@assets/svg/avatar-default.svg";
@@ -22,8 +22,10 @@ const PromptCard: React.FC<IProps> = (props) => {
   const [copied, setCopied] = useState("");
   const { data: session } = useSession();
   const router = useRouter();
+  const pathName = usePathname();
 
   const isAuthUser = session?.user.id === prompt.user.id;
+  const hasAccess = isAuthUser && /profile/.test(pathName);
 
   const handleCopy = () => {
     const promptText = String(prompt.text);
@@ -41,7 +43,7 @@ const PromptCard: React.FC<IProps> = (props) => {
   };
 
   return (
-    <div className="prompt_card">
+    <div className="prompt_card w-[20rem]">
       <div className="flex justify-between items-start gap-5">
         <div
           className="flex-1 flex justify-start items-center gap-3 cursor-pointer"
@@ -81,8 +83,8 @@ const PromptCard: React.FC<IProps> = (props) => {
       >
         #{prompt.tag}
       </p>
-      {isAuthUser && (
-        <div className="mt-5 flex-end gap-4 border-t border-gray-100 pt-3">
+      {hasAccess && (
+        <div className="mt-3 flex-end gap-4 border-t border-gray-100 pt-3">
           <Link href={`/prompts/update/${prompt.id}`}>
             <p
               className="text-sm green_gradient cursor-pointer"

@@ -28,10 +28,10 @@ const PromptsPage: React.FC<IProps> = async ({ searchParams }) => {
           AI-Powered Prompts
         </span>
       </h1>
-      <p className="desc text-center">
+      {/* <p className="desc text-center">
         This is an open-source AI prompting tool for modern world to discover,
         create and share creative prompts
-      </p>
+      </p> */}
       <Hydrate state={dehydratedState}>
         <Feed />
       </Hydrate>
