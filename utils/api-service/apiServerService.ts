@@ -50,11 +50,13 @@ class APIServerSide {
             {
               text: {
                 contains: search,
+                mode: "insensitive",
               },
             },
             {
               tag: {
                 contains: search,
+                mode: "insensitive",
               },
             },
             {
@@ -63,11 +65,13 @@ class APIServerSide {
                   {
                     name: {
                       contains: search,
+                      mode: "insensitive",
                     },
                   },
                   {
                     email: {
                       contains: search,
+                      mode: "insensitive",
                     },
                   },
                 ],
@@ -89,7 +93,7 @@ class APIServerSide {
       take: take ? parseInt(take as string) : 7,
       skip: 1, // Do not include the cursor itself in the query result.
       cursor: {
-        id: String(cursor),
+        id: cursor ?? "",
       },
     });
 

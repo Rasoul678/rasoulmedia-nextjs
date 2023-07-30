@@ -13,25 +13,14 @@ interface IProps<T> {
   columnCount: number;
   hasNextPage?: boolean;
   isFetchingNextPage?: boolean;
-  fetchNextPage?: any;
 }
 
 export const VirtualizedGrid = <T,>(props: IProps<T>) => {
-  const {
-    data,
-    children,
-    columnCount,
-    hasNextPage,
-    isFetchingNextPage,
-    fetchNextPage,
-  } = props;
+  const { data, children, columnCount, hasNextPage } = props;
 
   const gridData: any[] = useMemo(() => [...chunks(data, 3)], [data]);
 
-  const itemCount = hasNextPage ? data.length + 1 : data.length;
-
-  const isItemLoaded = (index: number) =>
-    !hasNextPage || index < gridData.length;
+  const itemCount = hasNextPage ? gridData.length + 1 : gridData.length;
 
   const itemData = useMemo(
     () => ({
@@ -44,8 +33,8 @@ export const VirtualizedGrid = <T,>(props: IProps<T>) => {
   return (
     <>
       <InfiniteLoader
-        isItemLoaded={isItemLoaded}
-        loadMoreItems={fetchNextPage}
+        isItemLoaded={() => true}
+        loadMoreItems={() => {}}
         itemCount={itemCount}
       >
         {({ ref }) => (

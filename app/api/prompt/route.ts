@@ -10,11 +10,14 @@ export const GET = async (req: NextRequest) => {
     const lastCursor = searchParams.get("lastCursor");
     const search = searchParams.get("search");
 
-    const result = await serverService.getPrompts({
+    const params = {
       take,
       searchText: search,
       lastCursor,
-    });
+    };
+    console.log("🚀 ~ file: route.ts:18 ~ GET ~ params:", params)
+
+    const result = await serverService.getPrompts(params);
 
     if (result.length == 0) {
       return new Response(

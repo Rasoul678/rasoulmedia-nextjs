@@ -8,7 +8,7 @@ import VirtualizedGrid from "@components/virtualized-grid";
 interface ICardListProps {
   pages: InfiniteResponseDataType<PromptWithUserType[]>[];
   handleTagClick: (tag: string) => void;
-  hasNextPage: boolean;
+  hasNextPage?: boolean;
   isFetchingNextPage: boolean;
   fetchNextPage: (options?: FetchNextPageOptions | undefined) => void;
   handleEdit?: (promptId: string) => void;
@@ -26,7 +26,7 @@ const PromptCardList: React.FC<ICardListProps> = (props: ICardListProps) => {
     isFetchingNextPage,
   } = props;
 
-  //! to know when the last element is in view
+  //! To know when the last element is in view
   const inView = observable(false);
 
   observe(() => {
@@ -45,7 +45,6 @@ const PromptCardList: React.FC<ICardListProps> = (props: ICardListProps) => {
           columnCount={3}
           hasNextPage={hasNextPage}
           isFetchingNextPage={isFetchingNextPage}
-          fetchNextPage={fetchNextPage}
         >
           {({ columnIndex, data, rowIndex, style }) => {
             const prompt = data.allData?.[rowIndex]?.[columnIndex];

@@ -8,18 +8,24 @@ import {
   useQueryClient,
 } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
+import { observer, useObservable } from "@legendapp/state/react";
 import { Spinner } from "@components/spinner/Spinner";
 import { clientService } from "@utils/api-service";
+import Link from "next/link";
 
 interface IProps {}
 
-export const Feed: React.FC<IProps> = (props) => {
+export const Feed: React.FC<IProps> = observer((props) => {
   const router = useRouter();
   const queryClient = useQueryClient();
 
-  const [searchText, setSearchText] = React.useState("");
-  const [searchTimeout, setSearchTimeout] =
-    React.useState<ReturnType<typeof setTimeout>>();
+  const state = useObservable<{
+    searchText: string;
+    searchTimeout: ReturnType<typeof setTimeout> | null;
+  }>({
+    searchText: "",
+    searchTimeout: null,
+  });
 
   const {
     data,
@@ -35,7 +41,7 @@ export const Feed: React.FC<IProps> = (props) => {
       await clientService.allUserPrompts({
         take: 10,
         lastCursor: pageParam,
-        searchText,
+        searchText: state.searchText.get(),
       }),
     queryKey: ["hydrate-user-prompts"],
     // getNextPageParam is used to get the cursor of the last element in the current page
@@ -60,22 +66,21 @@ export const Feed: React.FC<IProps> = (props) => {
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const searchText = e.target.value;
-    setSearchText(searchText);
-    refetchPrompts();
+    refetchPrompts(searchText);
   };
 
   const handleTagClick = (tagName: string) => {
-    setSearchText(tagName);
-    refetchPrompts();
+    refetchPrompts(tagName);
   };
 
-  const refetchPrompts = () => {
-    clearTimeout(searchTimeout);
+  const refetchPrompts = (searchText: string) => {
+    clearTimeout(state.searchTimeout.get());
+    state.searchText.set(searchText);
 
-    setSearchTimeout(
+    state.searchTimeout.set(
       setTimeout(() => {
         refetch();
-      }, 500)
+      }, 700)
     );
   };
 
@@ -95,25 +100,26 @@ export const Feed: React.FC<IProps> = (props) => {
 
   return (
     <section className="feed">
-      <form className="sticky top-2 z-[1000] w-full flex-center max-w-xl">
+      <form className="sticky top-2 z-[1000] w-full flex-between gap-3 px-20">
         <input
           type="text"
           placeholder="Search for text, tag, email or a name"
-          value={searchText}
+          value={state.searchText.get()}
           onChange={handleSearchChange}
           required
           className="search_input peer"
         />
+        <Link href='/prompts/new' className="block w-[12rem] text-center green_gradient uppercase">add new prompt</Link>
       </form>
       {error ? (
-        <p>Oh no, there was an error</p>
+        <p>Oh no, there was an error when loading prompts</p>
       ) : isLoading ? (
-        <p>Loading...</p>
+        <p className="text-lg orange_gradient mt-10">Loading prompts...</p>
       ) : data?.pages ? (
         <PromptCardList
           pages={data.pages}
           handleTagClick={handleTagClick}
-          hasNextPage={Boolean(hasNextPage)}
+          hasNextPage={hasNextPage}
           fetchNextPage={fetchNextPage}
           handleDelete={handleDelete}
           handleEdit={handleEdit}
@@ -123,4 +129,4 @@ export const Feed: React.FC<IProps> = (props) => {
       {hasNextPage && isFetchingNextPage && <Spinner size={50} />}
     </section>
   );
-};
+});
