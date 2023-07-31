@@ -230,7 +230,7 @@ main {
 }
 
 .blue_gradient {
-  @apply bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent;
+  @apply bg-gradient-to-r from-sky-500 to-sky-300 bg-clip-text text-transparent;
 }
 
 .desc {

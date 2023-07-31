@@ -3,7 +3,7 @@ import ChatWithGPT from "@components/chat-gpt";
 
 interface IProps {}
 
-const AskGPT: React.FC<IProps> = (props) => {
+const AskGPT: React.FC<IProps> = async (props) => {
   return <ChatWithGPT />;
 };
 

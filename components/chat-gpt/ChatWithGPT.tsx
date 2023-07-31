@@ -5,11 +5,15 @@ import { Creator, GPTMessageType } from "@types";
 import ChatInput from "./ChatInput";
 import ChatMessage from "./ChatMessage";
 import { useGPT } from "@hooks/useGPT";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 interface IProps {}
 
 export const ChatWithGPT: React.FC<IProps> = (props) => {
   const [messages, setMessages] = React.useState<GPTMessageType[]>([]);
+  const { data: session, status } = useSession();
+  const router = useRouter();
 
   const { askGPT, isLoading } = useGPT({
     onSuccess: (botMessage) => setMessages((ms) => [...ms, botMessage]),
@@ -27,25 +31,46 @@ export const ChatWithGPT: React.FC<IProps> = (props) => {
     askGPT(prompt);
   };
 
-  return (
-    <div className="relative max-w-3xl mx-auto w-full">
-      <div className="sticky top-4 w-full pt-10 px-4">
-        <ChatInput onSend={callGPT} disabled={isLoading} />
+  if (status === "loading") {
+    return (
+      <div
+        className="text-2xl blue_gradient h-screen flex flex-col justify-center items-center
+    "
+      >
+        Loading chat-GPT...
       </div>
-      <div className="mt-10 px-4">
-        {messages.map((message) => (
-          <ChatMessage
-            key={message.key}
-            text={message.text}
-            from={message.from}
+    );
+  }
+
+  if (status === "unauthenticated") {
+    router.push("/");
+  } else if (status === "authenticated") {
+    return (
+      <div className="relative max-w-3xl mx-auto w-full">
+        <div className="sticky top-4 w-full pt-10 px-4">
+          <ChatInput
+            onSend={callGPT}
+            disabled={isLoading}
+            userName={session?.user.name || ""}
           />
-        ))}
-        {messages.length === 0 && (
-          <p className="text-center text-2xl text-gray-200">
-            I am at your service!
-          </p>
-        )}
+        </div>
+        <div className="mt-10 px-4">
+          {messages.map((message) => (
+            <ChatMessage
+              key={message.key}
+              text={message.text}
+              from={message.from}
+            />
+          ))}
+          {messages.length === 0 && (
+            <p className="text-center text-2xl orange_gradient">
+              I am at your service!
+            </p>
+          )}
+        </div>
       </div>
-    </div>
-  );
+    );
+  } else {
+    return null;
+  }
 };

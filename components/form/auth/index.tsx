@@ -83,7 +83,7 @@ export const AuthForm: React.FC<IProps> = ({
       </div>
 
       <button type="submit" className="form-submit-btn" disabled={loading}>
-        {loading && <Spinner />}
+        {loading && <Spinner size={20} />}
         {loading ? "submitting..." : type}
       </button>
     </form>

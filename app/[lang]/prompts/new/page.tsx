@@ -5,47 +5,58 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { PromptForm } from "@components/form";
 import { FormPromptType } from "@types";
+import { useMutation } from "@tanstack/react-query";
+import { clientService } from "@utils/api-service";
 
 interface IProps {}
 
 const CreatePrompt: React.FC<IProps> = (props) => {
-  const [submitting, setSubmitting] = useState(false);
   const [prompt, setPrompt] = useState<FormPromptType>({ text: "", tag: "" });
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const router = useRouter();
 
-  const createPrompt = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setSubmitting(true);
-
-    try {
-      const response = await fetch("/api/prompt/new", {
-        method: "POST",
-        body: JSON.stringify({
-          ...prompt,
-          userId: session?.user.id,
-        }),
-      });
-
+  //! Mutation (add prompt)
+  const { mutate: addPrompt, isLoading } = useMutation({
+    mutationFn: () =>
+      clientService.createPrompt(String(session?.user.id), prompt),
+    onSuccess: (response) => {
       if (response.ok) {
         router.push("/prompts");
       }
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setSubmitting(false);
-    }
+    },
+  });
+
+  const createPrompt = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    addPrompt();
   };
 
-  return (
-    <PromptForm
-      type="Create"
-      prompt={prompt}
-      setPrompt={setPrompt}
-      submitting={submitting}
-      handleSubmit={createPrompt}
-    />
-  );
+  if (status === "loading") {
+    return (
+      <div
+        className="text-2xl blue_gradient h-screen flex flex-col justify-center items-center
+    "
+      >
+        Loading ...
+      </div>
+    );
+  }
+
+  if (status === "unauthenticated") {
+    router.push("/");
+  } else if (status === "authenticated") {
+    return (
+      <PromptForm
+        type="Create"
+        prompt={prompt}
+        setPrompt={setPrompt}
+        submitting={isLoading}
+        handleSubmit={createPrompt}
+      />
+    );
+  } else {
+    return null;
+  }
 };
 
 export default CreatePrompt;

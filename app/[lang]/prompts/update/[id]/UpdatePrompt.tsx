@@ -29,25 +29,19 @@ const UpdatePrompt: React.FC<IProps> = ({ params }) => {
   });
 
   //! Mutation (edit prompt)
-  const { mutate, isLoading } = useMutation({
-    mutationFn: async (promptId: string) => {
-      return await fetch(`/api/prompt/${promptId}`, {
-        method: "PATCH",
-        body: JSON.stringify({
-          ...prompt,
-        }),
-      });
-    },
+  const { mutate: updatePrompt, isLoading } = useMutation({
+    mutationFn: (promptId: string) =>
+      clientService.updatePrompt(promptId, prompt),
     onSuccess: () => {
       router.push("/prompts");
     },
   });
 
-  const updatePrompt = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmitUpdate = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (promptId) {
-      mutate(promptId);
+      updatePrompt(promptId);
     }
   };
 
@@ -57,7 +51,7 @@ const UpdatePrompt: React.FC<IProps> = ({ params }) => {
       prompt={prompt}
       setPrompt={setPrompt}
       submitting={isLoading}
-      handleSubmit={updatePrompt}
+      handleSubmit={handleSubmitUpdate}
     />
   );
 };
