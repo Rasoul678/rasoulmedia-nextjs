@@ -299,3 +299,9 @@ main {
 .form-prompt-submit-btn {
   @apply px-5 py-1.5 text-sm bg-sky-600 rounded-full text-white;
 }
+
+
+.prompts-wrapper {
+  width: 100%;
+  height: calc(100vh - 13rem);
+}

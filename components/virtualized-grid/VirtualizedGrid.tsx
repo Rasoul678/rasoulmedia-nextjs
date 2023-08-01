@@ -18,7 +18,10 @@ interface IProps<T> {
 export const VirtualizedGrid = <T,>(props: IProps<T>) => {
   const { data, children, columnCount, hasNextPage } = props;
 
-  const gridData: any[] = useMemo(() => [...chunks(data, 3)], [data]);
+  const gridData: any[] = useMemo(
+    () => [...chunks(data, columnCount)],
+    [data, columnCount]
+  );
 
   const itemCount = hasNextPage ? gridData.length + 1 : gridData.length;
 
@@ -46,7 +49,7 @@ export const VirtualizedGrid = <T,>(props: IProps<T>) => {
                 height={height}
                 columnCount={columnCount}
                 rowCount={gridData.length}
-                columnWidth={() => Math.ceil(width / columnCount) - 5}
+                columnWidth={() => (width / columnCount) - 10}
                 rowHeight={() => 225}
                 width={width}
                 itemData={itemData}
