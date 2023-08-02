@@ -60,9 +60,9 @@ const ChatMessage: React.FC<IProps> = ({ text, from }) => {
             height={50}
             className="rounded-full"
           />
-          <p className="text-gray-200 mt-3 flex-1">
+          <div className="text-gray-200 mt-3 flex-1">
             <CustomTypewriter delay={1} text={text} loop={false} cursor=" " />
-          </p>
+          </div>
           <div className="flex gap-1">
             <div
               className="copy_btn"
@@ -91,9 +91,9 @@ const ChatMessage: React.FC<IProps> = ({ text, from }) => {
             height={40}
             className="rounded-full"
           />
-          <p className="text-gray-700 mt-3 p-2 flex-1">
+          <div className="text-gray-700 mt-3 p-2 flex-1">
             <CustomTypewriter delay={0} text={text} loop={false} cursor=" " />
-          </p>
+          </div>
           <div className="copy_btn" title="copy" onClick={handleCopy}>
             <Image
               src={copied === text ? tick : copy}
