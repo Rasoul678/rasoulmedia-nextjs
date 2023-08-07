@@ -1,15 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 import * as bcrypt from "bcrypt";
 import prisma from "@utils/auth/db/client";
+import { SignupSchema } from "@schemas/signupSchema";
 
 export const POST = async (req: NextRequest, res: NextResponse) => {
+  const reqBody = await req.json();
   try {
-    const { email, password, firstName, lastName } = (await req.json()) as {
-      email: string;
-      password: string;
-      firstName?: string;
-      lastName?: string;
-    };
+    const { email, firstName, lastName, password } =
+      SignupSchema.parse(reqBody);
 
     if (!email || !password) {
       return new Response(
