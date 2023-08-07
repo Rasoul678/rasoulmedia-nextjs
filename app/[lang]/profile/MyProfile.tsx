@@ -5,7 +5,6 @@ import { clientService } from "@utils/api-service";
 import ProfileDetails from "./ProfileDetails";
 import ProfileMain from "./ProfileMain";
 
-
 const MyProfile = () => {
   //! Fetch profile on the client
   const {

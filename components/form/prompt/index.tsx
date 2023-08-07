@@ -52,7 +52,7 @@ export const PromptForm: React.FC<IProps> = (props) => {
           />
         </label>
         <div className="flex-end mx-3 gap-4">
-          <Link href="/prompts" className="text-gray-200 text-sm">
+          <Link href="/profile" className="text-gray-200 text-sm">
             Cancel
           </Link>
           <button

@@ -6,9 +6,9 @@ import { InfiniteResponseDataType, PromptWithUserType } from "@types";
 
 interface ICardListProps {
   pages: InfiniteResponseDataType<PromptWithUserType[]>[];
-  handleTagClick: (tag: string) => void;
-  hasNextPage: boolean;
-  fetchNextPage: (options?: FetchNextPageOptions | undefined) => void;
+  handleTagClick?: (tag: string) => void;
+  hasNextPage?: boolean;
+  fetchNextPage?: (options?: FetchNextPageOptions | undefined) => void;
   handleEdit?: (promptId: string) => void;
   handleDelete?: (promptId: string) => void;
 }
@@ -26,7 +26,7 @@ export const PromptRegularList: React.FC<ICardListProps> = ({
   React.useEffect(() => {
     // if the last element is in view and there is a next page, fetch the next page
     if (inView && hasNextPage) {
-      fetchNextPage();
+      fetchNextPage?.();
     }
   }, [hasNextPage, inView, fetchNextPage]);
 

@@ -11,6 +11,7 @@ class APIServerSide {
           include: {
             followedBy: true,
             following: true,
+            prompts: true,
           },
         },
       },
@@ -28,9 +29,10 @@ class APIServerSide {
   };
 
   public getPrompts = async (args: PromptQueryParams) => {
-    const { take, searchText: search, lastCursor } = args;
+    const { take, searchText: search, lastCursor, userId } = args;
 
     const prompts = await prisma.prompt.findMany({
+      ...(userId && { where: { userId } }),
       take: take ? parseInt(take as string) : 10,
       ...(lastCursor && {
         skip: 1, // Do not include the cursor itself in the query result.
@@ -86,11 +88,12 @@ class APIServerSide {
   };
 
   public getNextPrompts = async (args: PromptQueryParams) => {
-    const { take, lastCursor: cursor } = args;
+    const { take, lastCursor: cursor, userId } = args;
 
     const nextPage = await prisma.prompt.findMany({
       // Same as before, limit the number of events returned by this query.
       take: take ? parseInt(take as string) : 7,
+      ...(userId && { where: { userId } }),
       skip: 1, // Do not include the cursor itself in the query result.
       cursor: {
         id: cursor ?? "",

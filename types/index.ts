@@ -63,6 +63,7 @@ export type UserType = {
   emailVerified?: StringOrNull;
   followedBy?: UserType[];
   following?: UserType[];
+  prompts?: PromptType[];
   image?: StringOrNull;
   name?: StringOrNull;
   password?: StringOrNull;
@@ -139,4 +140,5 @@ export type PromptQueryParams = {
   take?: number | string | null;
   lastCursor?: string | null;
   searchText?: string | null;
+  userId?: string | null;
 };

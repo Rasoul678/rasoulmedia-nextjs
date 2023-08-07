@@ -1,7 +1,10 @@
 import React from "react";
 import Image from "next/image";
 import { ProfileWithUserType } from "@types";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import defaultAvatar from "@assets/svg/avatar-default.svg";
+import { clientService } from "@utils/api-service";
+import { PromptRegularList } from "@components/PromptRegularList/PromptRegularList";
 
 interface IProps {
   profile: ProfileWithUserType;
@@ -16,6 +19,26 @@ const ProfileDetails: React.FC<IProps> = ({ profile }) => {
       ref?.current?.scrollIntoView({ behavior: "smooth" });
     }
   }, [showMore]);
+
+  const {
+    data,
+    error,
+    isLoading,
+    hasNextPage,
+    fetchNextPage,
+    isSuccess,
+    isFetchingNextPage,
+  } = useInfiniteQuery({
+    queryFn: async ({ pageParam = "" }) =>
+      await clientService.getUserPrompts({
+        take: 10,
+        lastCursor: pageParam,
+      }),
+    queryKey: ["user-prompts"],
+    getNextPageParam: (lastPage) => {
+      return lastPage?.metaData.lastCursor;
+    },
+  });
 
   return (
     <div className="mt-10 py-5 border-t border-blueGray-200 text-center">
@@ -220,6 +243,16 @@ const ProfileDetails: React.FC<IProps> = ({ profile }) => {
                     </div>
                   </div>
                 </div>
+              </div>
+              <div className="my-4"></div>
+              <div className="bg-gray-900 p-3 shadow-sm rounded-md">
+                {data?.pages && (
+                  <PromptRegularList
+                    pages={data.pages}
+                    fetchNextPage={fetchNextPage}
+                    hasNextPage={hasNextPage}
+                  />
+                )}
               </div>
             </div>
           )}

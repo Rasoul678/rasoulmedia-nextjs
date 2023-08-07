@@ -78,14 +78,29 @@ class APIClientSide {
     return prompt;
   };
 
-  public allUserPrompts = async (args: PromptQueryParams) => {
+  public getAllPrompts = async (args: PromptQueryParams) => {
     const { take, lastCursor, searchText } = args;
     const response = await fetch(
       `/api/prompt?take=${take}&lastCursor=${lastCursor}&search=${searchText}`
     );
+
     const data = (await response.json()) as InfiniteResponseDataType<
       PromptWithUserType[]
     >;
+
+    return data;
+  };
+
+  public getUserPrompts = async (args: PromptQueryParams) => {
+    const { take, lastCursor } = args;
+    const response = await fetch(
+      `/api/my-prompt?take=${take}&lastCursor=${lastCursor}`
+    );
+
+    const data = (await response.json()) as InfiniteResponseDataType<
+      PromptWithUserType[]
+    >;
+
     return data;
   };
 

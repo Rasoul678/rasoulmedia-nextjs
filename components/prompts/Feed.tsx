@@ -38,12 +38,12 @@ export const Feed: React.FC<IProps> = observer((props) => {
     refetch,
   } = useInfiniteQuery({
     queryFn: async ({ pageParam = "" }) =>
-      await clientService.allUserPrompts({
+      await clientService.getAllPrompts({
         take: 10,
         lastCursor: pageParam,
         searchText: state.searchText.get(),
       }),
-    queryKey: ["hydrate-user-prompts"],
+    queryKey: ["hydrate-all-prompts"],
     // getNextPageParam is used to get the cursor of the last element in the current page
     // which is then used as the pageParam in the queryFn
     getNextPageParam: (lastPage) => {
@@ -109,7 +109,12 @@ export const Feed: React.FC<IProps> = observer((props) => {
           required
           className="search_input peer"
         />
-        <Link href='/prompts/new' className="block w-[12rem] text-center green_gradient uppercase">add new prompt</Link>
+        <Link
+          href="/prompts/new"
+          className="block w-[12rem] text-center green_gradient uppercase"
+        >
+          add new prompt
+        </Link>
       </form>
       {error ? (
         <p>Oh no, there was an error when loading prompts</p>

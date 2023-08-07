@@ -27,6 +27,7 @@ export const GET = async () => {
           include: {
             followedBy: true,
             following: true,
+            prompts: true,
           },
         },
       },
