@@ -11,7 +11,7 @@ export const Spinner: React.FC<IProps> = ({size}) => {
     <div
       aria-label="Loading..."
       role="status"
-      className="flex flex-col align-middle justify-center"
+      className="flex flex-col align-middle justify-center items-center"
     >
       <Image src={loader} alt="Loader" width={size || 40} />
     </div>

@@ -1,18 +1,27 @@
 import React from "react";
 import Image from "next/image";
 import { ProfileWithUserType } from "@types";
-import { useInfiniteQuery } from "@tanstack/react-query";
+import {
+  useInfiniteQuery,
+  useMutation,
+  useQueryClient,
+} from "@tanstack/react-query";
 import defaultAvatar from "@assets/svg/avatar-default.svg";
 import { clientService } from "@utils/api-service";
 import { PromptRegularList } from "@components/PromptRegularList/PromptRegularList";
+import { useRouter } from "next/navigation";
+import { Spinner } from "@components/spinner/Spinner";
 
 interface IProps {
   profile: ProfileWithUserType;
+  userId?: string;
 }
 
-const ProfileDetails: React.FC<IProps> = ({ profile }) => {
+const ProfileDetails: React.FC<IProps> = ({ profile, userId }) => {
   const [showMore, setShowMore] = React.useState(false);
   const ref = React.useRef<HTMLButtonElement>(null);
+  const router = useRouter();
+  const queryClient = useQueryClient();
 
   React.useEffect(() => {
     if (showMore) {
@@ -28,17 +37,51 @@ const ProfileDetails: React.FC<IProps> = ({ profile }) => {
     fetchNextPage,
     isSuccess,
     isFetchingNextPage,
+    refetch,
   } = useInfiniteQuery({
     queryFn: async ({ pageParam = "" }) =>
       await clientService.getUserPrompts({
         take: 10,
         lastCursor: pageParam,
+        userId,
       }),
     queryKey: ["user-prompts"],
     getNextPageParam: (lastPage) => {
       return lastPage?.metaData.lastCursor;
     },
   });
+
+  React.useEffect(() => {
+    refetch();
+  }, [userId, refetch]);
+
+  //! Mutation (delete prompt)
+  const { mutate } = useMutation({
+    mutationFn: async (promptId: string) => {
+      return await fetch(`/api/prompt/${promptId}`, {
+        method: "DELETE",
+      });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["user-prompts", "hydrate-my-profile"],
+      });
+    },
+  });
+
+  const handleEdit = (promptId: string) => {
+    router.push(`/prompts/update?id=${promptId}`);
+  };
+
+  const handleDelete = async (promptId: string) => {
+    const hasConfirmed = confirm(
+      "Are you sure you want to delete this prompt?"
+    );
+
+    if (hasConfirmed) {
+      mutate(promptId);
+    }
+  };
 
   return (
     <div className="mt-10 py-5 border-t border-blueGray-200 text-center">
@@ -246,13 +289,22 @@ const ProfileDetails: React.FC<IProps> = ({ profile }) => {
               </div>
               <div className="my-4"></div>
               <div className="bg-gray-900 p-3 shadow-sm rounded-md">
-                {data?.pages && (
+                {error ? (
+                  <p>Oh no, there was an error when loading prompts</p>
+                ) : isLoading ? (
+                  <p className="text-lg orange_gradient mt-10">
+                    Loading prompts...
+                  </p>
+                ) : data?.pages ? (
                   <PromptRegularList
                     pages={data.pages}
                     fetchNextPage={fetchNextPage}
                     hasNextPage={hasNextPage}
+                    handleEdit={handleEdit}
+                    handleDelete={handleDelete}
                   />
-                )}
+                ) : null}
+                {hasNextPage && isFetchingNextPage && <Spinner size={50} />}
               </div>
             </div>
           )}

@@ -92,9 +92,11 @@ class APIClientSide {
   };
 
   public getUserPrompts = async (args: PromptQueryParams) => {
-    const { take, lastCursor } = args;
+    const { take, lastCursor, userId } = args;
     const response = await fetch(
-      `/api/my-prompt?take=${take}&lastCursor=${lastCursor}`
+      `/api/my-prompt?take=${take}&lastCursor=${lastCursor}${
+        userId ? `&userId=${userId}` : ""
+      }`
     );
 
     const data = (await response.json()) as InfiniteResponseDataType<

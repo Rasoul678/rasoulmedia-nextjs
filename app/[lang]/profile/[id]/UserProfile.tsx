@@ -28,7 +28,7 @@ const UserProfile: React.FC<IProps> = ({ params }) => {
       {profile && (
         <>
           <ProfileMain profile={profile} />
-          <ProfileDetails profile={profile} />
+          <ProfileDetails profile={profile} userId={params.id} />
         </>
       )}
     </>

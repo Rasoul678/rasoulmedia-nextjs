@@ -18,7 +18,7 @@ const getUserProfile = async () => {
 
 const ProfilePage = async () => {
   const queryClient = getQueryClient();
-  await queryClient.prefetchQuery(["hydrate-user-profile"], getUserProfile);
+  await queryClient.prefetchQuery(["hydrate-my-profile"], getUserProfile);
   const dehydratedState = dehydrate(queryClient);
 
   return (

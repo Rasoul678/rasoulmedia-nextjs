@@ -21,7 +21,7 @@ export const GET = async (req: NextRequest) => {
     );
   }
 
-  const userId = session.user.id;
+  let userId = session.user.id;
 
   try {
     //! get page and lastCursor from query
@@ -29,6 +29,7 @@ export const GET = async (req: NextRequest) => {
 
     const take = searchParams.get("take");
     const lastCursor = searchParams.get("lastCursor");
+    const userId = searchParams.get("userId") ?? session.user.id;
 
     const params: PromptQueryParams = {
       take,

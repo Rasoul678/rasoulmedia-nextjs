@@ -13,7 +13,7 @@ const MyProfile = () => {
     isFetching,
     error,
   } = useQuery({
-    queryKey: ["hydrate-user-profile"],
+    queryKey: ["hydrate-my-profile"],
     queryFn: () => clientService.getProfile(),
     keepPreviousData: true,
   });

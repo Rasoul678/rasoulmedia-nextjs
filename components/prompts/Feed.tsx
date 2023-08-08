@@ -1,23 +1,18 @@
 "use client";
 
-import React from "react";
-import PromptCardList from "./PromptCardList";
-import {
-  useInfiniteQuery,
-  useMutation,
-  useQueryClient,
-} from "@tanstack/react-query";
-import { useRouter } from "next/navigation";
-import { observer, useObservable } from "@legendapp/state/react";
 import { Spinner } from "@components/spinner/Spinner";
+import { observer, useObservable } from "@legendapp/state/react";
+import {
+  useInfiniteQuery
+} from "@tanstack/react-query";
 import { clientService } from "@utils/api-service";
 import Link from "next/link";
+import React from "react";
+import PromptCardList from "./PromptCardList";
 
 interface IProps {}
 
 export const Feed: React.FC<IProps> = observer((props) => {
-  const router = useRouter();
-  const queryClient = useQueryClient();
 
   const state = useObservable<{
     searchText: string;
@@ -52,18 +47,6 @@ export const Feed: React.FC<IProps> = observer((props) => {
     keepPreviousData: true,
   });
 
-  //! Mutation (delete prompt)
-  const { mutate } = useMutation({
-    mutationFn: async (promptId: string) => {
-      return await fetch(`/api/prompt/${promptId}`, {
-        method: "DELETE",
-      });
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["hydrate-user-prompts"] });
-    },
-  });
-
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const searchText = e.target.value;
     refetchPrompts(searchText);
@@ -82,20 +65,6 @@ export const Feed: React.FC<IProps> = observer((props) => {
         refetch();
       }, 700)
     );
-  };
-
-  const handleEdit = (promptId: string) => {
-    router.push(`/prompts/update?id=${promptId}`);
-  };
-
-  const handleDelete = async (promptId: string) => {
-    const hasConfirmed = confirm(
-      "Are you sure you want to delete this prompt?"
-    );
-
-    if (hasConfirmed) {
-      mutate(promptId);
-    }
   };
 
   return (
@@ -126,8 +95,6 @@ export const Feed: React.FC<IProps> = observer((props) => {
           handleTagClick={handleTagClick}
           hasNextPage={hasNextPage}
           fetchNextPage={fetchNextPage}
-          handleDelete={handleDelete}
-          handleEdit={handleEdit}
           isFetchingNextPage={isFetchingNextPage}
         />
       ) : null}
