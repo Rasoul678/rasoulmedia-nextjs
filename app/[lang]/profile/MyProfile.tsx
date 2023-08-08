@@ -15,7 +15,7 @@ const MyProfile = () => {
   } = useQuery({
     queryKey: ["hydrate-my-profile"],
     queryFn: () => clientService.getProfile(),
-    keepPreviousData: true,
+    // keepPreviousData: true,
   });
 
   return (

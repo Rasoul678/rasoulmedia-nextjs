@@ -20,7 +20,7 @@ const UserProfile: React.FC<IProps> = ({ params }) => {
   } = useQuery({
     queryKey: ["hydrate-user-profile"],
     queryFn: () => clientService.getProfile(params.id),
-    keepPreviousData: true,
+    // keepPreviousData: true,
   });
 
   return (

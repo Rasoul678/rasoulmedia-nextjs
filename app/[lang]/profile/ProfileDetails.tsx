@@ -63,9 +63,7 @@ const ProfileDetails: React.FC<IProps> = ({ profile, userId }) => {
       });
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ["user-prompts", "hydrate-my-profile"],
-      });
+      refetch({ queryKey: ["user-prompts", "hydrate-my-profile"] });
     },
   });
 
