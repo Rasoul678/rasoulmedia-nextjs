@@ -1,17 +1,14 @@
-"use client";
-
 import React, { useContext } from "react";
-import { IntlContext } from "@components/intl-provider";
 import InfiniteLoopSlider from "@components/infinite-loop-slider/InfiniteLoopSlider";
+import Hero from "@components/home_hero/Hero";
 
 const Home = () => {
-  const intl = useContext(IntlContext);
-
   return (
-    <main className="min-h-screen p-5">
-      <div className="text-4xl">Rasoul Media with Next.js</div>
-      <div>{intl?.dict?.me}</div>
-      <InfiniteLoopSlider />
+    <main className="min-h-screen">
+      <Hero />
+      <div className="px-6">
+        <InfiniteLoopSlider />
+      </div>
     </main>
   );
 };

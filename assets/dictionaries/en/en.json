@@ -50,7 +50,7 @@
   "light": "Light",
   "live-description": "And my hometown is Rostamkola.",
   "master-description": "I got my master's degree from Shahid Beheshti University in aerospace engineering.",
-  "me": "Rasoul Hesami",
+  "me": "Rasoul Hesami Rostami",
   "message": "Message",
   "mind": {
     "description": {
@@ -105,9 +105,12 @@
   },
   "subject": "Subject",
   "tech-stack": "Technology",
-  "typewriter": { "1": "I like to design.", "3": "I like meeting new people." },
+  "typewriter": { "1": "I like to design.", "2": "I like meeting new people." },
   "university": { "mut": "Malek Ashtar", "sbu": "Shahid Beheshti" },
   "work-experience": "Work & Experience",
   "yellow": "Yellow",
-  "account": { "signin": "sign in", "signout": "sign out" }
+  "account": { "signin": "sign in", "signout": "sign out" },
+  "hero": {
+    "intro-welcome": "Hi, I am Rasoul Hesami Rostami"
+  }
 }

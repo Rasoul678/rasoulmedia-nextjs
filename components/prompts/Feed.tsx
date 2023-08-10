@@ -9,6 +9,7 @@ import { clientService } from "@utils/api-service";
 import Link from "next/link";
 import React from "react";
 import PromptCardList from "./PromptCardList";
+import { icons } from "@components/icons/icons";
 
 interface IProps {}
 
@@ -82,7 +83,7 @@ export const Feed: React.FC<IProps> = observer((props) => {
           href="/prompts/new"
           className="block w-[12rem] text-center green_gradient uppercase"
         >
-          add new prompt
+          {icons.add({alt: 'add new prompt', width: 40})}
         </Link>
       </form>
       {error ? (

@@ -107,10 +107,13 @@
   "tech-stack": "La technologie",
   "typewriter": {
     "1": "J'aime concevoir.",
-    "3": "J'aime rencontrer de nouvelles personnes."
+    "2": "J'aime rencontrer de nouvelles personnes."
   },
   "university": { "mut": "Malek Ashtar", "sbu": "Shahid Beheshti" },
   "work-experience": "L'expérience professionnelle",
   "yellow": "Jaune",
-  "account": { "signin": "s'identifier", "signout": "se déconnecter" }
+  "account": { "signin": "s'identifier", "signout": "se déconnecter" },
+  "hero": {
+    "intro-welcome": "Bonjour, je suis Rasoul Hesami."
+  }
 }

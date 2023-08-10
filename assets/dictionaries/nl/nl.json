@@ -107,10 +107,13 @@
   "tech-stack": "Technologie",
   "typewriter": {
     "1": "Ik hou van ontwerpen.",
-    "3": "Ik vind het leuk om nieuwe mensen te ontmoeten."
+    "2": "Ik vind het leuk om nieuwe mensen te ontmoeten."
   },
   "university": { "mut": "Malek Ashtar", "sbu": "Shahid Beheshti" },
   "work-experience": "Werkervaring",
   "yellow": "Geel",
-  "account": { "signin": "inloggen", "signout": "uitloggen" }
+  "account": { "signin": "inloggen", "signout": "uitloggen" },
+  "hero": {
+    "intro-welcome": "Hallo, ik ben Rasoul Hesami."
+  }
 }

@@ -3,11 +3,12 @@
 import React from "react";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
-import defaultAvatar from "@assets/svg/avatar-default.svg";
+import defaultAvatar from "@assets/icon-pack/icons8-anonymous-mask-420.svg";
 import { ProfileWithUserType } from "@types";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { clientService } from "@utils/api-service";
 import { Spinner } from "@components/spinner/Spinner";
+import { icons } from "@components/icons/icons";
 
 interface IProps {
   profile: ProfileWithUserType;
@@ -77,10 +78,10 @@ const ProfileMain: React.FC<IProps> = ({ profile }) => {
               <>
                 {isAuthUser ? (
                   <button
-                    className="bg-teal-500 active:bg-teal-600 uppercase text-black font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150"
+                    className="bg-teal-500 active:bg-teal-600 uppercase hover:shadow-md shadow p-1 rounded-full outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150"
                     type="button"
                   >
-                    Edit profile
+                    {icons.edit({ alt: "edit profile", width: 30 })}
                   </button>
                 ) : (
                   <>
@@ -127,7 +128,7 @@ const ProfileMain: React.FC<IProps> = ({ profile }) => {
             </div>
             <div className="lg:mr-4 p-3 text-center">
               <span className="text-xl font-bold block uppercase tracking-wide text-blueGray-600">
-              {profile?.user.prompts?.length || 0}
+                {profile?.user.prompts?.length || 0}
               </span>
               <span className="text-sm text-blueGray-400">Prompts</span>
             </div>

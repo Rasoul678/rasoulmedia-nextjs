@@ -115,7 +115,7 @@ main {
 /* Tailwind Styles */
 
 .navbar {
-  @apply px-10 py-2 flex justify-between align-middle gap-5 sticky top-0 backdrop-blur-sm uppercase bg-white bg-opacity-7;
+  @apply px-5 md:px-10 py-3 flex justify-between align-middle gap-5 sticky top-0 backdrop-blur-sm uppercase bg-white bg-opacity-7;
 }
 
 .glassmorphism {
@@ -123,11 +123,11 @@ main {
 }
 
 .nav-links {
-  @apply flex gap-5;
+  @apply flex gap-3 md:gap-5;
 }
 
 .nav-links a {
-  @apply leading-8 flex justify-center items-end;
+  @apply leading-8 flex justify-center;
 }
 
 .lang-select {

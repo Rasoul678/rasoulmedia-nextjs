@@ -7,8 +7,9 @@ import { useSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
 import tick from "@assets/svg/tick.svg";
 import copy from "@assets/svg/copy.svg";
-import defaultAvatar from "@assets/svg/avatar-default.svg";
+import defaultAvatar from "@assets/icon-pack/icons8-anonymous-mask-420.svg";
 import Link from "next/link";
+import { icons } from "@components/icons/icons";
 
 interface IProps {
   prompt: PromptWithUserType;
@@ -90,14 +91,14 @@ const PromptCard: React.FC<IProps> = (props) => {
               className="text-sm green_gradient cursor-pointer"
               // onClick={handleEdit}
             >
-              Edit
+              {icons.edit({ alt: "edit prompt", width: 25 })}
             </p>
           </Link>
           <p
             className=" font-inter text-sm red_gradient cursor-pointer"
             onClick={handleDelete}
           >
-            Delete
+            {icons.delete({ alt: "remove prompt", width: 25 })}
           </p>
         </div>
       )}

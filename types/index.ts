@@ -142,3 +142,11 @@ export type PromptQueryParams = {
   searchText?: string | null;
   userId?: string | null;
 };
+
+export type IconType = {
+  alt?: string;
+  width?: number;
+  height?: number;
+  title?: string;
+  className?: string;
+};

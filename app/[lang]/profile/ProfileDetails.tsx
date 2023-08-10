@@ -6,7 +6,8 @@ import {
   useMutation,
   useQueryClient,
 } from "@tanstack/react-query";
-import defaultAvatar from "@assets/svg/avatar-default.svg";
+import defaultAvatar from "@assets/icon-pack/icons8-anonymous-mask-420.svg";
+import verified from "@assets/icon-pack/icons8-instagram-verification-badge-420.svg";
 import { clientService } from "@utils/api-service";
 import { PromptRegularList } from "@components/PromptRegularList/PromptRegularList";
 import { useRouter } from "next/navigation";
@@ -123,9 +124,14 @@ const ProfileDetails: React.FC<IProps> = ({ profile, userId }) => {
                       <li className="flex items-center py-3">
                         <span>Status</span>
                         <span className="ml-auto">
-                          <span className="bg-green-700 py-1 px-2 rounded text-white text-sm">
+                          {/* <span className="bg-green-700 py-1 px-2 rounded text-white text-sm">
                             Verified
-                          </span>
+                          </span> */}
+                          <Image
+                            src={verified}
+                            alt="verified"
+                            width={30}
+                          />
                         </span>
                       </li>
                       <li className="flex items-center py-3">
