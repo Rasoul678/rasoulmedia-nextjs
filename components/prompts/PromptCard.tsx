@@ -9,7 +9,7 @@ import tick from "@assets/svg/tick.svg";
 import copy from "@assets/svg/copy.svg";
 import defaultAvatar from "@assets/icon-pack/icons8-anonymous-mask-420.svg";
 import Link from "next/link";
-import { icons } from "@components/icons/icons";
+import { iconsList } from "@components/icons/icons";
 
 interface IProps {
   prompt: PromptWithUserType;
@@ -85,20 +85,20 @@ const PromptCard: React.FC<IProps> = (props) => {
         #{prompt.tag}
       </p>
       {hasAccess && (
-        <div className="mt-3 flex-end gap-4 border-t border-gray-100 pt-3">
+        <div className="mt-3 flex-end gap-2 border-t border-gray-100 pt-3">
           <Link href={`/prompts/update/${prompt.id}`}>
             <p
               className="text-sm green_gradient cursor-pointer"
               // onClick={handleEdit}
             >
-              {icons.edit({ alt: "edit prompt", width: 25 })}
+              {iconsList.edit({ alt: "edit", width: 25 })}
             </p>
           </Link>
           <p
             className=" font-inter text-sm red_gradient cursor-pointer"
             onClick={handleDelete}
           >
-            {icons.delete({ alt: "remove prompt", width: 25 })}
+            {iconsList.delete({ alt: "remove", width: 25 })}
           </p>
         </div>
       )}

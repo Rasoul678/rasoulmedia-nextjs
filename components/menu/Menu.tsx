@@ -4,6 +4,7 @@ import { signOut } from "next-auth/react";
 import { IntlContext } from "@components/intl-provider";
 import { Locale, i18n } from "@i18n-config";
 import { usePathname, useRouter } from "next/navigation";
+import Triangle from "./Triangle";
 
 interface IProps {
   user: any;
@@ -13,6 +14,8 @@ export const Menu: React.FC<IProps> = ({ user }) => {
   const intl = React.useContext(IntlContext);
   const pathName = usePathname();
   const router = useRouter();
+
+  const isPersian = intl?.lang === "fa";
 
   const redirectedPathName = (locale: string) => {
     if (!pathName) return "/";
@@ -28,20 +31,12 @@ export const Menu: React.FC<IProps> = ({ user }) => {
 
   return (
     <div className="menu-wrapper">
-      <svg
-        className="absolute bottom-full left-5"
-        width="30"
-        height="20"
-        viewBox="0 0 30 20"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <polygon points="15, 0 30, 20 0, 20" className="fill-gray-900" />
-      </svg>
+      <Triangle />
       <MenuItem name={user.email} noBorder />
-      <MenuItem name="Profile" href="/profile" />
+      <MenuItem name="Profile" href={`/${intl?.lang}/profile`} />
       <MenuItem
         name="Language"
-        left={40}
+        dir={isPersian ? "right" : "left"}
         subMenu={i18n.locales.map((locale) => ({
           name: String(intl?.dict.lang[locale]),
           onClick: () => handleSelectChange(locale),

@@ -33,7 +33,7 @@ const UpdatePrompt: React.FC<IProps> = ({ params }) => {
     mutationFn: (promptId: string) =>
       clientService.updatePrompt(promptId, prompt),
     onSuccess: () => {
-      router.push("/prompts");
+      router.push("/profile");
     },
   });
 

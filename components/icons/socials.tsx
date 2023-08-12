@@ -1,74 +1,75 @@
-import Image from "next/image";
-import githubSVG from "@assets/icon-pack/icons8-github-420.svg";
-import discordSVG from "@assets/icon-pack/icons8-discord-420.svg";
-import linkedinSVG from "@assets/icon-pack/icons8-linkedin-circled-420.svg";
-import mediumSVG from "@assets/icon-pack/icons8-medium-420.svg";
-import redditSVG from "@assets/icon-pack/icons8-reddit-420.svg";
-import stackSVG from "@assets/icon-pack/icons8-stack-overflow-500.svg";
-import twitterSVG from "@assets/icon-pack/icons8-twitter-circled-420.svg";
+import { IconType } from "@types";
+import GeneralIcon from "./GeneralIcon";
+import discord from "@assets/icon-pack/icons8-discord-420.svg";
+import github from "@assets/icon-pack/icons8-github-420.svg";
+import linkedin from "@assets/icon-pack/icons8-linkedin-circled-420.svg";
+import medium from "@assets/icon-pack/icons8-medium-420.svg";
+import reddit from "@assets/icon-pack/icons8-reddit-420.svg";
+import stack from "@assets/icon-pack/icons8-stack-overflow-500.svg";
+import twitter from "@assets/icon-pack/icons8-twitter-circled-420.svg";
 
 export const socials = {
-  discord: (
-    <Image
-      src={discordSVG}
+  discord: (props?: IconType) => (
+    <GeneralIcon
+      src={discord}
       alt="discord"
-      width={50}
       className="cursor-pointer"
-      title="discord"
+      width={50}
+      {...props}
     />
   ),
-  github: (
-    <Image
-      src={githubSVG}
+  github: (props?: IconType) => (
+    <GeneralIcon
+      src={github}
       alt="github"
-      width={50}
       className="cursor-pointer"
-      title="github"
+      width={50}
+      {...props}
     />
   ),
-  linkedin: (
-    <Image
-      src={linkedinSVG}
+  linkedin: (props?: IconType) => (
+    <GeneralIcon
+      src={linkedin}
       alt="linkedin"
-      width={50}
       className="cursor-pointer"
-      title="linkedin"
+      width={50}
+      {...props}
     />
   ),
-  medium: (
-    <Image
-      src={mediumSVG}
+  medium: (props?: IconType) => (
+    <GeneralIcon
+      src={medium}
       alt="medium"
-      width={50}
       className="cursor-pointer"
-      title="medium"
+      width={50}
+      {...props}
     />
   ),
-  reddit: (
-    <Image
-      src={redditSVG}
+  reddit: (props?: IconType) => (
+    <GeneralIcon
+      src={reddit}
       alt="reddit"
-      width={50}
       className="cursor-pointer"
-      title="reddit"
+      width={50}
+      {...props}
     />
   ),
-  stackOverflow: (
-    <Image
-      src={stackSVG}
-      alt="stackOverflow"
-      width={50}
+  stackOverflow: (props?: IconType) => (
+    <GeneralIcon
+      src={stack}
+      alt="stack"
       className="cursor-pointer"
-      title="stackOverflow"
+      width={50}
+      {...props}
     />
   ),
-  twitter: (
-    <Image
-      src={twitterSVG}
+  twitter: (props?: IconType) => (
+    <GeneralIcon
+      src={twitter}
       alt="twitter"
-      width={50}
       className="cursor-pointer"
-      title="twitter"
+      width={50}
+      {...props}
     />
   ),
 };

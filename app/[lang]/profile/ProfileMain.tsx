@@ -8,7 +8,7 @@ import { ProfileWithUserType } from "@types";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { clientService } from "@utils/api-service";
 import { Spinner } from "@components/spinner/Spinner";
-import { icons } from "@components/icons/icons";
+import { iconsList } from "@components/icons/icons";
 
 interface IProps {
   profile: ProfileWithUserType;
@@ -81,7 +81,7 @@ const ProfileMain: React.FC<IProps> = ({ profile }) => {
                     className="bg-teal-500 active:bg-teal-600 uppercase hover:shadow-md shadow p-1 rounded-full outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150"
                     type="button"
                   >
-                    {icons.edit({ alt: "edit profile", width: 30 })}
+                    {iconsList.edit({ alt: "edit profile", width: 30 })}
                   </button>
                 ) : (
                   <>
@@ -136,7 +136,7 @@ const ProfileMain: React.FC<IProps> = ({ profile }) => {
         </div>
       </div>
       <div className="text-center md:mt-6">
-        <h3 className="text-4xl font-semibold leading-normal mb-2 text-blueGray-700">
+        <h3 className="text-2xl md:text-4xl font-semibold leading-normal mb-2 text-blueGray-700">
           {profile?.user.name}
         </h3>
         <p className="text-sm text-gray-400 hover:text-gray-500 leading-6 sm:mx-2 md:mx-32">

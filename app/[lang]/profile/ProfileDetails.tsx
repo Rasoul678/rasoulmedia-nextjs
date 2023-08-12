@@ -96,7 +96,7 @@ const ProfileDetails: React.FC<IProps> = ({ profile, userId }) => {
             </button>
           </div>
           {showMore && (
-            <div className="container mx-auto my-5 p-5 bg-gray-800 rounded-xl">
+            <div className="container mx-auto my-5 p-3 bg-gray-800 rounded-xl">
               <div className="sm:flex no-wrap md:-mx-2 ">
                 <div className="w-full md:w-3/12 md:mx-2">
                   <div className="bg-gray-900 rounded-md p-3">

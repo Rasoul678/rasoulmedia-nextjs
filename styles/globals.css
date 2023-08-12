@@ -124,6 +124,7 @@ main {
 
 .nav-links {
   @apply flex gap-3 md:gap-5;
+  direction: ltr;
 }
 
 .nav-links a {
@@ -198,7 +199,7 @@ main {
 }
 
 .menu-wrapper {
-  @apply rounded-lg bg-gray-900 shadow-xl px-4 absolute left-6 mt-7 w-[13rem] break-all;
+  @apply rounded-lg bg-gray-900 shadow-xl px-4 absolute mt-7 w-[13rem] break-all rtl:right-6 ltr:left-6;
 }
 
 .menu-link {
@@ -210,7 +211,7 @@ main {
 }
 
 .sub-menu-wrapper {
-  @apply py-2 bg-gray-900 rounded-lg shadow-xl px-4 absolute left-[12.5rem] -top-0 break-normal;
+  @apply py-2 bg-gray-900 rounded-lg shadow-xl px-4 absolute -top-0 break-normal;
 }
 
 .copy_btn {
@@ -262,6 +263,7 @@ main {
 /* PromptCard Component */
 .prompt_card {
   @apply flex flex-col break-inside-avoid rounded-lg  bg-gray-700/20 bg-clip-padding p-6 pb-4 backdrop-blur-lg backdrop-filter min-h-[13rem] max-h-[15.5rem];
+  text-align: initial;
 }
 
 .flex-center {

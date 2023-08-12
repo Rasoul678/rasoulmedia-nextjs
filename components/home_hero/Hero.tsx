@@ -6,7 +6,7 @@ import Image from "next/image";
 import { CustomTypewriter } from "@components/CustomTypewriter/CustomTypewriter";
 import { IntlContext } from "@components/intl-provider";
 import reactStringReplace from "react-string-replace";
-import { socials } from "@components/icons";
+import { iconsList } from "@components/icons";
 
 const HomeHero: React.FC = () => {
   const intl = useContext(IntlContext);
@@ -28,9 +28,9 @@ const HomeHero: React.FC = () => {
           />
         </div>
         <div className="flex gap-2">
-          {socials.github}
-          {socials.linkedin}
-          {socials.twitter}
+          {iconsList.socials.github()}
+          {iconsList.socials.linkedin()}
+          {iconsList.socials.twitter()}
         </div>
       </div>
       <div className="flex flex-col flex-grow gap-10 items-center">

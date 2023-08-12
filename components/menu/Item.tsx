@@ -9,11 +9,11 @@ type IProps = {
   href?: string;
   onClick?: () => void;
   subMenu?: IProps[];
-  left?: number;
+  dir?: "right" | "left";
 };
 
 export const MenuItem: React.FC<IProps> = (props) => {
-  const { name, noBorder, href, onClick, subMenu } = props;
+  const { name, noBorder, href, onClick, subMenu, dir = "left" } = props;
   const [showSub, setShowSub] = React.useState(false);
   const clickRef = React.useRef(null);
 
@@ -39,7 +39,12 @@ export const MenuItem: React.FC<IProps> = (props) => {
         <div className="relative flex-1">
           <div className="menu-regular">{name}</div>
           {subMenu && showSub && (
-            <div ref={clickRef} className="sub-menu-wrapper">
+            <div
+              ref={clickRef}
+              className={`sub-menu-wrapper ${
+                dir === "right" ? "right-[12.5rem]" : "left-[12.5rem]"
+              }`}
+            >
               {subMenu?.map((sub, idx) => {
                 return (
                   <MenuItem noBorder={idx === 0} key={sub.name} {...sub} />
@@ -51,7 +56,7 @@ export const MenuItem: React.FC<IProps> = (props) => {
       )}
       {!href && subMenu && (
         <div>
-          <ArrowIcon />
+          <ArrowIcon dir={dir} />
         </div>
       )}
     </div>

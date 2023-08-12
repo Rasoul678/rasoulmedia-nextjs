@@ -2,19 +2,16 @@
 
 import { Spinner } from "@components/spinner/Spinner";
 import { observer, useObservable } from "@legendapp/state/react";
-import {
-  useInfiniteQuery
-} from "@tanstack/react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import { clientService } from "@utils/api-service";
 import Link from "next/link";
 import React from "react";
 import PromptCardList from "./PromptCardList";
-import { icons } from "@components/icons/icons";
+import { iconsList } from "@components/icons/icons";
 
 interface IProps {}
 
 export const Feed: React.FC<IProps> = observer((props) => {
-
   const state = useObservable<{
     searchText: string;
     searchTimeout: ReturnType<typeof setTimeout> | null;
@@ -83,7 +80,7 @@ export const Feed: React.FC<IProps> = observer((props) => {
           href="/prompts/new"
           className="block w-[12rem] text-center green_gradient uppercase"
         >
-          {icons.add({alt: 'add new prompt', width: 40})}
+          {iconsList.add({ alt: "add new prompt", width: 40 })}
         </Link>
       </form>
       {error ? (
