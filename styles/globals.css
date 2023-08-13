@@ -311,7 +311,7 @@ main {
   @apply w-full flex shrink-0 flex-col gap-y-4 gap-x-0 relative py-6 px-0 overflow-hidden rounded-md;
 }
 
-.loop-slider .inner {
+.loop-slider .tags-row {
   @apply flex w-fit;
   animation-name: loop;
   animation-timing-function: linear;
