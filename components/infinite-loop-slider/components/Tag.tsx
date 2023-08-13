@@ -1,6 +1,5 @@
 "use client";
 
-import { block } from "million/react";
 import React from "react";
 import { COLORS } from "../constants";
 
@@ -8,7 +7,7 @@ interface IProps {
   text: keyof typeof COLORS;
 }
 
-const Tag: React.FC<IProps> = block(({ text }) => {
+const Tag: React.FC<IProps> = ({ text }) => {
   return (
     <div
       className="tag"
@@ -17,6 +16,6 @@ const Tag: React.FC<IProps> = block(({ text }) => {
       <div>{text}</div>
     </div>
   );
-});
+};
 
 export default Tag;
