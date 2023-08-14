@@ -72,6 +72,11 @@ export type UserType = {
   sessions?: any;
   profiles?: ProfileType[];
   lastJoin?: StringOrNull;
+  _count: {
+    followedBy: number;
+    following: number;
+    prompts: number;
+  };
   createdAt?: string;
   updatedAt?: string;
 };

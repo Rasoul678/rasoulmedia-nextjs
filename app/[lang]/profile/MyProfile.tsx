@@ -2,8 +2,8 @@
 
 import { useQuery } from "@tanstack/react-query";
 import { clientService } from "@utils/api-service";
-import ProfileDetails from "./ProfileDetails";
-import ProfileMain from "./ProfileMain";
+import ProfileDetails from "./components/Details";
+import ProfileMain from "./components/Main";
 
 const MyProfile = () => {
   //! Fetch profile on the client
@@ -17,6 +17,8 @@ const MyProfile = () => {
     queryFn: () => clientService.getProfile(),
     // keepPreviousData: true,
   });
+
+  console.log("🚀 ~ file: MyProfile.tsx:12 ~ MyProfile ~ profile:", profile);
 
   return (
     <>

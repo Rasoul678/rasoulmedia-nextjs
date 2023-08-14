@@ -7,3 +7,11 @@ export function* chunks<T>(arr: T[], n: number): Generator<T[], void> {
 export const random = (min: number, max: number) => {
   return Math.floor(Math.random() * (max - min)) + min;
 };
+
+export const getCounter = (n: number) => {
+  if (n >= 100) {
+    return "+99";
+  }
+
+  return n;
+};

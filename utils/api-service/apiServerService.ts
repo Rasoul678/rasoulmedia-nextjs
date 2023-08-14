@@ -1,21 +1,11 @@
 import prisma from "@utils/auth/db/client";
 import { parseDate } from "@utils";
 import { PromptQueryParams } from "@types";
+import { prismaService } from "./prismaService";
 
 class APIServerSide {
   public getProfile = async (userId: string) => {
-    const profile = await prisma.profile.findUnique({
-      where: { userId },
-      include: {
-        user: {
-          include: {
-            followedBy: true,
-            following: true,
-            prompts: true,
-          },
-        },
-      },
-    });
+    const profile = await prismaService.findUniqueProfile(userId);
 
     if (profile) {
       profile.user.createdAt = parseDate(String(profile.user.createdAt))

@@ -63,7 +63,7 @@
     "@types/react-window": "^1.8.5",
     "@types/react-window-infinite-loader": "^1.0.6",
     "dotenv-cli": "^7.2.1",
-    "prisma": "^4.16.2",
+    "prisma": "^5.1.1",
     "tsx": "^3.12.7"
   }
 }
