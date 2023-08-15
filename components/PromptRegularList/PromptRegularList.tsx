@@ -2,10 +2,10 @@ import React from "react";
 import { useInView } from "react-intersection-observer";
 import { FetchNextPageOptions } from "@tanstack/react-query";
 import PromptCard from "@components/prompts/PromptCard";
-import { InfiniteResponseDataType, PromptWithUserType } from "@types";
+import { PromptWithUserType } from "@types";
 
 interface ICardListProps {
-  pages: InfiniteResponseDataType<PromptWithUserType[]>[];
+  prompts: PromptWithUserType[];
   handleTagClick?: (tag: string) => void;
   hasNextPage?: boolean;
   fetchNextPage?: (options?: FetchNextPageOptions | undefined) => void;
@@ -14,7 +14,7 @@ interface ICardListProps {
 }
 
 export const PromptRegularList: React.FC<ICardListProps> = ({
-  pages,
+  prompts,
   handleTagClick,
   hasNextPage,
   fetchNextPage,
@@ -29,8 +29,6 @@ export const PromptRegularList: React.FC<ICardListProps> = ({
       fetchNextPage?.();
     }
   }, [hasNextPage, inView, fetchNextPage]);
-
-  const prompts = pages.flatMap((page) => page.data);
 
   return (
     <div className="mt-5 prompt_layout">

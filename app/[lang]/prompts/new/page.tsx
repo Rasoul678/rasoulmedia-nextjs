@@ -21,7 +21,7 @@ const CreatePrompt: React.FC<IProps> = (props) => {
       clientService.createPrompt(String(session?.user.id), prompt),
     onSuccess: (response) => {
       if (response.ok) {
-        router.push("/prompts");
+        router.push("/profile");
       }
     },
   });

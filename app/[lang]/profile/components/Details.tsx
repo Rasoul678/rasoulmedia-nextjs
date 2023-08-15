@@ -1,16 +1,15 @@
 import { PromptRegularList } from "@components/PromptRegularList/PromptRegularList";
 import React from "react";
 import { useRouter } from "next/navigation";
-import {
-  useInfiniteQuery,
-  useMutation,
-  useQueryClient,
-} from "@tanstack/react-query";
+import { useInfiniteQuery, useMutation } from "@tanstack/react-query";
 import { Spinner } from "@components/spinner/Spinner";
 import { ProfileWithUserType } from "@types";
 import { clientService } from "@utils/api-service";
 import DescriptionColumn from "./details/DescriptionColumn";
 import ExcerptColumn from "./details/ExcerptColumn";
+import Link from "next/link";
+import { iconsList } from "@components/icons";
+import { useSession } from "next-auth/react";
 
 interface IProps {
   profile: ProfileWithUserType;
@@ -21,7 +20,9 @@ const ProfileDetails: React.FC<IProps> = ({ profile, userId }) => {
   const [showMore, setShowMore] = React.useState(false);
   const ref = React.useRef<HTMLButtonElement>(null);
   const router = useRouter();
-  const queryClient = useQueryClient();
+  const { data: session } = useSession();
+
+  const isAuthUser = session?.user.id === profile?.user.id;
 
   React.useEffect(() => {
     if (showMore) {
@@ -50,6 +51,8 @@ const ProfileDetails: React.FC<IProps> = ({ profile, userId }) => {
       return lastPage?.metaData.lastCursor;
     },
   });
+
+  const prompts = data?.pages.flatMap((page) => page.data);
 
   React.useEffect(() => {
     refetch();
@@ -103,20 +106,35 @@ const ProfileDetails: React.FC<IProps> = ({ profile, userId }) => {
               <div className="my-4"></div>
               <div className="bg-gray-900 p-3 shadow-sm rounded-md">
                 {error ? (
-                  <p className="text-red-500 font-bold">Oh no, there was an error when loading prompts</p>
+                  <p className="red_gradient font-bold">
+                    Oh no, there was an error when loading prompts
+                  </p>
                 ) : isLoading ? (
                   <p className="text-lg orange_gradient mt-10">
                     Loading prompts...
                   </p>
-                ) : data?.pages ? (
+                ) : prompts && prompts.length ? (
                   <PromptRegularList
-                    pages={data.pages}
+                    prompts={prompts}
                     fetchNextPage={fetchNextPage}
                     hasNextPage={hasNextPage}
                     handleEdit={handleEdit}
                     handleDelete={handleDelete}
                   />
-                ) : null}
+                ) : (
+                  <div>
+                    <p className="text-lg orange_gradient">No prompt yet!</p>
+                    {isAuthUser && (
+                      <Link
+                        href="/prompts/new"
+                        className="green_gradient text-sm uppercase flex justify-center items-center gap-2"
+                      >
+                        {iconsList.add({ alt: "add new prompt", width: 30 })}
+                        <span className="pt-1">add new prompt</span>
+                      </Link>
+                    )}
+                  </div>
+                )}
                 {hasNextPage && isFetchingNextPage && <Spinner size={50} />}
               </div>
             </div>

@@ -18,7 +18,6 @@ const MyProfile = () => {
     // keepPreviousData: true,
   });
 
-  console.log("🚀 ~ file: MyProfile.tsx:12 ~ MyProfile ~ profile:", profile);
 
   return (
     <>
