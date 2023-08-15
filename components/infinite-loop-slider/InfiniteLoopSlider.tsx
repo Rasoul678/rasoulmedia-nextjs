@@ -8,6 +8,7 @@ type IProps = {
   tagPerRow?: number;
   rows?: number;
   duration?: number;
+  className?: string;
 };
 
 const DURATION = 15_000;
@@ -15,11 +16,16 @@ const ROWS = 3;
 const TAG_PER_RWO = 30;
 
 const InfiniteLoopSlider: React.FC<IProps> = (props) => {
-  const { tagPerRow = TAG_PER_RWO, rows = ROWS, duration = DURATION } = props;
+  const {
+    tagPerRow = TAG_PER_RWO,
+    rows = ROWS,
+    duration = DURATION,
+    className,
+  } = props;
   const rowData = React.useMemo(() => [...new Array(rows)], [rows]);
 
   return (
-    <div className="tag-list">
+    <div className={`tag-list ${className}`}>
       {rowData.map((_, i) => {
         const listDuration = random(duration - 5000, duration + 5000);
 

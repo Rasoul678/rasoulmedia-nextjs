@@ -41,7 +41,7 @@ export const Navbar = () => {
             ) : (
               <>
                 <Link className="leading-8" href="/auth/signin">
-                  {iconsList.fingerprint({
+                  {iconsList.id({
                     alt: "Signin",
                   })}
                 </Link>

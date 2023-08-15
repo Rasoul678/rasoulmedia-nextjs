@@ -309,7 +309,7 @@ main {
 }
 
 .tag-list {
-  @apply w-full flex shrink-0 flex-col gap-y-4 gap-x-0 relative py-6 px-0 overflow-hidden rounded-md;
+  @apply w-full flex shrink-0 flex-col gap-y-2 gap-x-0 relative py-2 px-0 overflow-hidden rounded-md;
 }
 
 .loop-slider .tags-row {
@@ -347,4 +347,12 @@ main {
   100% {
     transform: translateX(-30%);
   }
+}
+
+.out-view {
+  @apply opacity-0 blur-sm -translate-x-full;
+}
+
+.in-view {
+  @apply opacity-100 blur-0 translate-x-0 transition-all duration-[300ms] motion-reduce:transition-none;
 }
