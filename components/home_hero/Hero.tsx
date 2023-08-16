@@ -33,11 +33,11 @@ const HomeHero: React.FC = () => {
           {iconsList.socials.twitter()}
         </div>
       </div>
-      <div className="flex flex-col flex-grow gap-10 items-center">
-        <div>
+      <div className="flex justify-evenly flex-col mb-16 flex-grow items-center">
+        <div className="flex flex-col gap-4">
           <div className="text-2xl md:text-5xl text-center" tabIndex={0}>
             {reactStringReplace(welcome, me, (match, i) => (
-              <span key={i} className="font-bold red_gradient">
+              <span key={i} className="text-xl md:text-5xl font-bold red_gradient block sm:inline">
                 {match}
               </span>
             ))}

@@ -356,3 +356,15 @@ main {
 .in-view {
   @apply opacity-100 blur-0 translate-x-0 transition-all duration-[300ms] motion-reduce:transition-none;
 }
+
+.test:after {
+  content: "";
+  background-color: var(--color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  height: var(--height);
+  scroll-behavior: smooth;
+  border-radius: 0.5rem;
+}

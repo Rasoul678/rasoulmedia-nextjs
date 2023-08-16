@@ -14,8 +14,8 @@ const GeneralIcon: React.FC<IProps> = (props) => {
   const {
     alt = "image",
     title = alt,
-    height = 35,
     width = 35,
+    height = width,
     className = "",
     src,
   } = props;

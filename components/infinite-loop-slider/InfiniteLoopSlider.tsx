@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { memo } from "react";
 import { random } from "@utils/helpers";
 import TagsRow from "./components/TagsRow";
 
@@ -49,4 +49,4 @@ const InfiniteLoopSlider: React.FC<IProps> = (props) => {
   );
 };
 
-export default InfiniteLoopSlider;
+export default memo(InfiniteLoopSlider);

@@ -64,7 +64,7 @@ export const Navbar = () => {
           })}
         </Link>
         <Link href={`/${intl?.lang}/live-code`}>
-          {iconsList.javascript({
+          {iconsList.stacks.javascript({
             alt: intl?.dict.nav.code!,
             className: "self-baseline",
           })}
