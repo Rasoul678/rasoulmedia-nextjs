@@ -7,45 +7,45 @@ type IProps = {
 
 const TechListIcons: React.FC<IProps> = ({ inView }) => {
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-5 mt-[5rem] relative left-[0%] mb-[3rem] w-[65%]">
+    <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-7 gap-5 mt-[5rem] relative left-[0%] mb-[3rem] w-[65%]">
       <div className={inView ? "in-view delay-[50ms]" : "out-view"}>
-        {iconsList.stacks.html({ width: 100, alt: "HTML" })}
+        {iconsList.stacks.html({ width: 80, alt: "HTML" })}
       </div>
       <div className={inView ? "in-view delay-[150ms]" : "out-view"}>
-        {iconsList.stacks.css({ width: 100, alt: "CSS" })}
+        {iconsList.stacks.css({ width: 80, alt: "CSS" })}
       </div>
       <div className={inView ? "in-view delay-[250ms]" : "out-view"}>
-        {iconsList.stacks.javascript({ width: 100, alt: "Javascript" })}
+        {iconsList.stacks.javascript({ width: 80, alt: "Javascript" })}
       </div>
       <div className={`${inView ? "in-view delay-[350ms]" : "out-view"} mt-1`}>
-        {iconsList.stacks.ts({ width: 100, alt: "Typescript" })}
+        {iconsList.stacks.ts({ width: 80, alt: "Typescript" })}
       </div>
       <div className={inView ? "in-view delay-[450ms]" : "out-view"}>
-        {iconsList.stacks.git({ width: 100, alt: "Git" })}
+        {iconsList.stacks.git({ width: 80, alt: "Git" })}
       </div>
       <div className={inView ? "in-view delay-[550ms]" : "out-view"}>
-        {iconsList.stacks.postman({ width: 100, alt: "Postman" })}
+        {iconsList.stacks.postman({ width: 80, alt: "Postman" })}
       </div>
       <div className={`${inView ? "in-view delay-[650ms]" : "out-view"} mt-2`}>
-        {iconsList.stacks.react({ width: 95, alt: "ReactJs" })}
+        {iconsList.stacks.react({ width: 75, alt: "ReactJs" })}
       </div>
       <div className={`${inView ? "in-view delay-[750ms]" : "out-view"} mt-5`}>
-        {iconsList.stacks.nextjs({ width: 120, alt: "Next.js" })}
+        {iconsList.stacks.nextjs({ width: 100, alt: "Next.js" })}
       </div>
       <div className={`${inView ? "in-view delay-[850ms]" : "out-view"}`}>
-        {iconsList.stacks.yarn({ width: 110, alt: "Yarn" })}
+        {iconsList.stacks.yarn({ width: 90, alt: "Yarn" })}
       </div>
       <div className={`${inView ? "in-view delay-[950ms]" : "out-view"}`}>
-        {iconsList.stacks.npm({ width: 110, alt: "NPM" })}
+        {iconsList.stacks.npm({ width: 90, alt: "NPM" })}
       </div>
       <div className={`${inView ? "in-view delay-[1050ms]" : "out-view"}`}>
-        {iconsList.stacks.docker({ width: 110, alt: "Docker" })}
+        {iconsList.stacks.docker({ width: 90, alt: "Docker" })}
       </div>
       <div className={`${inView ? "in-view delay-[1150ms]" : "out-view"}`}>
-        {iconsList.stacks.redux({ width: 100, alt: "Redux" })}
+        {iconsList.stacks.redux({ width: 80, alt: "Redux" })}
       </div>
       <div className={`${inView ? "in-view delay-[1250ms]" : "out-view"}`}>
-        {iconsList.stacks.webpack({ width: 100, alt: "Webpack" })}
+        {iconsList.stacks.webpack({ width: 80, alt: "Webpack" })}
       </div>
     </div>
   );

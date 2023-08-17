@@ -10,6 +10,7 @@ const TimeLine: React.FC<IProps> = (props) => {
     <div>
       <TechStack />
       <TechStack color="f48fb1" />
+      <TechStack />
     </div>
   );
 };

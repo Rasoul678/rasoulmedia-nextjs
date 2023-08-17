@@ -28,6 +28,7 @@ const GeneralIcon: React.FC<IProps> = (props) => {
       alt={alt}
       width={width}
       height={height}
+      tabIndex={0}
     />
   );
 };

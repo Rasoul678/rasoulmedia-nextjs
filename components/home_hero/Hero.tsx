@@ -16,8 +16,8 @@ const HomeHero: React.FC = () => {
 
   return (
     <div className="h-screen flex flex-col justify-between gap-12 items-center px-16">
-      <div className="flex flex-col justify-center items-center gap-4 mt-3">
-        <div tabIndex={0}>
+      <div className="flex flex-col justify-center items-center gap-[2.5rem] sm:gap-4 mt-3">
+        <div tabIndex={0} className="mt-6 sm:mt-0">
           <Image
             src={ProfilePic}
             alt="My-Picture"

@@ -2,7 +2,7 @@ import { useEffect, useRef, useState, useMemo, MutableRefObject } from "react";
 import { Subject, debounceTime } from "rxjs";
 
 // The shape for initial state before detection.
-interface UndetectedState extends Size {
+interface UndetectedState {
   status: "undetected";
 }
 
@@ -18,7 +18,7 @@ interface DetectedState extends Size {
 }
 
 // The state for shape when rendering on server or ref is null.
-interface UnsupportedState extends Size {
+interface UnsupportedState {
   status: "unsupported";
 }
 
@@ -38,8 +38,6 @@ const useElementSize = (config?: ElementSizeConfig) => {
   // The state handled with ref to read current values.
   const state = useRef<SizeState>({
     status: "undetected",
-    height: 0,
-    width: 0,
   });
 
   const observerRef = useRef<ResizeObserver | null>(null);
@@ -75,8 +73,6 @@ const useElementSize = (config?: ElementSizeConfig) => {
         // ref value assigned we cannot read the value.
         changed.next({
           status: "unsupported",
-          height: 0,
-          width: 0,
         });
         return;
       }

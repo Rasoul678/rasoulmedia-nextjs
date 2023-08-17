@@ -1,9 +1,8 @@
 import React, { CSSProperties } from "react";
 import { useInView } from "react-intersection-observer";
 import InfiniteLoopSlider from "@components/infinite-loop-slider/InfiniteLoopSlider";
-import { useElementScroll } from "@hooks/useElementScroll";
 import TechListIcons from "./TechListIcons";
-import TimeScroler from "./TimeScroller";
+import TimeCrawler from "./TimeCrawler";
 
 type IProps = {
     color?: string; 
@@ -24,7 +23,7 @@ export const TechStack: React.FC<IProps> = ({color}) => {
             <InfiniteLoopSlider rows={1} className="opacity-70" />
           </div>
         </div>
-        <TimeScroler color={color} />
+        <TimeCrawler color={color} />
         <TechListIcons inView={inView} />
       </section>
     </>

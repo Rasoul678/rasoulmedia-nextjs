@@ -39,13 +39,13 @@ export const Navbar = () => {
                 {showMenu && <Menu user={session.user} />}
               </div>
             ) : (
-              <>
+              <div>
                 <Link className="leading-8" href="/auth/signin">
                   {iconsList.id({
                     alt: "Signin",
                   })}
                 </Link>
-              </>
+              </div>
             )}
           </>
         )}
