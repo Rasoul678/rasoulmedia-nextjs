@@ -2,10 +2,10 @@ import React from "react";
 
 interface IProps {}
 
-const Triangle: React.FC<IProps> = (props) => {
+export const Triangle: React.FC<IProps> = (props) => {
   return (
     <svg
-      className="absolute bottom-full rtl:right-5 ltr:left-5"
+      className="absolute bottom-full rtl:right-3 ltr:left-3"
       width="30"
       height="20"
       viewBox="0 0 30 20"
@@ -15,5 +15,3 @@ const Triangle: React.FC<IProps> = (props) => {
     </svg>
   );
 };
-
-export default Triangle;

@@ -115,5 +115,7 @@
   "account": { "signin": "inloggen", "signout": "uitloggen" },
   "hero": {
     "intro-welcome": "Hallo, ik ben Rasoul Hesami."
-  }
+  },
+  "language": "taal",
+  "my-prof": "mijn profiel"
 }

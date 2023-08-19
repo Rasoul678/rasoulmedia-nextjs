@@ -6,6 +6,10 @@ import plus from "@assets/icon-pack/icons8-plus-420.svg";
 import fingerprint from "@assets/icon-pack/icons8-touch-id-420.svg";
 import remove from "@assets/icon-pack/icons8-trash-can-420.svg";
 import uncheckAll from "@assets/icon-pack/icons8-uncheck-all-420.svg";
+import menu from "@assets/icon-pack/icons8-menu-420.svg";
+import logout from "@assets/icon-pack/icons8-out-420.svg";
+import lang from "@assets/icon-pack/icons8-google-translate-new-420.svg";
+import chatGPT from "@assets/icon-pack/icons8-chatgpt-420.svg";
 import { IconType } from "@types";
 import GeneralIcon from "./GeneralIcon";
 import { socials } from "./socials";
@@ -26,4 +30,8 @@ export const iconsList = {
   delete: (props?: IconType) => <GeneralIcon src={remove} {...props} />,
   id: (props?: IconType) => <GeneralIcon src={fingerprint} {...props} />,
   uncheckAll: (props?: IconType) => <GeneralIcon src={uncheckAll} {...props} />,
+  menu: (props?: IconType) => <GeneralIcon src={menu} {...props} />,
+  logout: (props?: IconType) => <GeneralIcon src={logout} {...props} />,
+  lang: (props?: IconType) => <GeneralIcon src={lang} {...props} />,
+  chatGPT: (props?: IconType) => <GeneralIcon src={chatGPT} {...props} />,
 };

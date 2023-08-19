@@ -115,5 +115,7 @@
   "account": { "signin": "ورود", "signout": "خروج" },
   "hero": {
     "intro-welcome": "سلام من رسول حسامی رستمی هستم."
-  }
+  },
+  "language": "زبان",
+  "my-prof": "پروفایل من"
 }

@@ -37,7 +37,7 @@ const TimeCrawler: React.FC<IProps> = ({ color = "8ce7f2" }) => {
           { "--height": `${height}px`, "--color": `#${color}` } as CSSProperties
         }
       >
-        <Sparkler hasAnimation={hasAnimation} />
+        <Sparkler hasAnimation={hasAnimation} color={color} />
       </div>
     </div>
   );

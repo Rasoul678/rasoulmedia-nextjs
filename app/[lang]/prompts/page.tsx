@@ -24,7 +24,7 @@ const PromptsPage: React.FC<IProps> = async ({ searchParams }) => {
   return (
     <section className="w-full flex-center flex-col">
       <h1 className="head_text text-center mt-4">
-        <span className="orange_gradient text-center text-4xl">
+        <span className="orange_gradient text-center text-2xl sm:text-4xl">
           AI-Powered Prompts
         </span>
       </h1>

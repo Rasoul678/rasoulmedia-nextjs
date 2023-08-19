@@ -1,5 +1,6 @@
 import React, { ChangeEvent } from "react";
 import { Spinner } from "@components/spinner/Spinner";
+import { IntlContext } from "@components/intl-provider";
 
 interface IProps {
   onSubmit: (e: React.FormEvent) => void;
@@ -24,6 +25,8 @@ export const AuthForm: React.FC<IProps> = ({
   type,
 }) => {
   const isSignIn = type === "signin";
+  const intl = React.useContext(IntlContext);
+
 
   return (
     <form onSubmit={onSubmit}>
@@ -77,7 +80,7 @@ export const AuthForm: React.FC<IProps> = ({
 
       <div className="form-question">
         {isSignIn ? "Don't have an account?" : "Already have an account?"}
-        <a href={`/auth/${isSignIn ? "signup" : "signin"}`}>
+        <a href={`/${intl?.lang}/auth/${isSignIn ? "signup" : "signin"}`}>
           {isSignIn ? "Sign up" : "Sign in"}
         </a>
       </div>

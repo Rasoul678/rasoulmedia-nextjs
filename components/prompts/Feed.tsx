@@ -67,7 +67,7 @@ export const Feed: React.FC<IProps> = observer((props) => {
 
   return (
     <section className="feed">
-      <form className="sticky top-2 z-[1000] w-full flex-between gap-3 px-20">
+      <form className="sticky top-2 z-[1000] w-full flex-between gap-3 px-4 sm:px-20">
         <input
           type="text"
           placeholder="Search for text, tag, email or a name"
@@ -78,9 +78,9 @@ export const Feed: React.FC<IProps> = observer((props) => {
         />
         <Link
           href="/prompts/new"
-          className="block w-[12rem] text-center green_gradient uppercase"
+          className="block text-center green_gradient uppercase"
         >
-          {iconsList.add({ alt: "add new prompt", width: 40 })}
+          {iconsList.add({ alt: "add new prompt", width: 50 })}
         </Link>
       </form>
       {error ? (

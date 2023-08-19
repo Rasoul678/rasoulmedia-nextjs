@@ -4,16 +4,17 @@ import { useClickOutside } from "@hooks/useClickOutside";
 import Link from "next/link";
 
 type IProps = {
-  name: string;
+  name: string | null | undefined;
   noBorder?: boolean;
   href?: string;
   onClick?: () => void;
   subMenu?: IProps[];
   dir?: "right" | "left";
+  icon?: React.JSX.Element;
 };
 
 export const MenuItem: React.FC<IProps> = (props) => {
-  const { name, noBorder, href, onClick, subMenu, dir = "left" } = props;
+  const { name, noBorder, href, onClick, subMenu, dir = "left", icon } = props;
   const [showSub, setShowSub] = React.useState(false);
   const clickRef = React.useRef(null);
 
@@ -26,11 +27,12 @@ export const MenuItem: React.FC<IProps> = (props) => {
 
   return (
     <div
-      className={`py-3 flex w-full ${
+      className={`py-3 flex w-full items-center gap-2 ${
         noBorder ? "" : "border-t"
       } border-gray-200`}
       onClick={handleClickItem}
     >
+      {icon}
       {href ? (
         <Link href={href}>
           <div className="menu-link">{name}</div>
@@ -42,7 +44,7 @@ export const MenuItem: React.FC<IProps> = (props) => {
             <div
               ref={clickRef}
               className={`sub-menu-wrapper ${
-                dir === "right" ? "right-[12.5rem]" : "left-[12.5rem]"
+                dir === "right" ? "right-[10.5rem]" : "left-[10.5rem]"
               }`}
             >
               {subMenu?.map((sub, idx) => {

@@ -115,7 +115,7 @@ main {
 /* Tailwind Styles */
 
 .navbar {
-  @apply px-5 w-full md:px-10 py-3 flex justify-between align-middle gap-5 sticky top-0 backdrop-blur-sm uppercase bg-white bg-opacity-7;
+  @apply w-full px-5 py-3 flex justify-between align-middle gap-5 sticky top-0 backdrop-blur-sm uppercase bg-white bg-opacity-7;
 }
 
 .glassmorphism {
@@ -123,7 +123,7 @@ main {
 }
 
 .nav-links {
-  @apply flex gap-3 md:gap-5;
+  @apply flex gap-1 sm:gap-3;
   direction: ltr;
 }
 
@@ -157,12 +157,13 @@ main {
 
 .signin hr:before {
   background: #0d1117;
-  color: #888;
+  color: #999;
   content: "or";
   padding: 0 0.4rem;
   position: relative;
   top: -0.7rem;
   left: calc(50% - 0.4rem);
+  right: calc(50% - 0.4rem);
   border-radius: 50%;
 }
 
@@ -187,7 +188,7 @@ main {
 }
 
 .form-submit-btn {
-  @apply w-full flex justify-center align-middle gap-2 rounded bg-blue-600 px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal text-white;
+  @apply w-full flex justify-center align-middle gap-2 rounded bg-[#a5d6a7] px-7 pb-2.5 pt-3 text-sm font-medium uppercase leading-normal text-gray-900;
 }
 
 .form-question {
@@ -199,7 +200,7 @@ main {
 }
 
 .menu-wrapper {
-  @apply rounded-lg bg-gray-900 shadow-xl px-4 absolute mt-7 w-[13rem] break-all rtl:right-6 ltr:left-6;
+  @apply rounded-lg bg-gray-900 shadow-xl px-4 absolute mt-7 w-[13rem] break-all rtl:right-3 ltr:left-3;
 }
 
 .menu-link {
@@ -387,7 +388,8 @@ main {
   height: 0.8rem;
   border-radius: 0.1rem;
   opacity: 0;
-  background-color: rgba(255, 215, 0, 0.7);
+  /* background-color: rgba(255, 215, 0, 0.7); */
+  background-color: var(--spark-color);
   transform-origin: bottom center;
   animation: var(--spark-animation);
   animation-delay: var(--spark-delay);

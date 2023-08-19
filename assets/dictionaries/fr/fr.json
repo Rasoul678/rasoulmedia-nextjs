@@ -115,5 +115,7 @@
   "account": { "signin": "s'identifier", "signout": "se déconnecter" },
   "hero": {
     "intro-welcome": "Bonjour, je suis Rasoul Hesami."
-  }
+  },
+  "language": "langue",
+  "my-prof": "mon profil"
 }

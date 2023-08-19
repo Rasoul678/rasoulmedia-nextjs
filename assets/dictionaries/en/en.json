@@ -112,5 +112,7 @@
   "account": { "signin": "sign in", "signout": "sign out" },
   "hero": {
     "intro-welcome": "Hi, I am Rasoul Hesami Rostami"
-  }
+  },
+  "language": "language",
+  "my-prof": "my profile"
 }
