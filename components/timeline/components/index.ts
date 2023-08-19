@@ -1,1 +1,1 @@
-export { TechStack } from "./TechStack";
+export { TimeSection } from "./TimeSection";

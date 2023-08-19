@@ -5,10 +5,13 @@ import { random } from "@utils/helpers";
 import TagsRow from "./components/TagsRow";
 
 type IProps = {
+  tagList?: string[];
   tagPerRow?: number;
   rows?: number;
   duration?: number;
   className?: string;
+  color?: string;
+  loop?: boolean;
 };
 
 const DURATION = 15_000;
@@ -21,6 +24,9 @@ const InfiniteLoopSlider: React.FC<IProps> = (props) => {
     rows = ROWS,
     duration = DURATION,
     className,
+    tagList,
+    color,
+    loop,
   } = props;
   const rowData = React.useMemo(() => [...new Array(rows)], [rows]);
 
@@ -37,10 +43,11 @@ const InfiniteLoopSlider: React.FC<IProps> = (props) => {
               {
                 "--duration": `${listDuration}ms`,
                 "--direction": i % 2 ? "reverse" : "normal",
+                "--animation": loop ? "loop" : "none",
               } as React.CSSProperties
             }
           >
-            <TagsRow tagPerRow={tagPerRow} />
+            <TagsRow color={color} tagList={tagList} tagPerRow={tagPerRow} />
           </div>
         );
       })}

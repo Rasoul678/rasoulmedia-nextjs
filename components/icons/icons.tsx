@@ -10,6 +10,7 @@ import menu from "@assets/icon-pack/icons8-menu-420.svg";
 import logout from "@assets/icon-pack/icons8-out-420.svg";
 import lang from "@assets/icon-pack/icons8-google-translate-new-420.svg";
 import chatGPT from "@assets/icon-pack/icons8-chatgpt-420.svg";
+import ok from "@assets/icon-pack/icons8-ok-420.svg";
 import { IconType } from "@types";
 import GeneralIcon from "./GeneralIcon";
 import { socials } from "./socials";
@@ -34,4 +35,5 @@ export const iconsList = {
   logout: (props?: IconType) => <GeneralIcon src={logout} {...props} />,
   lang: (props?: IconType) => <GeneralIcon src={lang} {...props} />,
   chatGPT: (props?: IconType) => <GeneralIcon src={chatGPT} {...props} />,
+  ok: (props?: IconType) => <GeneralIcon src={ok} {...props} />,
 };

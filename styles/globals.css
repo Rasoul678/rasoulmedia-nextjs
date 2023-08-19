@@ -314,7 +314,7 @@ main {
 }
 
 .loop-slider .tags-row {
-  animation-name: loop;
+  animation-name: var(--animation);
   animation-timing-function: linear;
   animation-iteration-count: infinite;
   animation-direction: var(--direction);
@@ -334,8 +334,8 @@ main {
   background: linear-gradient(
     60deg,
     #101929,
-    transparent 30%,
-    transparent 70%,
+    transparent 25%,
+    transparent 75%,
     #101929
   );
 }

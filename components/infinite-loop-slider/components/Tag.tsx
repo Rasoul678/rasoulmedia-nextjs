@@ -1,18 +1,15 @@
 "use client";
 
 import React from "react";
-import { COLORS } from "../constants";
 
 interface IProps {
-  text: keyof typeof COLORS;
+  text: string;
+  color?: string;
 }
 
-const Tag: React.FC<IProps> = ({ text }) => {
+const Tag: React.FC<IProps> = ({ text, color = "8ce7f2" }) => {
   return (
-    <div
-      className="tag"
-      style={{ "--color": COLORS[text] } as React.CSSProperties}
-    >
+    <div className="tag" style={{ "--color": `#${color}` } as React.CSSProperties}>
       <div>{text}</div>
     </div>
   );

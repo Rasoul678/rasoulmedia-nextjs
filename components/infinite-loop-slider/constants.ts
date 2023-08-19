@@ -30,4 +30,4 @@ export const TAGS = [
   "Tailwind",
   "React",
   "Next.js",
-] as const;
+];
