@@ -323,7 +323,7 @@ main {
 }
 
 .tag {
-  @apply text-sm font-bold flex bg-gray-900/70 items-center gap-y-0 gap-x-1 rounded-md py-1 px-2 mr-4;
+  @apply text-sm min-w-max font-bold flex bg-gray-900/70 items-center gap-y-0 gap-x-1 rounded-md py-1 px-2 mr-4;
   color: var(--color);
   box-shadow: 0 0.1rem 0.2rem rgba(0, 0, 0, 0.2),
     0 0.1rem 0.5rem rgba(0, 0, 0, 0.3), 0 0.2rem 1.5rem rgba(0, 0, 0, 0.4);

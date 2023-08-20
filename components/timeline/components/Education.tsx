@@ -8,7 +8,7 @@ type IProps = {
 
 const Education: React.FC<IProps> = ({ inView }) => {
   return (
-    <div className="w-[80%] mt-14 flex flex-col gap-4">
+    <div className="w-[70%] mt-14 flex flex-col gap-4">
       <div
         className={`flex items-center px-5 h-10 gap-5 ${
           inView ? "in-view delay-[350ms]" : "out-view"
@@ -16,11 +16,8 @@ const Education: React.FC<IProps> = ({ inView }) => {
       >
         {iconsList.ok({ width: 40, alt: "Ok" })}
         <span className="mt-2 flex gap-2">
-          Master{" "}
-          <span className="hidden sm:inline">
-            of Science in Aerospace Engineering
-          </span>{" "}
-          at
+          Master of Science
+          <span className="hidden md:inline">in Aerospace Engineering</span> at
           <Link
             href="https://sbu.ac.ir"
             target="_blank"
@@ -28,7 +25,8 @@ const Education: React.FC<IProps> = ({ inView }) => {
             className="red_gradient"
           >
             SBU
-          </Link>
+          </Link>{" "}
+          <span className="hidden lg:inline">(Shahid Beheshti University)</span>
         </span>
       </div>
       <div
@@ -38,11 +36,8 @@ const Education: React.FC<IProps> = ({ inView }) => {
       >
         {iconsList.ok({ width: 40, alt: "Ok" })}
         <span className="mt-2 flex gap-2">
-          Bachelor{" "}
-          <span className="hidden sm:inline">
-            of Science in Aerospace Engineering
-          </span>{" "}
-          at
+          Bachelor of Science
+          <span className="hidden md:inline">in Aerospace Engineering</span> at
           <Link
             href="https://mut.ac.ir"
             target="_blank"
@@ -50,7 +45,10 @@ const Education: React.FC<IProps> = ({ inView }) => {
             className="red_gradient"
           >
             MUT
-          </Link>
+          </Link>{" "}
+          <span className="hidden lg:inline">
+            (Malek-e-Ashtar University of Technology)
+          </span>
         </span>
       </div>
     </div>

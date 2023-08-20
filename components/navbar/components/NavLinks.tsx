@@ -34,13 +34,6 @@ export const NavLinks = () => {
           <span className="relative inline-flex rounded-full h-3 w-3 bg-sky-500"></span>
         </span>
       </Link>
-
-      <Link href={`/${intl?.lang}/contact`}>
-        {iconsList.gmail({
-          alt: intl?.dict.nav.contact!,
-          className: "self-baseline",
-        })}
-      </Link>
     </div>
   );
 };
