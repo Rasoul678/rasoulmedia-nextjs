@@ -15,7 +15,7 @@ type IProps = {
 const TimeLine: React.FC<IProps> = ({ repos }) => {
   return (
     <div>
-      <TimeSection loop title="My Tech Stack" tagList={TAGS}>
+      <TimeSection loop title="Tools" tagList={TAGS}>
         {({ inView }) => <TechListIcons inView={inView} />}
       </TimeSection>
       <TimeSection
@@ -27,7 +27,7 @@ const TimeLine: React.FC<IProps> = ({ repos }) => {
         {({ inView }) => <Repos repos={repos} inView={inView} />}
       </TimeSection>
       <TimeSection
-        title="Academic Background"
+        title="Academic Educations"
         tagList={["Master & Bachelor"]}
         color="f48fb1"
       >

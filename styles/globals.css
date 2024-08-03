@@ -14,7 +14,7 @@ html {
 
 /* width */
 ::-webkit-scrollbar {
-  width: 0.5rem;
+  width: 0.3rem;
 }
 
 /* Track */
@@ -351,11 +351,11 @@ main {
 }
 
 .out-view {
-  @apply opacity-0 blur-sm -translate-x-full;
+  @apply opacity-0 blur-sm translate-y-full;
 }
 
 .in-view {
-  @apply opacity-100 blur-0 translate-x-0 transition-all duration-[300ms] motion-reduce:transition-none;
+  @apply opacity-100 blur-0 translate-y-0 transition-all duration-[300ms] motion-reduce:transition-none;
 }
 
 .crawler {
