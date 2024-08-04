@@ -1,3 +1,5 @@
+"use client";
+
 import React, { CSSProperties } from "react";
 import { useElementScroll } from "@hooks/useElementScroll";
 import { useElementSize } from "@hooks/useElementSize";

@@ -24,9 +24,10 @@ export const NavLinks = () => {
         })}
       </Link>
       <Link href={`/${intl?.lang}/live-code`}>
-        {iconsList.stacks.javascript({
+        {iconsList.stacks.js({
           alt: intl?.dict.nav.code!,
           className: "self-baseline",
+          width: 35
         })}
 
         <span className="relative flex h-3 w-3">

@@ -1,6 +1,5 @@
 import React from "react";
 import Image from "next/image";
-import { signOut, useSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
 import defaultAvatar from "@assets/icon-pack/icons8-anonymous-mask-420.svg";
 import { iconsList } from "@components/icons";
@@ -12,7 +11,6 @@ const MenuDropDown = () => {
   const intl = React.useContext(IntlContext);
   const pathName = usePathname();
   const router = useRouter();
-  const { data: session, status } = useSession();
 
   const isPersian = intl?.lang === "fa";
 
@@ -31,34 +29,22 @@ const MenuDropDown = () => {
   return (
     <div className="menu-wrapper">
       <Triangle />
-      {session?.user && (
-        <>
-          <MenuItem
-            noBorder
-            name={String(intl?.dict["my-prof"])}
-            href={`/${intl?.lang}/profile`}
-            icon={
-              <Image
-                src={session?.user.image || defaultAvatar}
-                alt={String(intl?.dict["my-prof"])}
-                className="rounded-full"
-                width={30}
-                height={30}
-              />
-            }
-          />
-          <MenuItem
-            name="Prompts"
-            href={`/${intl?.lang}/prompts`}
-            icon={iconsList.chatGPT({
-              alt: "chatGPT",
-              width: 30,
-            })}
-          />
-        </>
-      )}
       <MenuItem
-        noBorder={!session?.user}
+        noBorder
+        name={String(intl?.dict["my-prof"])}
+        href={`/${intl?.lang}/profile`}
+        icon={
+          <Image
+            src={defaultAvatar}
+            alt={String(intl?.dict["my-prof"])}
+            className="rounded-full"
+            width={30}
+            height={30}
+          />
+        }
+      />
+
+      <MenuItem
         name={String(intl?.dict.language)}
         dir={isPersian ? "right" : "left"}
         subMenu={i18n.locales.map((locale) => ({
@@ -70,27 +56,6 @@ const MenuDropDown = () => {
           width: 30,
         })}
       />
-      {session?.user ? (
-        <MenuItem
-          name={String(intl?.dict.account.signout)}
-          onClick={() => {
-            signOut();
-          }}
-          icon={iconsList.logout({
-            alt: String(intl?.dict.account.signout),
-            width: 30,
-          })}
-        />
-      ) : (
-        <MenuItem
-          name={String(intl?.dict.account.signin)}
-          href={`/${intl?.lang}/auth/signin`}
-          icon={iconsList.id({
-            alt: String(intl?.dict.account.signin),
-            width: 30,
-          })}
-        />
-      )}
     </div>
   );
 };

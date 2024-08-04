@@ -8,7 +8,10 @@ interface IProps {
 
 const TechIcon: React.FC<IProps> = ({ delay, children, inView }) => {
   return (
-    <div className={inView ? `in-view delay-[${delay}ms]` : "out-view"}>
+    <div
+      className={inView ? "in-view" : "out-view"}
+      style={{ transitionDelay: delay + 2 + "50ms" }}
+    >
       {children}
     </div>
   );

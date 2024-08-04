@@ -7,7 +7,7 @@ interface IProps {
   className?: string;
   height?: number;
   width?: number;
-  src: string;
+  src: typeof import("*.svg");
 }
 
 const GeneralIcon: React.FC<IProps> = (props) => {

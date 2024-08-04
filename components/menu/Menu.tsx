@@ -3,7 +3,15 @@
 import React from "react";
 import { iconsList } from "@components/icons";
 import { useClickOutside } from "@hooks/useClickOutside";
-import MenuDropDown  from "./MenuDropDown";
+import dynamic from "next/dynamic";
+import Spinner from "@components/spinner";
+
+const MenuDropDown = dynamic(
+  () => import("./MenuDropDown").then((mod) => mod.default),
+  {
+    loading: () => <Spinner />,
+  }
+);
 
 export const Menu = () => {
   const [showMenu, setShowMenu] = React.useState(false);

@@ -351,11 +351,11 @@ main {
 }
 
 .out-view {
-  @apply opacity-0 blur-sm translate-y-full;
+  @apply opacity-0 blur-sm translate-y-full flex;
 }
 
 .in-view {
-  @apply opacity-100 blur-0 translate-y-0 transition-all duration-[300ms] motion-reduce:transition-none;
+  @apply opacity-100 blur-0 translate-y-0 transition-all duration-[300ms] motion-reduce:transition-none flex;
 }
 
 .crawler {

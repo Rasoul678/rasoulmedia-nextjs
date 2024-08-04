@@ -16,7 +16,7 @@ const Education: React.FC<IProps> = ({ inView }) => {
       >
         {iconsList.ok({ width: 40, alt: "Ok" })}
         <span className="mt-2 flex gap-2">
-          Master of Science
+          MS
           <span className="hidden md:inline">in Aerospace Engineering</span> at
           <Link
             href="https://sbu.ac.ir"
@@ -36,7 +36,7 @@ const Education: React.FC<IProps> = ({ inView }) => {
       >
         {iconsList.ok({ width: 40, alt: "Ok" })}
         <span className="mt-2 flex gap-2">
-          Bachelor of Science
+          BS
           <span className="hidden md:inline">in Aerospace Engineering</span> at
           <Link
             href="https://mut.ac.ir"
