@@ -4,7 +4,11 @@ const nextConfig = {
     appDir: true,
   },
   images: {
-    domains: ["avatars.githubusercontent.com", "cloudflare-ipfs.com"],
+    domains: [
+      "avatars.githubusercontent.com",
+      "cloudflare-ipfs.com",
+      "lh3.googleusercontent.com",
+    ],
   },
   async redirects() {
     return [

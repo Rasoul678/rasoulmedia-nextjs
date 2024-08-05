@@ -25,6 +25,9 @@ const envVariables = z.object({
   DATABASE_URL: z.string(),
 
   OPENAI_API_KEY: z.string(),
+
+  NOTION_TOKEN: z.string(),
+  NOTION_DB_ID: z.string(),
 });
 
 envVariables.parse(process.env);

@@ -32,7 +32,7 @@ const MenuDropDown = () => {
       <MenuItem
         noBorder
         name={String(intl?.dict["my-prof"])}
-        href={`/${intl?.lang}/profile`}
+        href={`/${intl?.lang}/aboutme`}
         icon={
           <Image
             src={defaultAvatar}

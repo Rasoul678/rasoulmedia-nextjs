@@ -263,3 +263,24 @@ export type RepoType = {
     pull: boolean;
   };
 };
+
+type NotionUser = "person" | "bot";
+
+export type NotionUserType = {
+  avatar_url: string;
+  id: string;
+  name: string;
+  object: string;
+  person: { email: string };
+  type: NotionUser;
+};
+
+export type NotionUserResultType<RT> = {
+  has_more: boolean;
+  next_cursor: null | number;
+  object: string;
+  request_id: string;
+  results: Array<RT>;
+  type: NotionUser;
+  user: {};
+};

@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import defaultAvatar from "@assets/icon-pack/icons8-anonymous-mask-420.svg";
+import userPic from "@assets/profile-pic-2.jpg";
 import verified from "@assets/icon-pack/icons8-instagram-verification-badge-420.svg";
 
 type IProps = {};
@@ -12,7 +12,7 @@ const UserExcerptColumn: React.FC<IProps> = () => {
         <div className="overflow-hidden">
           <Image
             className="h-auto w-full mx-auto rounded-md"
-            src={ defaultAvatar}
+            src={userPic}
             alt=""
             width={500}
             height={500}
