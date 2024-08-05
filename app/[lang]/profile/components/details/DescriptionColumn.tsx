@@ -1,11 +1,9 @@
 import React from "react";
 import { ProfileWithUserType } from "@types";
 
-type IProps = {
-  profile: ProfileWithUserType;
-};
+type IProps = {};
 
-const DescriptionColumn: React.FC<IProps> = ({ profile }) => {
+const DescriptionColumn: React.FC<IProps> = () => {
   return (
     <div className="w-full md:w-9/12 sm:mx-3 mt-4 sm:mt-0">
       <div className="bg-gray-900 p-3 shadow-sm rounded-md">
@@ -34,20 +32,23 @@ const DescriptionColumn: React.FC<IProps> = ({ profile }) => {
               <div className="px-4 py-2 font-semibold text-left">
                 First Name:
               </div>
-              <div className="px-4 py-2">{profile?.firstName}</div>
+              <div className="px-4 py-2">Rasoul</div>
             </div>
             <div className="grid grid-cols-2">
               <div className="px-4 py-2 font-semibold text-left">
                 Last Name:
               </div>
-              <div className="px-4 py-2">{profile?.lastName}</div>
+              <div className="px-4 py-2">Hesami Rostami</div>
             </div>
 
             <div className="grid grid-cols-2">
               <div className="px-4 py-2 font-semibold text-left">Email:</div>
               <div className="px-4 py-2">
-                <a className="text-sky-500" href={`mailto:${profile?.email}`}>
-                  {profile?.email}
+                <a
+                  className="text-sky-500"
+                  href={`mailto:h.rostami.r@gmail.com`}
+                >
+                  h.rostami.r@gmail.com
                 </a>
               </div>
             </div>

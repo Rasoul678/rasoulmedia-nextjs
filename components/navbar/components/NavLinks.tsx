@@ -23,7 +23,7 @@ export const NavLinks = () => {
           className: "self-baseline",
         })}
       </Link>
-      <Link href={`/${intl?.lang}/live-code`}>
+      <Link href={`/${intl?.lang}/live`}>
         {iconsList.stacks.js({
           alt: intl?.dict.nav.code!,
           className: "self-baseline",

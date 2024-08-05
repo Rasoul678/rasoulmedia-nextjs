@@ -98,7 +98,7 @@ const PromptCard: React.FC<IProps> = (props) => {
             className=" font-inter text-sm red_gradient cursor-pointer"
             onClick={handleDelete}
           >
-            {iconsList.delete({ alt: "remove", width: 25 })}
+            {iconsList.remove({ alt: "remove", width: 25 })}
           </p>
         </div>
       )}

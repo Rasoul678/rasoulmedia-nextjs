@@ -80,7 +80,7 @@ export const Feed: React.FC<IProps> = observer((props) => {
           href="/prompts/new"
           className="block text-center green_gradient uppercase"
         >
-          {iconsList.add({ alt: "add new prompt", width: 50 })}
+          {iconsList.plus({ alt: "add new prompt", width: 50 })}
         </Link>
       </form>
       {error ? (
